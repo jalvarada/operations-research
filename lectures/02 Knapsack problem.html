@@ -80,58 +80,35 @@ School specific teaching materials"/>
 <h1 class="title">Knapsack problem</h1><h2 class="author">Adolfo De Unánue Adolfo De Unánue</h2>
 </section>
 <section>
-<section id="slide-orgc64f48b">
-<h2 id="orgc64f48b">Introduction and Recap of Last Class</h2>
-<div class="outline-text-2" id="text-orgc64f48b">
-</div>
-</section>
-<section id="slide-org3cc5a30">
-<h3 id="org3cc5a30">Anuncios</h3>
+<section id="slide-org2bcedc8">
+<h2 id="org2bcedc8">Repaso de la clase pasada</h2>
 <form><ul>
-<li>La próxima semana estoy en la República de El Salvador</li>
-<li>Así que la primeras lecturas se discutirán el Lunes 10 de Febrero de 2020</li>
-
-</ul></form>
-</section>
-<section id="slide-org12dc1b2">
-<h3 id="org12dc1b2">Repaso de la última clase</h3>
-</section>
-<section id="slide-lectures/Knapsack problem/Outline">
-<h3 id="lectures/Knapsack problem/Outline">Lecture Outline</h3>
-<form><ul>
-<li class="fragment appear">Instalación de pyenv/python</li>
-<li class="fragment appear">Un rápido ejercicio de Github</li>
-<li class="fragment appear">Usando Github classroom</li>
-<li class="fragment appear">Breve introducción a python</li>
-<li class="fragment appear"><i>Knapsack problem</i>: descripción</li>
-<li class="fragment appear">Modelado  en OR</li>
-<li class="fragment appear">Siempre define un baseline</li>
-<li class="fragment appear">Algoritmos greedy</li>
+<li class="fragment appear">Introducción a Investigación de Operaciones</li>
 
 </ul></form>
 </section>
 </section>
 <section>
-<section id="slide-org35f7cb7">
-<h2 id="org35f7cb7">Instalación de pyenv/python</h2>
+<section id="slide-org3e38c18">
+<h2 id="org3e38c18">Instalación de pyenv/python</h2>
 
 </section>
 </section>
 <section>
-<section id="slide-orgad93381">
-<h2 id="orgad93381">Un rápido ejercicio de Github</h2>
+<section id="slide-orgae20dec">
+<h2 id="orgae20dec">Un rápido ejercicio de Github</h2>
 
 </section>
 </section>
 <section>
-<section id="slide-orgdf81005">
-<h2 id="orgdf81005">Usando Github classroom</h2>
+<section id="slide-orgde067bb">
+<h2 id="orgde067bb">Usando Github classroom</h2>
 
 </section>
 </section>
 <section>
-<section id="slide-orgcd66e7c">
-<h2 id="orgcd66e7c">Breve introducción a python</h2>
+<section id="slide-org8b8d70b">
+<h2 id="org8b8d70b">Breve introducción a python</h2>
 <form><ul>
 <li><code>ipython</code></li>
 <li><code>jupyter</code></li>
@@ -144,8 +121,8 @@ School specific teaching materials"/>
 </section>
 </section>
 <section>
-<section id="slide-orga25b9b6">
-<h2 id="orga25b9b6"><i>Knapsack problem</i>: descripción</h2>
+<section id="slide-org5e04a3a">
+<h2 id="org5e04a3a"><i>Knapsack problem</i>: descripción</h2>
 <p>
 Tenemos a la vista \(n\) cosas, descritas por su peso \(w\) y su valor
 \(v\). Tenemos también una <i>backpack</i>  con una capacidad de \(Q\).
@@ -215,8 +192,8 @@ Capacidad de la mochila: 20kg
 </p>
 
 </section>
-<section id="slide-orgd0c4013">
-<h3 id="orgd0c4013">Implementación en python</h3>
+<section id="slide-org50df40a">
+<h3 id="org50df40a">Implementación en python</h3>
 <p>
 Existen varias maneras de codificar esto, un ejemplo sería tener dos
 listas, para pesos (<code>weights</code>) y valor (<code>values</code>)
@@ -240,20 +217,54 @@ Otra opción es usar un diccionario y tuplas
 <div class="org-src-container">
 
 <pre><code class=" jupyter-python" >things = { 'A': (12,4), 'B': (7,3), 'C': (1,2), 'D': (10,5), 'E': (2,6) }
-capacity = 20
+capacity = 17
 </code></pre>
 </div>
 
+</section>
+<section>
+
+<p>
+Y quizá una mejor opción sea:
+</p>
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >things = { 'A': {'weight':12, 'value':4},
+           'B': {'weight':7, 'value':3},
+           'C': {'weight':1,'value':2},
+           'D': {'weight':10,'value':5},
+           'E': {'weight':2,'value':6} }
+capacity = 17
+</code></pre>
+</div>
 
 </section>
-<section id="slide-org84b1923">
-<h3 id="org84b1923">Fuerza bruta</h3>
+<section>
+
+<p>
+Si te preocupa el desempeño del programa, puedes usar <code>namedtuples</code>
+</p>
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >from collections import namedtuple
+
+Thing = namedtuple('thing', 'name weight value')
+things = [ Thing('A', 12, 4), Thing('B', 7, 3), Thing('C', 1, 2), Thing('D', 10, 5), Thing('E', 2, 6) ]
+capacity = 17
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgc2aed3f">
+<h3 id="orgc2aed3f">Fuerza bruta</h3>
 <p>
 Para el ejemplo pasado, es fácil enumerar todas las opciones:
 </p>
 
 <p>
-[ 0, 0 ,0, 0], [0,0,0,1], \(\ldots\)  , [1,1,1,1]
+[ 0, 0 ,0, 0, o], [0,0,0,0, 1], \(\ldots\)  , [1,1,1,1,1]
 </p>
 
 <p>
@@ -278,23 +289,23 @@ fuerza bruta,  en el siguiente intervalo \(|I| = 5\) a \(|I| = 50\)</li>
 </ul></form>
 
 </section>
-<section id="slide-org06ecdee">
-<h3 id="org06ecdee">Implementación en python</h3>
+<section id="slide-orgcc0e2b7">
+<h3 id="orgcc0e2b7">Implementación en python</h3>
 <div class="org-src-container">
 
 <pre><code class=" jupyter-python" >import itertools
 import functools
 
 def generate_solutions(things):
-    return sum([list(map(list, itertools.combinations(things, i))) for i in range(len(things) + 1)], [])
+    return sum([list(map(dict, itertools.combinations(things.items(), i))) for i in range(len(things) + 1)], [])
 
 def is_feasible(solution, capacity):
     pass
 
 def solution_space(things, capacity):
     all_solutions = generate_solutions(things)
-    feasible_predicate = functools.partial(is_feasible, capacity)
-    return map(feasible_predicate, all_solutions)
+    feasible_predicate = functools.partial(is_feasible, capacity=capacity)
+    return filter(feasible_predicate, all_solutions)
 
 def evaluate_solution():
     pass
@@ -306,6 +317,13 @@ def brute_force(things, capacity):
 
 </section>
 <section>
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >list(solution_space(things, capacity))
+</code></pre>
+</div>
+
 
 <p>
 Encontrar el espacio de soluciones:
@@ -332,8 +350,8 @@ Encontrar la solución:
 </section>
 </section>
 <section>
-<section id="slide-orgc3bfb82">
-<h2 id="orgc3bfb82">Modelado  en OR</h2>
+<section id="slide-org34375b7">
+<h2 id="org34375b7">Modelado  en OR</h2>
 <p>
 Un <b>modelo de optimización</b> tiene tres partes:
 </p>
@@ -420,8 +438,8 @@ Estamos interesados en el valor total de los objetos
 </section>
 </section>
 <section>
-<section id="slide-orgc0828f6">
-<h2 id="orgc0828f6">Knapsack problem: Modelo de optimización</h2>
+<section id="slide-lectures/Knapsack/Modelo">
+<h2 id="lectures/Knapsack/Modelo">Knapsack problem: Modelo de optimización</h2>
 <p>
 \[
 \textbf{maximize} \sum_{i \in I} v_i \cdot x_i \\
@@ -433,8 +451,8 @@ x_i = \{ 0,1 \}, i \in I
 </section>
 </section>
 <section>
-<section id="slide-orgd9092aa">
-<h2 id="orgd9092aa">Siempre define un baseline</h2>
+<section id="slide-orgb892cf5">
+<h2 id="orgb892cf5">Siempre define un baseline</h2>
 <form><ul>
 <li>No sabemos qué algoritmo puede solucionar el problema</li>
 <li>Tienes que saber contra que mejorar</li>
@@ -445,8 +463,8 @@ x_i = \{ 0,1 \}, i \in I
 </section>
 </section>
 <section>
-<section id="slide-org35c08f1">
-<h2 id="org35c08f1">Algoritmos greedy</h2>
+<section id="slide-orga87c3ed">
+<h2 id="orga87c3ed">Algoritmos greedy</h2>
 <form><ul>
 <li>La idea clave  es: <i>Construir la solución  seleccionando un item a la vez</i></li>
 <li>También son conocidos como heurísticas.</li>
@@ -459,8 +477,8 @@ x_i = \{ 0,1 \}, i \in I
 </section>
 </section>
 <section>
-<section id="slide-orgbe958f0">
-<h2 id="orgbe958f0">Primera idea</h2>
+<section id="slide-org9220653">
+<h2 id="org9220653">Primera idea</h2>
 <form><ul>
 <li>¿Qué tal si tomamos los más valiosos primero?</li>
 
@@ -484,11 +502,11 @@ x_i = \{ 0,1 \}, i \in I
 <pre><code class=" jupyter-python" >def greedy_algorithm(things, capacity):
     sorted_things = {k: v for k,v in sorted(things.items(), key=lambda item: item[1][1], reverse=True)}
 
-    knapsack = []
+    knapsack = {}
 
     for thing in sorted_things.items():
         if thing[1][0] &lt;= capacity:
-            knapsack += [thing[0]]
+            knapsack.update({thing[0]: thing[1]})
             capacity -= thing[1][0]
 
     return {'solution': knapsack, 'value': evaluate_solution(knapsack)}
@@ -496,17 +514,103 @@ x_i = \{ 0,1 \}, i \in I
 </div>
 
 </section>
+<section>
+
+<p>
+Intentemos algo diferente, ¿Qué tal que ordenamos por peso de menor a
+mayor? (Así metemos <b>más</b> cosas)
+</p>
+
+<p>
+Primero, modifiquemos la función, para especificar cómo ordenar los elementos
+</p>
+
+<p>
+El código cambia un poco:
+</p>
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >def greedy_algorithm(things, capacity, key, reverse):
+    sorted_things = {k: v for k,v in sorted(things.items(), key=key, reverse=reverse)}
+
+    knapsack = {}
+
+    for thing in sorted_things.items():
+        if thing[1][0] &lt;= capacity:
+            knapsack.update({thing[0]: thing[1]})
+            capacity -= thing[1][0]
+
+    return {'solution': knapsack, 'value': evaluate_solution(knapsack)}
+</code></pre>
+</div>
+
+
 </section>
 <section>
-<section id="slide-orga4259df">
-<h2 id="orga4259df">¿Cómo se resuelven los problemas en la vida real? (y en las tareas)</h2>
+
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >greedy_algorithm(things, capacity, key=lambda item: item[1][1], reverse=True)
+</code></pre>
+</div>
+
+<p>
+Podemos, usar una función parcial (<i>currying</i>) para nombrarla
+</p>
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >most_valuable_greedy = functools.partial(greedy_algorithm, key=lambda item: item[1][1], reverse=True)
+
+most_items_greedy = functools.partial(greedy_algorithm, key=lambda item: item[1][0], reverse=False)
+</code></pre>
+</div>
+
+</section>
+<section>
+
+<p>
+Por útimo podemos intenter con la <i>densidad</i> del valor :
+</p>
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >density_greedy = functools.partial(greedy_algorithm, key=lambda item: item[1][1]/item[1][0], reverse=True)
+</code></pre>
+</div>
+
 
 </section>
 </section>
 <section>
-<section id="slide-orgf24701f">
-<h2 id="orgf24701f">Repaso</h2>
+<section id="slide-org13400e1">
+<h2 id="org13400e1">¿Cómo se resuelven los problemas en la vida real? (y en las tareas)</h2>
+<form><ul>
+<li>Primero has la cosa más simple que se te ocurra para resolverlo
+<form><ul>
+<li>Quizá un <i>greedy</i> sea una buena opción</li>
+<li>Este es tu <i>baseline</i></li>
 
+</ul></form></li>
+<li>Entiende la solución, inspecciónala, trata de implementar un <i>greedy</i>
+un poco más inteligente</li>
+<li>¿Mejoró? ¿No?</li>
+<li>Intenta otras estrategias como, <b>DP</b>, <b>CP</b>, <b>LS</b>, <b>Heurísticas</b>, <b>ES</b>,
+<b>Mixed Integer programming</b> , en orden de dificultad &#x2026;</li>
+
+</ul></form>
+
+</section>
+</section>
+<section>
+<section id="slide-org2aea6cc">
+<h2 id="org2aea6cc">Repaso</h2>
+<form><ul>
+<li class="fragment appear">Introducción a Investigación de Operaciones</li>
+
+</ul></form>
 </section>
 </section>
 </div>

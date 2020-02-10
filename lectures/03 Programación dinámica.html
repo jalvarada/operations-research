@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Programación dinámica</title>
+<meta name="author" content="Adolfo De Unánue Adolfo De Unánue"/>
+<meta name="description" content="Description
+School specific teaching materials"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://revealjs.com/css/reveal.css"/>
+
+<link rel="stylesheet" href="https://revealjs.com/css/theme/black.css" id="theme"/>
+
+<link rel="stylesheet" href="./css/mozilla-light.css"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/toc-progress/toc-progress.css"/>
+
+<link rel="stylesheet" href="./reveal.js/css/theme/toc-style.css"/>
+
+<link rel="stylesheet" href="./reveal.js/lib/font/source-sans-pro/source-sans-pro.css"/>
+<link rel="stylesheet" href="https://revealjs.com/lib/css/zenburn.css"/>
+<link rel="stylesheet" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"/>
+<style>
+/* Position computations of klipse get confused by reveal.js's scaling.
+   Hence, scaling should be disabled with this code.  Fix height of code area
+   with scrollbar (use overflow instead of overflow-y to restore CodeMirror
+   setting afterwards): */
+.reveal section pre { max-height: 70vh; height: auto; overflow: auto; }
+/* Reset some reveal.js and oer-reveal settings: */
+.reveal section pre .CodeMirror pre { font-size: 2em; box-shadow: none; width: auto; padding: 0.4em; display: block; overflow: visible; }
+/* Enlarge cursor: */
+.CodeMirror-cursor { border-left: 3px solid black; }
+</style>
+<script>
+    window.klipse_settings = {
+        selector: '.language-klipse',
+        selector_eval_html: '.language-klipse-html',
+        selector_eval_js: '.language-klipse-javascript',
+        selector_eval_js: '.language-klipse-js',
+        selector_eval_php: '.language-klipse-php',
+        selector_eval_python_client: '.language-klipse-python',
+        selector_eval_ruby: '.language-klipse-ruby',
+        selector_eval_scheme: '.language-klipse-scheme',
+        selector_sql: '.language-klipse-sql'
+    };
+</script>
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'https://revealjs.com/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<meta name="description" content="Investigación de Operaciones 2020.">
+<base target="_blank">
+<base href="../">
+
+          <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic,700italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+          <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:400,700' rel='stylesheet' type='text/css'>
+          <style type='text/css'>
+             body {
+                font-family: 'Source Sans Pro', sans-serif;
+             }
+             pre, code {
+                font-family: 'Source Code Pro', monospace;
+             }
+          </style>
+</head>
+<body prefix="dc: http://purl.org/dc/elements/1.1/ dcterms: http://purl.org/dc/terms/ dcmitype: http://purl.org/dc/dcmitype/ cc: http://creativecommons.org/ns#" typeof="dcmitype:InteractiveResource">
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide">
+<h1 class="title">Programación dinámica</h1><h2 class="author">Adolfo De Unánue Adolfo De Unánue</h2>
+</section>
+<section>
+<section id="slide-orgbce2a6a">
+<h2 id="orgbce2a6a">Introduction and Recap of Last Class</h2>
+<div class="outline-text-2" id="text-orgbce2a6a">
+</div>
+</section>
+<section id="slide-org30021e8">
+<h3 id="org30021e8">Anuncios</h3>
+
+</section>
+<section id="slide-orgaf1965f">
+<h3 id="orgaf1965f">Repaso de la última clase</h3>
+</section>
+<section id="slide-lectures/Programación dinámica/Outline">
+<h3 id="lectures/Programación dinámica/Outline">Lecture Outline</h3>
+<form><ul>
+<li class="fragment appear">Recursión</li>
+<li class="fragment appear">El knapsack de nuevo</li>
+<li class="fragment appear">Recursión y el problema del Knapsack</li>
+<li class="fragment appear">Programación dinámica</li>
+<li class="fragment appear">Generalizaciones del Knapsack</li>
+
+</ul></form>
+</section>
+</section>
+<section>
+<section id="slide-org883c497">
+<h2 id="org883c497">Recursión</h2>
+<blockquote>
+<p>
+Cuando una función  se llama así misma directa o indirectamente, se le
+conoce como <i>función recursiva</i> y el proceso de ejecutarla <b>recursión</b>
+</p>
+
+<p>
+<b>Dynamic programming for coding interviews</b>
+</p>
+</blockquote>
+
+</section>
+<section>
+
+<p>
+En general una función recursiva:
+</p>
+
+<form><ol>
+<li>Siempre tiene <b>al menos</b> una  condición de término.</li>
+<li>Siempre realiza una parte de la tarea y delega el resto</li>
+
+</ol></form>
+
+
+</section>
+<section id="slide-orga724a5c">
+<h3 id="orga724a5c">La suma</h3>
+<p>
+Sumatoria de los primeros \(n\) números enteros, \(\sum n\)
+</p>
+
+<p>
+\[
+\sum n = \Big \{ n + \sum(n-1), if n > 1 \\ 1 if n = 1, \\ 0 if n = 0
+\]
+</p>
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >def recursive_sum(n):
+    if n == 0:
+        return 0
+    if n == 1:
+        return 1
+
+    return n + recursive_sum(n-1)
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgfcd16ed">
+<h3 id="orgfcd16ed">Fibonnaci</h3>
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >def fibonnaci(n):
+    if n == 0:
+        return 1
+    if n == 1:
+        return 1
+
+    return fibonacci(n-1) + fibonacci(n-2)
+</code></pre>
+</div>
+
+<aside class="notes">
+<p>
+print(f"Llamando a fibonnaci({n-1}) + fibonnaci({n-2})")
+</p>
+
+</aside>
+
+</section>
+<section id="slide-org820addb">
+<h3 id="org820addb">Problemas con la implementación</h3>
+<p>
+Observa el  <code>print</code> en el cuerpo de la función para verlo &#x2026;
+</p>
+
+
+</section>
+<section id="slide-org284cc40">
+<h3 id="org284cc40">Usando <code>cache</code></h3>
+<p>
+Como podrás observar, estamos calculando varias veces la misma
+función, podemos mejorar el desempeño,  si guardamos los resultados en
+una tabla.
+</p>
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >fibonnaci_cache = {} # variable global, en realidad esto es feo
+
+def fibonnaci(n):
+    global fibonnaci_cache
+    if n in fibonnaci_cache:
+        value = fibonnaci_cache[n]
+    elif n &lt; 2:
+        value = 1
+        fibonnaci_cache[n] = value # Vamos llenando la tabla
+    else:
+        series = fibonnaci(n - 2) + fibonnaci(n - 1)
+        fibonnaci_cache[n] = value
+
+    return series
+</code></pre>
+</div>
+
+
+</section>
+<section id="slide-org362766c">
+<h3 id="org362766c">Usando el poder de pyhton: decoradores</h3>
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >import functools
+
+@functools.lru_cache()
+def fibonnaci(n):
+    if n &lt; 2:
+        return 1
+    else:
+        return fibonnaci(n-2) + fibonnaci(n-1)
+</code></pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orgb74c8a0">
+<h2 id="orgb74c8a0">El knapsack de nuevo</h2>
+<p>
+\[
+\textbf{maximize} \sum_{i \in I} v_i \cdot x_i \\
+\textbf{s.t.} \sum_{i \in I} w_i \cdot x_i \leq Q \\
+x_i = \{ 0,1 \}, i \in I
+\]
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org7c69910">
+<h2 id="org7c69910">Recursión y el problema del Knapsack</h2>
+<form><ul>
+<li>Supondremos que \(I = \{1, 2, \ldots, n\}\) son los <i>items</i> disponibles</li>
+<li><code>solucion(J,q)</code> es la solución óptima para el problema del knapsack
+con capacidad \(q\) e items \(J = \{1,..,j\}\) , i.e.</li>
+
+</ul></form>
+
+<p>
+\[
+\textbf{maximize} \sum_{i \in 1 .. j} v_i \cdot x_i \\
+\textbf{s.t.} \sum_{i \in 1 .. j} w_i \cdot x_i \leq q \\
+x_i = \{ 0,1 \}, i \in 1..j
+\]
+</p>
+
+
+</section>
+<section>
+
+<form><ul>
+<li>Supón que conoces la solución para el knapsack, en el caso</li>
+
+</ul></form>
+<p>
+\(q, j  -  1 \qquad \forall q \qquad \in \qquad 0 .. Q\)
+</p>
+<form><ul>
+<li>Agreguemos un sólo <i>item</i></li>
+<li>Si w_j &le; k
+<form><ul>
+<li>O no seleccionamos el <i>item</i> \(j\) y entonces la solución es \(solucion(j-1,q)\)</li>
+<li>O seleccionamos el item \(j\) y la solución es \(v_j + solucion(j-1, q-w_j)\)</li>
+
+</ul></form></li>
+
+</ul></form>
+
+<p>
+Siguiendo este algoritmo, se obtienen las relaciones de recurrencia de
+<b>Bellman</b>
+</p>
+
+<aside class="notes">
+<p>
+Discutir por qué Bellman bautizó este método como
+programación dinámica.
+</p>
+
+<p>
+In his autobiography, Eye of the Hurricane: An Autobiography (1984). He explains
+</p>
+
+<p>
+"I spent the Fall quarter (of 1950) at RAND. My first task was to
+find a  name for multistage decision processes. An interesting
+question is,  Where did the name, dynamic programming, come from?
+The 1950s were not  good years for mathematical research. We had a
+very interesting  gentleman in Washington named Wilson.  He was
+Secretary of Defense, and he actually had a pathological fear  and
+hatred of the word research. I’m not using the term lightly; I’m
+using it precisely. His face would suffuse, he would turn red, and
+he  would get violent if people used the term research in his
+presence. You  can imagine how he felt, then, about the term
+mathematical. The RAND  Corporation was employed by the Air Force,
+and the Air Force had Wilson  as its boss, essentially. Hence, I
+felt I had to do something to shield  Wilson and the Air Force
+from the fact that I was really doing  mathematics inside the RAND
+Corporation. What title, what name, could I  choose? In the first
+place I was interested in planning, in decision  making, in
+thinking. But planning, is not a good word for various  reasons. I
+decided therefore to use the word “programming”. I wanted to  get
+across the idea that this was dynamic, this was multistage, this
+was  time-varying I thought, lets kill two birds with one
+stone. Lets take a  word that has an absolutely precise meaning,
+namely dynamic, in the  classical physical sense. It also has a
+very interesting property as an  adjective, and that is it's
+impossible to use the word dynamic in a  pejorative sense. Try
+thinking of some combination that will possibly  give it a
+pejorative meaning. It's impossible. Thus, I thought dynamic
+programming was a good name. It was something not even a
+Congressman  could object to. So I used it as an umbrella for my
+activities. "
+</p>
+
+
+<p>
+The above explanation of the origin of the term is lacking. As Russell
+and Norvig in their book have written, referring to the above story:
+"This cannot be strictly true, because his first paper using the term
+(Bellman, 1952) appeared before Wilson became Secretary of Defense in
+1953."[18] Also, there is a comment in a speech by Harold J. Kushner,
+where he remembers Bellman. Quoting Kushner as he speaks of Bellman:
+"On the other hand, when I asked him the same question, he replied
+that he was trying to upstage Dantzig's linear programming by adding
+dynamic. Perhaps both motivations were true."
+</p>
+
+</aside>
+
+<p>
+\[
+solucion(j, q) = max(solucion(j-1, q), v_j + solucion(j-1, q-w_j)), si w_j \leq q \\
+solucion(j, q) = solucion(j -1, q)
+solucion(\{\}, q) = 0 \forall q
+\]
+</p>
+
+</section>
+<section>
+
+<p>
+En <code>python</code>:
+</p>
+
+<p>
+<b>NOTA</b>: Voy a usar la representación de <code>namedtuples</code>
+</p>
+
+<aside class="notes">
+<p>
+Discutir la eficiencia del método recursivo
+</p>
+
+<p>
+Discutir que la recursión empieza "desde arriba"
+</p>
+
+</aside>
+
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >def knapsack_recursivo(things, capacity):
+    if not things  or capacity == 0:
+        return {'solucion': [], 'value': 0}
+
+    things = things[:] # Copiamos
+    thing = things[-1] # La cosa que vamos a probar
+    things = things[:-1] # El resto de las cosas
+
+
+    if  thing.weight &lt;= capacity: # ¿Cabe el item?
+        # ¿Lo elegimos o no?
+
+        without_item = knapsack_recursivo(things,capacity)
+        with_item = knapsack_recursivo(things, capacity-thing.weight)
+
+        # ¿Cuál configuración es más valiosa?
+        if thing.value + with_item['value'] &gt;= without_item['value']:
+            # Seleccionamos el item
+            solucion = with_item['solucion']
+            solucion.append(thing)
+            return {'solucion': solucion, 'value': thing.value + with_item['value']}
+        else:
+            # No lo seleccionamos
+            return without_item
+    else:
+        # No cabe el item
+        return knapsack_recursivo(things,capacity)
+</code></pre>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org70a6647">
+<h2 id="org70a6647">Programación dinámica</h2>
+<form><ul>
+<li>En lugar de empezar desde "arriba", la técnica de
+<b>programación dinámica</b>, empieza desde "abajo"</li>
+<li>i.e. Empezamos con \(0\) items, continuamos con \(1\), luego \(2\) y así
+sucesivamente</li>
+
+</ul></form>
+
+
+
+<aside class="notes">
+<p>
+maximize 5x_1 + 4x_2 + 3x_3, sujeto a 4x_1 + 5x_2+ 2x_3 &le; 9 x_i, i &isin; \{0,1\}
+</p>
+
+</aside>
+
+</section>
+<section id="slide-org9aa2be7">
+<h3 id="org9aa2be7">Demostración (en el pizarrón)</h3>
+<p>
+<b>NOTA</b>: Ejemplo tomado de <i>Grooking Algorithms</i>
+</p>
+
+<p>
+Supongamos que tenemos 3 cosas:
+</p>
+
+<form><dl>
+<dt>Un Estéreo (\(x_1\))</dt><dd>3000 USD, 4kg</dd>
+<dt>Una laptop (\(x_2\))</dt><dd>2000 USD, 3 kg</dd>
+<dt>Una guitarra (\(x_3\))</dt><dd>1500 USD, 1kg</dd>
+
+</dl></form>
+
+<p>
+Y una bolsa de 4kg de capacidad
+</p>
+
+</section>
+<section>
+
+<table>
+
+
+<colgroup>
+<col  class="org-right">
+
+<col  class="org-left">
+
+<col  class="org-left">
+
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">\(q\)</th>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">\(x_1\)</th>
+<th scope="col" class="org-left">\(x_2\)</th>
+<th scope="col" class="org-left">\(x_3\)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">0</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">4</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+</section>
+<section id="slide-orgfcef830">
+<h3 id="orgfcef830">Implementación en <code>python</code></h3>
+
+</section>
+</section>
+<section>
+<section id="slide-org69d443c">
+<h2 id="org69d443c">Generalizaciones del Knapsack</h2>
+<div class="outline-text-2" id="text-org69d443c">
+</div>
+</section>
+<section id="slide-org81486e0">
+<h3 id="org81486e0">Bounded Knapsack problem</h3>
+<p>
+\[
+\textbf{maximize} \sum_{i \in I} v_i \cdot x_i \\
+\textbf{s.t.} \sum_{i \in I} w_i \cdot x_i \leq Q \\
+0 \leq x_i \leq b_j, \quad j = 1, 2, \ldots, n
+x_i \in \mathcal{Z}
+\]
+</p>
+
+</section>
+<section id="slide-org75c1748">
+<h3 id="org75c1748">Subset-Sum Problem</h3>
+<p>
+Encontrar  un subconjunto de pesos que la suma es cercana sin exceder
+a la capacidad
+</p>
+
+<p>
+\[
+\textbf{maximize} \sum_{i \in I} v_i \cdot x_i \\
+\textbf{s.t.} \sum_{i \in I} w_i \cdot x_i \leq Q \\
+x_i = \{ 0,1 \}, i \in I
+\]
+</p>
+
+</section>
+<section id="slide-org31c002b">
+<h3 id="org31c002b">Change-Making problem</h3>
+<p>
+\[
+\textbf{maximize} \sum_{i \in I} v_i \cdot x_i \\
+\textbf{s.t.} \sum_{i \in I} w_i \cdot x_i = Q \\
+0 \leq x_i \leq b_j, \quad j = 1, 2, \ldots, n
+x_i \in \mathcal{Z}
+\]
+</p>
+
+</section>
+<section id="slide-org9c61bc9">
+<h3 id="org9c61bc9">Multiple  Knapsack problem</h3>
+<p>
+Existen \(m\) contenedores con capacidades  \(q_i\), \(i = 1,2,\ldots, m\)
+\[
+\textbf{maximize} \sum_{j \in M}\sum_{i \in I} v_i \cdot x_{ij} \\
+\textbf{s.t.} \sum_{i \in I} w_i \cdot x_{ij} \leq q_j , j \in M\\
+\sum_{j \in M} x_{ij} \leq 1, i \in I \\
+x_{ij} = \{ 0,1 \}
+\]
+</p>
+
+</section>
+<section id="slide-org3569d53">
+<h3 id="org3569d53">Generalized Assigment problem</h3>
+<p>
+Si el valor y el peso de cada item varían con respecto al contenedor
+</p>
+
+<p>
+\[
+\textbf{maximize} \sum_{j \in M}\sum_{i \in I} v_{ij} \cdot x_{ij} \\
+\textbf{s.t.} \sum_{i \in I} w_{ij} \cdot x_{ij} \leq q_j , j \in M\\
+\sum_{j \in M} x_{ij} \leq 1, i \in I \\
+x_{ij} = \{ 0,1 \}
+\]
+</p>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgce4d5af">
+<h2 id="orgce4d5af">Repaso</h2>
+<form><ul>
+<li class="fragment appear">Recursión</li>
+<li class="fragment appear">El knapsack de nuevo</li>
+<li class="fragment appear">Recursión y el problema del Knapsack</li>
+<li class="fragment appear">Programación dinámica</li>
+<li class="fragment appear">Generalizaciones del Knapsack</li>
+
+</ul></form>
+</section>
+</section>
+</div>
+</div>
+Adolfo De Unánue
+<script src="https://revealjs.com/js/reveal.js"></script>
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: true,
+center: true,
+slideNumber: 'c',
+rollingLinks: true,
+keyboard: true,
+mouseWheel: false,
+fragmentInURL: false,
+hashOneBasedIndex: false,
+pdfSeparateFragments: true,
+
+overview: true,
+width: 1400,
+height: 1000,
+margin: 0.10,
+minScale: 1.00,
+maxScale: 1.00,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'fade', // see README of reveal.js for options
+transitionSpeed: 'fast',
+controlsTutorial: false, controlsLayout: 'edges',
+
+// Optional libraries used to extend reveal.js
+dependencies: [
+{ src: 'https://revealjs.com/plugin/audio-slideshow/audio-slideshow.js', condition: function( ) { return !!document.body.classList && !Reveal.isSpeakerNotes(); } },
+{ src: 'https://revealjs.com/plugin/anything/anything.js' },
+{ src: 'https://revealjs.com/plugin/toc-progress/toc-progress.js', async: true, callback: function() { toc_progress.initialize('reduce', 'rgba(120,138,130,0.2)'); toc_progress.create(); } },
+{ src: 'https://revealjs.com/plugin/jump/jump.js', async: true },
+{ src: 'https://revealjs.com/plugin/quiz/js/quiz.js', async: true, callback: function() { prepareQuizzes({preventUnanswered: true, skipStartButton: true}); } },
+{ src: 'https://revealjs.com/plugin/coursemod/coursemod.js', async: true },
+ { src: 'https://revealjs.com/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+ { src: 'https://revealjs.com/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'https://revealjs.com/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }]
+
+,audioStartAtFragment: true,
+  audio: {
+    advance: -1, autoplay: false, defaultDuration: 0, defaultAudios: false, playerOpacity: 0.8, playerStyle: 'position: fixed; bottom: 9.5vh; left: 0%; width: 30%; height:30px; z-index: 33;' },
+anything: [
+        // Following initialization code for class animate from anything-demo.html.
+        // Copyright (c) 2016 Asvin Goel, under The MIT License (MIT).
+	{className: "animate",  initialize: (function(container, options){
+		Reveal.addEventListener( 'fragmentshown', function( event ) {
+			if (typeof event.fragment.beginElement === "function" ) {
+				event.fragment.beginElement();
+			}
+		});
+		Reveal.addEventListener( 'fragmenthidden', function( event ) {
+			if (event.fragment.hasAttribute('data-reverse') ) {
+				var reverse = event.fragment.parentElement.querySelector('[id=\"' + event.fragment.getAttribute('data-reverse') + '\"]');
+				if ( reverse && typeof reverse.beginElement === "function" ) {
+					reverse.beginElement();
+				}
+			}
+		});
+		if ( container.getAttribute("data-svg-src") ) {
+			var xhr = new XMLHttpRequest();
+			xhr.onload = function() {
+				if (xhr.readyState === 4) {
+					var svg = container.querySelector('svg');
+					container.removeChild( svg );
+					container.innerHTML = xhr.responseText + container.innerHTML;
+					if ( svg ) {
+						container.querySelector('svg').innerHTML = container.querySelector('svg').innerHTML + svg.innerHTML;
+					}
+				}
+				else {
+					console.warn( "Failed to get file. ReadyState: " + xhr.readyState + ", Status: " + xhr.status);
+				}
+			};
+			xhr.open( 'GET', container.getAttribute("data-svg-src"), true );
+			xhr.send();
+		}
+	}) },
+	{className: "randomPic",
+	 defaults: {imgalt: "Dummy alt text",
+		    imgcaption: "Image by {name}",
+		    choices: [ {name: "dummyname", path: "dummypath"} ]},
+	 initialize: (function(container, options){
+	     var choice = Math.trunc( Math.random()*(options.choices.length) );
+	     var img = "<img src='" + options.choices[choice].path + "' alt='" + options.choices[choice].imgalt + "' />";
+	     var caption = options.imgcaption.replace(new RegExp('\{name\}', 'gm'), options.choices[choice].name);
+	     container.innerHTML = img + caption;
+	 }) },
+	{className: "notes",
+	 initialize: (function(container, options){
+	     container.addEventListener('click', function(e) { RevealNotes.open(); });
+	 }) }
+],
+coursemod: { enabled: true, shown: false },
+});
+</script>
+<script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
+<script>
+/* Recompute layout upon changes by klipse.  Code fragment from
+   asciidoctor-revealjs-klipse by Timothy Pratley under GPLv3:
+   https://github.com/timothypratley/asciidoctor-revealjs-klipse/blob/master/docs/docinfo-footer.html */
+Reveal.addEventListener( 'slidechanged', function( event ) {
+    window.dispatchEvent( new Event('resize') );
+} );
+</script>
+</body>
+</html>

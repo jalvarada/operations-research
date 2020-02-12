@@ -80,8 +80,8 @@ School specific teaching materials"/>
 <h1 class="title">Knapsack problem</h1><h2 class="author">Adolfo De Unánue Adolfo De Unánue</h2>
 </section>
 <section>
-<section id="slide-org2bcedc8">
-<h2 id="org2bcedc8">Repaso de la clase pasada</h2>
+<section id="slide-orgec1e4ad">
+<h2 id="orgec1e4ad">Repaso de la clase pasada</h2>
 <form><ul>
 <li class="fragment appear">Introducción a Investigación de Operaciones</li>
 
@@ -89,40 +89,88 @@ School specific teaching materials"/>
 </section>
 </section>
 <section>
-<section id="slide-org3e38c18">
-<h2 id="org3e38c18">Instalación de pyenv/python</h2>
+<section id="slide-org5dd094d">
+<h2 id="org5dd094d">Instalación de pyenv/python</h2>
 
 </section>
 </section>
 <section>
-<section id="slide-orgae20dec">
-<h2 id="orgae20dec">Un rápido ejercicio de Github</h2>
+<section id="slide-org26782b8">
+<h2 id="org26782b8">Un rápido ejercicio de Github</h2>
 
 </section>
 </section>
 <section>
-<section id="slide-orgde067bb">
-<h2 id="orgde067bb">Usando Github classroom</h2>
+<section id="slide-orgcbccc5e">
+<h2 id="orgcbccc5e">Usando Github classroom</h2>
 
 </section>
 </section>
 <section>
-<section id="slide-org8b8d70b">
-<h2 id="org8b8d70b">Breve introducción a python</h2>
+<section id="slide-org8883459">
+<h2 id="org8883459">Breve introducción a python</h2>
 <form><ul>
 <li><code>ipython</code></li>
 <li><code>jupyter</code></li>
 <li>archivos</li>
 <li>funciones</li>
 <li>estructuras simples</li>
+<li>funciones de orden mayor (?)</li>
 
 </ul></form>
 
 </section>
+<section id="slide-org7592da7">
+<h3 id="org7592da7"><code>map</code></h3>
+<p>
+\[
+\texttt{map}: [(k_i, v_i)] \xrightarrow{f} [f(k_i, v_i)]
+\]
+</p>
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >list(map(lambda x: x*x, [1,2,3,4]))
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgdde0546">
+<h3 id="orgdde0546"><code>filter</code></h3>
+<p>
+\[
+\texttt{filter}: [(k_i, v_i)] \xrightarrow{p} [(k_i, v_i) \iff p(k_i, v_i)
+\text{ is True}]
+\]
+</p>
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >list(filter(lambda x: x % 2 == 0, [1,2,3,4]))
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgd82748c">
+<h3 id="orgd82748c"><code>reduce</code></h3>
+<p>
+\[
+\texttt{reduce}: [(k_i, v_i)] \xrightarrow{f} f(f(f(\ldotsf(k_i, v_i)))) 
+\]
+</p>
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >import functools
+functools.reduce(lambda x, y: x + y, [1,2,3,4], 0)
+</code></pre>
+</div>
+
+</section>
 </section>
 <section>
-<section id="slide-org5e04a3a">
-<h2 id="org5e04a3a"><i>Knapsack problem</i>: descripción</h2>
+<section id="slide-org1aa02e9">
+<h2 id="org1aa02e9"><i>Knapsack problem</i>: descripción</h2>
 <p>
 Tenemos a la vista \(n\) cosas, descritas por su peso \(w\) y su valor
 \(v\). Tenemos también una <i>backpack</i>  con una capacidad de \(Q\).
@@ -188,12 +236,12 @@ Ejemplo:
 </table>
 
 <p>
-Capacidad de la mochila: 20kg
+Capacidad de la mochila: 17kg
 </p>
 
 </section>
-<section id="slide-org50df40a">
-<h3 id="org50df40a">Implementación en python</h3>
+<section id="slide-orgbe8eb2c">
+<h3 id="orgbe8eb2c">Implementación en python</h3>
 <p>
 Existen varias maneras de codificar esto, un ejemplo sería tener dos
 listas, para pesos (<code>weights</code>) y valor (<code>values</code>)
@@ -203,7 +251,7 @@ listas, para pesos (<code>weights</code>) y valor (<code>values</code>)
 
 <pre><code class=" jupyter-python" >weights = [12,7,1,10,2]
 values = [4,3,2,5, 6]
-capacity = 20
+capacity = 17
 </code></pre>
 </div>
 
@@ -257,8 +305,8 @@ capacity = 17
 </div>
 
 </section>
-<section id="slide-orgc2aed3f">
-<h3 id="orgc2aed3f">Fuerza bruta</h3>
+<section id="slide-org3afeadf">
+<h3 id="org3afeadf">Fuerza bruta</h3>
 <p>
 Para el ejemplo pasado, es fácil enumerar todas las opciones:
 </p>
@@ -289,8 +337,8 @@ fuerza bruta,  en el siguiente intervalo \(|I| = 5\) a \(|I| = 50\)</li>
 </ul></form>
 
 </section>
-<section id="slide-orgcc0e2b7">
-<h3 id="orgcc0e2b7">Implementación en python</h3>
+<section id="slide-org201c797">
+<h3 id="org201c797">Implementación en python</h3>
 <div class="org-src-container">
 
 <pre><code class=" jupyter-python" >import itertools
@@ -346,12 +394,48 @@ Encontrar la solución:
 </div>
 
 
+</section>
+<section id="slide-org7c92cf3">
+<h3 id="org7c92cf3">Implementación en python    (Solución)</h3>
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >import itertools
+import functools
+
+def generate_solutions(things):
+    return sum([list(map(dict, itertools.combinations(things.items(), i))) for i in range(len(things) + 1)], [])
+
+def is_feasible(solution, capacity):
+    return functools.reduce(lambda x, value: x + value[0], solution.values(), 0) &lt;= capacity
+
+def solution_space(things, capacity):
+    all_solutions = generate_solutions(things)
+    feasible_predicate = functools.partial(is_feasible, capacity=capacity)
+    return filter(feasible_predicate, all_solutions)
+
+def evaluate_solution(solution):
+    return functools.reduce(lambda x, value: x + value[1], solution.values(), 0)
+
+def brute_force(things, capacity):
+    best_solution = None
+    best_value = 0
+    for solution in solution_space(things, capacity):
+        total_value = evaluate_solution(solution)
+        if total_value &gt;= best_value:
+            best_value, best_solution = total_value, solution
+
+    return {'solution': best_solution, 'value': best_value }
+</code></pre>
+</div>
+
+
+
 
 </section>
 </section>
 <section>
-<section id="slide-org34375b7">
-<h2 id="org34375b7">Modelado  en OR</h2>
+<section id="slide-org3c0fafc">
+<h2 id="org3c0fafc">Modelado  en OR</h2>
 <p>
 Un <b>modelo de optimización</b> tiene tres partes:
 </p>
@@ -440,19 +524,22 @@ Estamos interesados en el valor total de los objetos
 <section>
 <section id="slide-lectures/Knapsack/Modelo">
 <h2 id="lectures/Knapsack/Modelo">Knapsack problem: Modelo de optimización</h2>
-<p>
-\[
-\textbf{maximize} \sum_{i \in I} v_i \cdot x_i \\
-\textbf{s.t.} \sum_{i \in I} w_i \cdot x_i \leq Q \\
-x_i = \{ 0,1 \}, i \in I
-\]
-</p>
+<div>
+\begin{equation}
+\begin{array}{rrclcl}
+\textbf{maximize} & \sum_{i \in I} v_i \cdot x_i \\
+\textbf{s.t.} & \displaystyle \sum_{i \in I} w_i \cdot x_i & \leq & Q \\
+ & x_i = \{ 0,1 \} &  i \in I
+\end{array}
+\end{equation}
+
+</div>
 
 </section>
 </section>
 <section>
-<section id="slide-orgb892cf5">
-<h2 id="orgb892cf5">Siempre define un baseline</h2>
+<section id="slide-org0e8eac2">
+<h2 id="org0e8eac2">Siempre define un baseline</h2>
 <form><ul>
 <li>No sabemos qué algoritmo puede solucionar el problema</li>
 <li>Tienes que saber contra que mejorar</li>
@@ -463,8 +550,8 @@ x_i = \{ 0,1 \}, i \in I
 </section>
 </section>
 <section>
-<section id="slide-orga87c3ed">
-<h2 id="orga87c3ed">Algoritmos greedy</h2>
+<section id="slide-org3f6030e">
+<h2 id="org3f6030e">Algoritmos greedy</h2>
 <form><ul>
 <li>La idea clave  es: <i>Construir la solución  seleccionando un item a la vez</i></li>
 <li>También son conocidos como heurísticas.</li>
@@ -477,8 +564,8 @@ x_i = \{ 0,1 \}, i \in I
 </section>
 </section>
 <section>
-<section id="slide-org9220653">
-<h2 id="org9220653">Primera idea</h2>
+<section id="slide-org2d233cb">
+<h2 id="org2d233cb">Primera idea</h2>
 <form><ul>
 <li>¿Qué tal si tomamos los más valiosos primero?</li>
 
@@ -585,8 +672,8 @@ Por útimo podemos intenter con la <i>densidad</i> del valor :
 </section>
 </section>
 <section>
-<section id="slide-org13400e1">
-<h2 id="org13400e1">¿Cómo se resuelven los problemas en la vida real? (y en las tareas)</h2>
+<section id="slide-org0f2c8a3">
+<h2 id="org0f2c8a3">¿Cómo se resuelven los problemas en la vida real? (y en las tareas)</h2>
 <form><ul>
 <li>Primero has la cosa más simple que se te ocurra para resolverlo
 <form><ul>
@@ -605,8 +692,8 @@ un poco más inteligente</li>
 </section>
 </section>
 <section>
-<section id="slide-org2aea6cc">
-<h2 id="org2aea6cc">Repaso</h2>
+<section id="slide-orgff5c0bc">
+<h2 id="orgff5c0bc">Repaso</h2>
 <form><ul>
 <li class="fragment appear">Introducción a Investigación de Operaciones</li>
 

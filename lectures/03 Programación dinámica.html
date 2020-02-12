@@ -80,17 +80,17 @@ School specific teaching materials"/>
 <h1 class="title">Programación dinámica</h1><h2 class="author">Adolfo De Unánue Adolfo De Unánue</h2>
 </section>
 <section>
-<section id="slide-orgbce2a6a">
-<h2 id="orgbce2a6a">Introduction and Recap of Last Class</h2>
-<div class="outline-text-2" id="text-orgbce2a6a">
+<section id="slide-org808aa2c">
+<h2 id="org808aa2c">Introduction and Recap of Last Class</h2>
+<div class="outline-text-2" id="text-org808aa2c">
 </div>
 </section>
-<section id="slide-org30021e8">
-<h3 id="org30021e8">Anuncios</h3>
+<section id="slide-org1635da9">
+<h3 id="org1635da9">Anuncios</h3>
 
 </section>
-<section id="slide-orgaf1965f">
-<h3 id="orgaf1965f">Repaso de la última clase</h3>
+<section id="slide-org5a6e1b7">
+<h3 id="org5a6e1b7">Repaso de la última clase</h3>
 </section>
 <section id="slide-lectures/Programación dinámica/Outline">
 <h3 id="lectures/Programación dinámica/Outline">Lecture Outline</h3>
@@ -105,8 +105,8 @@ School specific teaching materials"/>
 </section>
 </section>
 <section>
-<section id="slide-org883c497">
-<h2 id="org883c497">Recursión</h2>
+<section id="slide-orgb1d380b">
+<h2 id="orgb1d380b">Recursión</h2>
 <blockquote>
 <p>
 Cuando una función  se llama así misma directa o indirectamente, se le
@@ -133,15 +133,19 @@ En general una función recursiva:
 
 
 </section>
-<section id="slide-orga724a5c">
-<h3 id="orga724a5c">La suma</h3>
+<section id="slide-orge25aa3c">
+<h3 id="orge25aa3c">La suma</h3>
 <p>
 Sumatoria de los primeros \(n\) números enteros, \(\sum n\)
 </p>
 
 <p>
 \[
-\sum n = \Big \{ n + \sum(n-1), if n > 1 \\ 1 if n = 1, \\ 0 if n = 0
+\sum n = \begin{cases}
+n + \sum(n-1), & \text{if} \  n > 1 \\ 
+1, & \text{if} \  n = 1 \\
+0, &  \text{if} \  n = 0
+\end{cases}
 \]
 </p>
 
@@ -158,8 +162,19 @@ Sumatoria de los primeros \(n\) números enteros, \(\sum n\)
 </div>
 
 </section>
-<section id="slide-orgfcd16ed">
-<h3 id="orgfcd16ed">Fibonnaci</h3>
+<section id="slide-org375277a">
+<h3 id="org375277a">El ejemplo típico: Fibonnaci</h3>
+<p>
+\[
+F_n = \begin{cases}
+F_{n-1} + F_{n-2}, & \text{if} \  n > 1 \\ 
+1, & \text{if} \  n = 1 \\
+1, &  \text{if} \  n = 0
+\end{cases}
+\]
+</p>
+
+
 <div class="org-src-container">
 
 <pre><code class=" jupyter-python" >def fibonnaci(n):
@@ -180,16 +195,16 @@ print(f"Llamando a fibonnaci({n-1}) + fibonnaci({n-2})")
 </aside>
 
 </section>
-<section id="slide-org820addb">
-<h3 id="org820addb">Problemas con la implementación</h3>
+<section id="slide-org6c213d2">
+<h3 id="org6c213d2">Problemas con la implementación</h3>
 <p>
 Observa el  <code>print</code> en el cuerpo de la función para verlo &#x2026;
 </p>
 
 
 </section>
-<section id="slide-org284cc40">
-<h3 id="org284cc40">Usando <code>cache</code></h3>
+<section id="slide-org370091c">
+<h3 id="org370091c">Usando <code>cache</code></h3>
 <p>
 Como podrás observar, estamos calculando varias veces la misma
 función, podemos mejorar el desempeño,  si guardamos los resultados en
@@ -217,8 +232,8 @@ def fibonnaci(n):
 
 
 </section>
-<section id="slide-org362766c">
-<h3 id="org362766c">Usando el poder de pyhton: decoradores</h3>
+<section id="slide-org2452ee4">
+<h3 id="org2452ee4">Usando el poder de pyhton: decoradores</h3>
 <div class="org-src-container">
 
 <pre><code class=" jupyter-python" >import functools
@@ -233,23 +248,54 @@ def fibonnaci(n):
 </div>
 
 </section>
-</section>
-<section>
-<section id="slide-orgb74c8a0">
-<h2 id="orgb74c8a0">El knapsack de nuevo</h2>
+<section id="slide-orga5500d3">
+<h3 id="orga5500d3">Todos las funciones &#x2026;</h3>
 <p>
-\[
-\textbf{maximize} \sum_{i \in I} v_i \cdot x_i \\
-\textbf{s.t.} \sum_{i \in I} w_i \cdot x_i \leq Q \\
-x_i = \{ 0,1 \}, i \in I
-\]
+<b>RECUERDA</b>: Todos las funciones recursivas pueden convertirse en funciones
+iterativas (i.e. usando <code>for</code> - loops).
 </p>
+
+<p>
+Si les interesa este tópico ver <a href="https://stackoverflow.com/a/933979/754176">este post</a> o <a href="https://stackoverflow.com/a/1662489/754176">este</a>.
+</p>
+
+</section>
+<section id="slide-orgdaefdfb">
+<h3 id="orgdaefdfb">Implementación en <code>python</code></h3>
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >def fibonnaci(n):
+    f1 = 1
+    f2 = 1
+    for i in range(1, n - 1):
+        f1, f2 = f2, f1+f2
+    return f2
+</code></pre>
+</div>
+
+
 
 </section>
 </section>
 <section>
-<section id="slide-org7c69910">
-<h2 id="org7c69910">Recursión y el problema del Knapsack</h2>
+<section id="slide-org80a269c">
+<h2 id="org80a269c">El knapsack de nuevo</h2>
+<div>
+\begin{equation}
+\begin{array}{rrclcl}
+\textbf{maximize} & \sum_{i \in I} v_i \cdot x_i \\
+\textbf{s.t.} & \displaystyle \sum_{i \in I} w_i \cdot x_i & \leq & Q \\
+ & x_i = \{ 0,1 \} &  i \in I
+\end{array}
+\end{equation}
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orgf263323">
+<h2 id="orgf263323">El problema del Knapsack y Bellman</h2>
 <form><ul>
 <li>Supondremos que \(I = \{1, 2, \ldots, n\}\) son los <i>items</i> disponibles</li>
 <li><code>solucion(J,q)</code> es la solución óptima para el problema del knapsack
@@ -278,7 +324,7 @@ x_i = \{ 0,1 \}, i \in 1..j
 </p>
 <form><ul>
 <li>Agreguemos un sólo <i>item</i></li>
-<li>Si w_j &le; k
+<li>Si \(w_j \leq k\)
 <form><ul>
 <li>O no seleccionamos el <i>item</i> \(j\) y entonces la solución es \(solucion(j-1,q)\)</li>
 <li>O seleccionamos el item \(j\) y la solución es \(v_j + solucion(j-1, q-w_j)\)</li>
@@ -383,6 +429,7 @@ Discutir que la recursión empieza "desde arriba"
 <div class="org-src-container">
 
 <pre><code class=" jupyter-python" >def knapsack_recursivo(things, capacity):
+    """ Resuelve el problema del knapsack utilizando recursividad  de manera naif. things es una lista de namedtuples de la forma (name, weight, value)"""
     if not things  or capacity == 0:
         return {'solucion': [], 'value': 0}
 
@@ -416,8 +463,8 @@ Discutir que la recursión empieza "desde arriba"
 </section>
 </section>
 <section>
-<section id="slide-org70a6647">
-<h2 id="org70a6647">Programación dinámica</h2>
+<section id="slide-org61d8734">
+<h2 id="org61d8734">Programación dinámica: "bottom up"</h2>
 <form><ul>
 <li>En lugar de empezar desde "arriba", la técnica de
 <b>programación dinámica</b>, empieza desde "abajo"</li>
@@ -425,8 +472,6 @@ Discutir que la recursión empieza "desde arriba"
 sucesivamente</li>
 
 </ul></form>
-
-
 
 <aside class="notes">
 <p>
@@ -436,8 +481,8 @@ maximize 5x_1 + 4x_2 + 3x_3, sujeto a 4x_1 + 5x_2+ 2x_3 &le; 9 x_i, i &isin; \{0
 </aside>
 
 </section>
-<section id="slide-org9aa2be7">
-<h3 id="org9aa2be7">Demostración (en el pizarrón)</h3>
+<section id="slide-orge56dcd5">
+<h3 id="orge56dcd5">Demostración (en el pizarrón)</h3>
 <p>
 <b>NOTA</b>: Ejemplo tomado de <i>Grooking Algorithms</i>
 </p>
@@ -527,19 +572,84 @@ Y una bolsa de 4kg de capacidad
 </table>
 
 </section>
-<section id="slide-orgfcef830">
-<h3 id="orgfcef830">Implementación en <code>python</code></h3>
+<section id="slide-org746d55d">
+<h3 id="org746d55d">Implementación en <code>python</code></h3>
 
 </section>
 </section>
 <section>
-<section id="slide-org69d443c">
-<h2 id="org69d443c">Generalizaciones del Knapsack</h2>
-<div class="outline-text-2" id="text-org69d443c">
+<section id="slide-org424c46e">
+<h2 id="org424c46e">Programación dinámica: "top down"</h2>
+<form><ul>
+<li>Un problema con la implementación anterior es que requiere calcular
+<b>toda</b> la tabla, no sólo los valores que necesitas. La implementación
+<i>bottom up</i> enfrentará problemas de memoria y tiempo.</li>
+<li>Es posible implementar el algoritmo usando <i>recursividad</i> y <i>memoización</i>.</li>
+<li>La implementación <i>top-down</i> calculará los resultados parciales que
+son necesarios para obtener la solución final.</li>
+
+</ul></form>
+
+
+</section>
+<section id="slide-org79ebad4">
+<h3 id="org79ebad4">Implementación en <code>python</code></h3>
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >import functools 
+
+def knapsack_td(items, capacity):
+     """ Resuelve el problema del knapsack utilizando recursividad  de con memoizacion.
+     things es una lista de namedtuples de la forma (name, weight, value)"""
+    @functools.lru_cache(maxsize=None)
+    def best_value(i, capacity):
+        # Return the value of the most valuable subsequence of the first
+        # i elements in items whose weights sum to no more than capacity.
+        if capacity &lt; 0:
+            return float('-inf')
+        if i == 0:
+            return 0
+        _, weight, value  = items[i - 1]
+        return max(best_value(i - 1, capacity), best_value(i - 1, capacity - weight) + value)
+
+    j = capacity
+    result = []
+    for i in reversed(range(len(items))):
+        if best_value(i + 1, j) != best_value(i, j):
+            result.append(items[i])
+            j -= items[i][1]
+    result.reverse()
+    return {'solucion': result, 'value': best_value(len(items), capacity)}
+
+</code></pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org9a378d9">
+<h2 id="org9a378d9">Características de los problemas de DP</h2>
+<form><ul>
+<li>El procedimiento está diseñado para encontrar la <b>política óptima</b>
+para el problema completo.</li>
+<li>Dado un estado actual, una <i>política óptima para las etapas restantes</i>
+es <b>independiente</b> de la política adoptada en las <i>etapas anteriores</i>.</li>
+<li>Por lo tanto, la decisión inmediata óptima depende solo del estado
+actual y no de cómo se llegó ahí. Esto es el <b>principio de optimalidad</b>.</li>
+
+</ul></form>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org7717e04">
+<h2 id="org7717e04">Generalizaciones del Knapsack</h2>
+<div class="outline-text-2" id="text-org7717e04">
 </div>
 </section>
-<section id="slide-org81486e0">
-<h3 id="org81486e0">Bounded Knapsack problem</h3>
+<section id="slide-orgff25503">
+<h3 id="orgff25503">Bounded Knapsack problem</h3>
 <p>
 \[
 \textbf{maximize} \sum_{i \in I} v_i \cdot x_i \\
@@ -550,8 +660,8 @@ x_i \in \mathcal{Z}
 </p>
 
 </section>
-<section id="slide-org75c1748">
-<h3 id="org75c1748">Subset-Sum Problem</h3>
+<section id="slide-orgafc5166">
+<h3 id="orgafc5166">Subset-Sum Problem</h3>
 <p>
 Encontrar  un subconjunto de pesos que la suma es cercana sin exceder
 a la capacidad
@@ -566,8 +676,8 @@ x_i = \{ 0,1 \}, i \in I
 </p>
 
 </section>
-<section id="slide-org31c002b">
-<h3 id="org31c002b">Change-Making problem</h3>
+<section id="slide-org112c140">
+<h3 id="org112c140">Change-Making problem</h3>
 <p>
 \[
 \textbf{maximize} \sum_{i \in I} v_i \cdot x_i \\
@@ -578,8 +688,8 @@ x_i \in \mathcal{Z}
 </p>
 
 </section>
-<section id="slide-org9c61bc9">
-<h3 id="org9c61bc9">Multiple  Knapsack problem</h3>
+<section id="slide-orga9517ac">
+<h3 id="orga9517ac">Multiple  Knapsack problem</h3>
 <p>
 Existen \(m\) contenedores con capacidades  \(q_i\), \(i = 1,2,\ldots, m\)
 \[
@@ -591,8 +701,8 @@ x_{ij} = \{ 0,1 \}
 </p>
 
 </section>
-<section id="slide-org3569d53">
-<h3 id="org3569d53">Generalized Assigment problem</h3>
+<section id="slide-orgd1e5eb5">
+<h3 id="orgd1e5eb5">Generalized Assigment problem</h3>
 <p>
 Si el valor y el peso de cada item varían con respecto al contenedor
 </p>
@@ -610,16 +720,11 @@ x_{ij} = \{ 0,1 \}
 </section>
 </section>
 <section>
-<section id="slide-orgce4d5af">
-<h2 id="orgce4d5af">Repaso</h2>
-<form><ul>
-<li class="fragment appear">Recursión</li>
-<li class="fragment appear">El knapsack de nuevo</li>
-<li class="fragment appear">Recursión y el problema del Knapsack</li>
-<li class="fragment appear">Programación dinámica</li>
-<li class="fragment appear">Generalizaciones del Knapsack</li>
-
-</ul></form>
+<section id="slide-org57e21a1">
+<h2 id="org57e21a1">Tarea</h2>
+<p>
+<a href="https://classroom.github.com/a/KVotVIjK">Knapsack problems</a>
+</p>
 </section>
 </section>
 </div>

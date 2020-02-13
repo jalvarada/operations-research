@@ -18,7 +18,7 @@ def trivial_greedy(items, capacity):
             weight += item.weight
     
     # prepare the solution in the specified output format
-    output_data = str(value) + ' ' + str(0) + '\n'
+    output_data = str(value) + '\n'
     output_data += ' '.join(map(str, taken))
     return output_data
 

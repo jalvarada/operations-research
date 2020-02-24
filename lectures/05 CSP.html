@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>CSP</title>
+<meta name="author" content="Adolfo De Unánue Adolfo De Unánue"/>
+<meta name="description" content="Description
+School specific teaching materials"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://revealjs.com/css/reveal.css"/>
+
+<link rel="stylesheet" href="https://revealjs.com/css/theme/black.css" id="theme"/>
+
+<link rel="stylesheet" href="./css/mozilla-light.css"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/toc-progress/toc-progress.css"/>
+
+<link rel="stylesheet" href="./reveal.js/css/theme/toc-style.css"/>
+
+<link rel="stylesheet" href="./reveal.js/lib/font/source-sans-pro/source-sans-pro.css"/>
+<link rel="stylesheet" href="https://revealjs.com/lib/css/zenburn.css"/>
+<link rel="stylesheet" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"/>
+<style>
+/* Position computations of klipse get confused by reveal.js's scaling.
+   Hence, scaling should be disabled with this code.  Fix height of code area
+   with scrollbar (use overflow instead of overflow-y to restore CodeMirror
+   setting afterwards): */
+.reveal section pre { max-height: 70vh; height: auto; overflow: auto; }
+/* Reset some reveal.js and oer-reveal settings: */
+.reveal section pre .CodeMirror pre { font-size: 2em; box-shadow: none; width: auto; padding: 0.4em; display: block; overflow: visible; }
+/* Enlarge cursor: */
+.CodeMirror-cursor { border-left: 3px solid black; }
+</style>
+<script>
+    window.klipse_settings = {
+        selector: '.language-klipse',
+        selector_eval_html: '.language-klipse-html',
+        selector_eval_js: '.language-klipse-javascript',
+        selector_eval_js: '.language-klipse-js',
+        selector_eval_php: '.language-klipse-php',
+        selector_eval_python_client: '.language-klipse-python',
+        selector_eval_ruby: '.language-klipse-ruby',
+        selector_eval_scheme: '.language-klipse-scheme',
+        selector_sql: '.language-klipse-sql'
+    };
+</script>
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'https://revealjs.com/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<meta name="description" content="Investigación de Operaciones 2020.">
+<base target="_blank">
+<base href="../">
+
+          <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic,700italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+          <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:400,700' rel='stylesheet' type='text/css'>
+          <style type='text/css'>
+             body {
+                font-family: 'Source Sans Pro', sans-serif;
+             }
+             pre, code {
+                font-family: 'Source Code Pro', monospace;
+             }
+          </style>
+</head>
+<body prefix="dc: http://purl.org/dc/elements/1.1/ dcterms: http://purl.org/dc/terms/ dcmitype: http://purl.org/dc/dcmitype/ cc: http://creativecommons.org/ns#" typeof="dcmitype:InteractiveResource">
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide">
+<h1 class="title">CSP</h1><h2 class="author">Adolfo De Unánue Adolfo De Unánue</h2>
+</section>
+<section>
+<section id="slide-org9d8160a">
+<h2 id="org9d8160a">Introduction and Recap of Last Class</h2>
+<div class="outline-text-2" id="text-org9d8160a">
+</div>
+</section>
+<section id="slide-orgec1a970">
+<h3 id="orgec1a970">Anuncios</h3>
+<form><ul>
+<li>&#x2026;</li>
+
+</ul></form>
+</section>
+<section id="slide-org40046c5">
+<h3 id="org40046c5">Repaso de la última clase</h3>
+</section>
+<section id="slide-lectures/CSP/Outline">
+<h3 id="lectures/CSP/Outline">Lecture Outline</h3>
+<form><ul>
+<li class="fragment appear">Constraint Programming</li>
+<li class="fragment appear">Ejemplo: Problema de las 8 reinas</li>
+<li class="fragment appear">Ejemplo: Colorear un mapa</li>
+<li class="fragment appear">Branch and prune</li>
+<li class="fragment appear">Definición</li>
+<li class="fragment appear">Ejemplo: 8 reinas</li>
+<li class="fragment appear">CSP como grafo</li>
+<li class="fragment appear">CSP como multigrafo: grafo de restricción</li>
+
+</ul></form>
+</section>
+</section>
+<section>
+<section id="slide-orgd543c7d">
+<h2 id="orgd543c7d">Constraint Programming</h2>
+<form><ul>
+<li>Usar los <i>constraints</i> (restricciones) para reducir el conjunto de valores que cada
+variable puede tomar.</li>
+<li>Las restricciones ayudan a <span class="underline">reducir</span> el espacio de soluciones.
+<form><ul>
+<li>En DP usamos la función objetivo &#x2026;</li>
+
+</ul></form></li>
+<li>Indica la estructura del problema de la manera más explícita posible</li>
+<li>A veces, hay que tomar una decisión cuando no se pueden hacer más deducciones</li>
+<li><b>NO</b> es una heurística: con el suficiente tiempo encontrará la solución</li>
+<li>Se enfoca en <i>feasibility</i></li>
+
+</ul></form>
+
+</section>
+</section>
+<section>
+<section id="slide-orge0430f9">
+<h2 id="orge0430f9">Ejemplo: Problema de las 8 reinas</h2>
+<form><ul>
+<li>Colocar 8 reinas en el tablero de ajedrez de tal manera que no
+puedan atacarse entre sí</li>
+<li>Las reinas "atacan" en diagonal, columna o renglón</li>
+
+</ul></form>
+
+<aside class="notes">
+<form><ul>
+<li>Variables de decisión: e.g. la columna y el valor es el renglón</li>
+<li>Dominio de las variables de decisión</li>
+<li>Expresar las restricciones: No en el mismo renglón, no en la
+diagonal superior, no en la diagonal inferior</li>
+
+</ul></form>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-org9e8884e">
+<h2 id="org9e8884e">Ejemplo: Colorear un mapa</h2>
+<form><ul>
+<li>Colorear un mapa de tal manera que no dos territorios adyacentes
+tengan el mismo color</li>
+
+</ul></form>
+
+<aside class="notes">
+<form><ul>
+<li>Cualquier mapa puede colorearse con 4 colores</li>
+<li>Kenneth Appel and Wolfgang Haken</li>
+<li>Primer teorema probado con una computadora</li>
+
+</ul></form>
+
+</aside>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org0ce5150">
+<h2 id="org0ce5150">Branch and prune</h2>
+<form><dl>
+<dt>Pruning</dt><dd>Reduce el espacio de búsqueda: usa las restricciones</dd>
+<dt>Branching</dt><dd>Parte el problema en subproblema y explorar el
+subproblema 
+<form><ul>
+<li>por ejemplo prueba los valores de una variable hasta que la
+solución se encuentre o se pruebe que no hay solución</li>
+
+</ul></form></dd>
+
+</dl></form>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org1c2aec8">
+<h2 id="org1c2aec8">Definición</h2>
+<p>
+Un problema de satisfacción de restricciones (CSP) consiste en:
+</p>
+
+<form><ul>
+<li>Un conjunto de variables</li>
+<li>Un dominio para cada variable</li>
+<li>Un conjunto de restricciones</li>
+
+</ul></form>
+
+</section>
+</section>
+<section>
+<section id="slide-orgcf24312">
+<h2 id="orgcf24312">Ejemplo: 8 reinas</h2>
+<form><ul>
+<li>Variables de decisión: e.g. la columna y el valor es el renglón</li>
+<li>Dominio de las variables de decisión</li>
+<li>Expresar las restricciones: No en el mismo renglón, no en la
+diagonal superior, no en la diagonal inferior</li>
+
+</ul></form>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org8d1bbff">
+<h2 id="org8d1bbff">CSP como grafo</h2>
+<form><ul>
+<li>Los nodos son los valores que puede tomar las variables</li>
+<li>Los vecino del nodo \(n\) se obtienen seleccionando la variable \(V\)
+que no está asignada al nodo \(n\) y cuyos vecinos no violan ninguna
+restricción.</li>
+<li>El nodo inicial es una asignación vacía de todas las variables</li>
+<li>El nodo meta es el nodo que asigna un valor a cada variable
+<form><ul>
+<li>Nota que este nodo existe <b>si</b> satisface odas las restricciones</li>
+
+</ul></form></li>
+
+</ul></form>
+
+<aside class="notes">
+<p>
+Del libro  <i>Artificial Intelligence  Foundations of computational agents</i>, 
+Poole and Mackworth, segunda edición
+</p>
+
+<p>
+variables: A, B, C
+dominio: {1,2,3,4}
+restrcciones: A &lt; B, B &lt; C
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-orgaa3314b">
+<h2 id="orgaa3314b">CSP como multigrafo: grafo de restricción</h2>
+<form><ul>
+<li>Hay nodos para cada variable</li>
+<li>Hay otro tipo de nodo para cada restricción</li>
+<li>Para cada restricción \(c\) y por cada variable \(X\) en el <i>scope</i> de \(c\)
+hay un arco \((X, c)\)</li>
+<li>El arco es <span class="underline">consistente</span> si para cada valor de la variable se
+satisface la restricción.</li>
+
+</ul></form>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org872a213">
+<h2 id="org872a213">Repaso</h2>
+<form><ul>
+<li class="fragment appear">Constraint Programming</li>
+<li class="fragment appear">Ejemplo: Problema de las 8 reinas</li>
+<li class="fragment appear">Ejemplo: Colorear un mapa</li>
+<li class="fragment appear">Branch and prune</li>
+<li class="fragment appear">Definición</li>
+<li class="fragment appear">Ejemplo: 8 reinas</li>
+<li class="fragment appear">CSP como grafo</li>
+<li class="fragment appear">CSP como multigrafo: grafo de restricción</li>
+
+</ul></form>
+</section>
+</section>
+</div>
+</div>
+Adolfo De Unánue
+<script src="https://revealjs.com/js/reveal.js"></script>
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: true,
+center: true,
+slideNumber: 'c',
+rollingLinks: true,
+keyboard: true,
+mouseWheel: false,
+fragmentInURL: false,
+hashOneBasedIndex: false,
+pdfSeparateFragments: true,
+
+overview: true,
+width: 1400,
+height: 1000,
+margin: 0.10,
+minScale: 1.00,
+maxScale: 1.00,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'fade', // see README of reveal.js for options
+transitionSpeed: 'fast',
+controlsTutorial: false, controlsLayout: 'edges',
+
+// Optional libraries used to extend reveal.js
+dependencies: [
+{ src: 'https://revealjs.com/plugin/audio-slideshow/audio-slideshow.js', condition: function( ) { return !!document.body.classList && !Reveal.isSpeakerNotes(); } },
+{ src: 'https://revealjs.com/plugin/anything/anything.js' },
+{ src: 'https://revealjs.com/plugin/toc-progress/toc-progress.js', async: true, callback: function() { toc_progress.initialize('reduce', 'rgba(120,138,130,0.2)'); toc_progress.create(); } },
+{ src: 'https://revealjs.com/plugin/jump/jump.js', async: true },
+{ src: 'https://revealjs.com/plugin/quiz/js/quiz.js', async: true, callback: function() { prepareQuizzes({preventUnanswered: true, skipStartButton: true}); } },
+{ src: 'https://revealjs.com/plugin/coursemod/coursemod.js', async: true },
+ { src: 'https://revealjs.com/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+ { src: 'https://revealjs.com/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'https://revealjs.com/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }]
+
+,audioStartAtFragment: true,
+  audio: {
+    advance: -1, autoplay: false, defaultDuration: 0, defaultAudios: false, playerOpacity: 0.8, playerStyle: 'position: fixed; bottom: 9.5vh; left: 0%; width: 30%; height:30px; z-index: 33;' },
+anything: [
+        // Following initialization code for class animate from anything-demo.html.
+        // Copyright (c) 2016 Asvin Goel, under The MIT License (MIT).
+	{className: "animate",  initialize: (function(container, options){
+		Reveal.addEventListener( 'fragmentshown', function( event ) {
+			if (typeof event.fragment.beginElement === "function" ) {
+				event.fragment.beginElement();
+			}
+		});
+		Reveal.addEventListener( 'fragmenthidden', function( event ) {
+			if (event.fragment.hasAttribute('data-reverse') ) {
+				var reverse = event.fragment.parentElement.querySelector('[id=\"' + event.fragment.getAttribute('data-reverse') + '\"]');
+				if ( reverse && typeof reverse.beginElement === "function" ) {
+					reverse.beginElement();
+				}
+			}
+		});
+		if ( container.getAttribute("data-svg-src") ) {
+			var xhr = new XMLHttpRequest();
+			xhr.onload = function() {
+				if (xhr.readyState === 4) {
+					var svg = container.querySelector('svg');
+					container.removeChild( svg );
+					container.innerHTML = xhr.responseText + container.innerHTML;
+					if ( svg ) {
+						container.querySelector('svg').innerHTML = container.querySelector('svg').innerHTML + svg.innerHTML;
+					}
+				}
+				else {
+					console.warn( "Failed to get file. ReadyState: " + xhr.readyState + ", Status: " + xhr.status);
+				}
+			};
+			xhr.open( 'GET', container.getAttribute("data-svg-src"), true );
+			xhr.send();
+		}
+	}) },
+	{className: "randomPic",
+	 defaults: {imgalt: "Dummy alt text",
+		    imgcaption: "Image by {name}",
+		    choices: [ {name: "dummyname", path: "dummypath"} ]},
+	 initialize: (function(container, options){
+	     var choice = Math.trunc( Math.random()*(options.choices.length) );
+	     var img = "<img src='" + options.choices[choice].path + "' alt='" + options.choices[choice].imgalt + "' />";
+	     var caption = options.imgcaption.replace(new RegExp('\{name\}', 'gm'), options.choices[choice].name);
+	     container.innerHTML = img + caption;
+	 }) },
+	{className: "notes",
+	 initialize: (function(container, options){
+	     container.addEventListener('click', function(e) { RevealNotes.open(); });
+	 }) }
+],
+coursemod: { enabled: true, shown: false },
+});
+</script>
+<script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
+<script>
+/* Recompute layout upon changes by klipse.  Code fragment from
+   asciidoctor-revealjs-klipse by Timothy Pratley under GPLv3:
+   https://github.com/timothypratley/asciidoctor-revealjs-klipse/blob/master/docs/docinfo-footer.html */
+Reveal.addEventListener( 'slidechanged', function( event ) {
+    window.dispatchEvent( new Event('resize') );
+} );
+</script>
+</body>
+</html>

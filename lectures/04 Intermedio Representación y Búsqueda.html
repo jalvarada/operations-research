@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Intermedio: Representación y Búsqueda</title>
+<meta name="author" content="Adolfo De Unánue Adolfo De Unánue"/>
+<meta name="description" content="Description
+School specific teaching materials"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://revealjs.com/css/reveal.css"/>
+
+<link rel="stylesheet" href="https://revealjs.com/css/theme/black.css" id="theme"/>
+
+<link rel="stylesheet" href="./css/mozilla-light.css"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/toc-progress/toc-progress.css"/>
+
+<link rel="stylesheet" href="./reveal.js/css/theme/toc-style.css"/>
+
+<link rel="stylesheet" href="./reveal.js/lib/font/source-sans-pro/source-sans-pro.css"/>
+<link rel="stylesheet" href="https://revealjs.com/lib/css/zenburn.css"/>
+<link rel="stylesheet" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"/>
+<style>
+/* Position computations of klipse get confused by reveal.js's scaling.
+   Hence, scaling should be disabled with this code.  Fix height of code area
+   with scrollbar (use overflow instead of overflow-y to restore CodeMirror
+   setting afterwards): */
+.reveal section pre { max-height: 70vh; height: auto; overflow: auto; }
+/* Reset some reveal.js and oer-reveal settings: */
+.reveal section pre .CodeMirror pre { font-size: 2em; box-shadow: none; width: auto; padding: 0.4em; display: block; overflow: visible; }
+/* Enlarge cursor: */
+.CodeMirror-cursor { border-left: 3px solid black; }
+</style>
+<script>
+    window.klipse_settings = {
+        selector: '.language-klipse',
+        selector_eval_html: '.language-klipse-html',
+        selector_eval_js: '.language-klipse-javascript',
+        selector_eval_js: '.language-klipse-js',
+        selector_eval_php: '.language-klipse-php',
+        selector_eval_python_client: '.language-klipse-python',
+        selector_eval_ruby: '.language-klipse-ruby',
+        selector_eval_scheme: '.language-klipse-scheme',
+        selector_sql: '.language-klipse-sql'
+    };
+</script>
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'https://revealjs.com/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<meta name="description" content="Investigación de Operaciones 2020.">
+<base target="_blank">
+<base href="../">
+
+          <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic,700italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+          <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:400,700' rel='stylesheet' type='text/css'>
+          <style type='text/css'>
+             body {
+                font-family: 'Source Sans Pro', sans-serif;
+             }
+             pre, code {
+                font-family: 'Source Code Pro', monospace;
+             }
+          </style>
+</head>
+<body prefix="dc: http://purl.org/dc/elements/1.1/ dcterms: http://purl.org/dc/terms/ dcmitype: http://purl.org/dc/dcmitype/ cc: http://creativecommons.org/ns#" typeof="dcmitype:InteractiveResource">
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide">
+<h1 class="title">Intermedio: Representación y Búsqueda</h1><h2 class="author">Adolfo De Unánue Adolfo De Unánue</h2>
+</section>
+<section>
+<section id="slide-orgdf57c8c">
+<h2 id="orgdf57c8c">Introduction and Recap of Last Class</h2>
+<div class="outline-text-2" id="text-orgdf57c8c">
+</div>
+</section>
+<section id="slide-org93e16fc">
+<h3 id="org93e16fc">Anuncios</h3>
+<form><ul>
+<li><p>
+Hay un horario nuevo
+</p>
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Día</th>
+<th scope="col" class="org-left">Horario</th>
+<th scope="col" class="org-left">Salón</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Lunes</td>
+<td class="org-left">15:30 - 17:00</td>
+<td class="org-left">106</td>
+</tr>
+
+<tr>
+<td class="org-left">Miércoles</td>
+<td class="org-left">15:00 - 17:00</td>
+<td class="org-left">CC302</td>
+</tr>
+</tbody>
+</table></li>
+
+</ul></form>
+
+</section>
+<section id="slide-orgd00cabc">
+<h3 id="orgd00cabc">Repaso de la última clase</h3>
+</section>
+<section id="slide-lectures/Intermedio Representación y Búsqueda/Outline">
+<h3 id="lectures/Intermedio Representación y Búsqueda/Outline">Lecture Outline</h3>
+<form><ul>
+<li class="fragment appear">Abstracción</li>
+<li class="fragment appear">Espacio de Estados</li>
+<li class="fragment appear">Vocabulario</li>
+<li class="fragment appear">Representación de redes</li>
+<li class="fragment appear">Usando grafos y búsqueda</li>
+<li class="fragment appear">Algoritmo genérico de búsqueda</li>
+<li class="fragment appear">Intermezzo: Colas y pilas</li>
+<li class="fragment appear">Estrategias de Búsquedas no informadas</li>
+<li class="fragment appear">Estrategias de Búsqueda heurística</li>
+<li class="fragment appear">Ejemplo</li>
+
+</ul></form>
+</section>
+</section>
+<section>
+<section id="slide-orgfb620a9">
+<h2 id="orgfb620a9">Abstracción</h2>
+<form><ul>
+<li>Tratar de representar el problema a resolver como un grafo dirigido,
+permite incorporar muchas técnicas que ayudarán a resolverlo.</li>
+<li>De lograrlo, el problema puede ser abstraído a encontrar un <i>path</i> del
+<b>nodo</b> inicial al nodo meta en un grafo dirigido.</li>
+<li>Optimización por Restricciones (<b>CSP</b>), <i>Búsqueda local</i> y
+<i>Meta heurística</i>, se beneficiarán de esta representación.</li>
+
+</ul></form>
+
+</section>
+</section>
+<section>
+<section id="slide-org60c21fd">
+<h2 id="org60c21fd">Espacio de Estados</h2>
+<form><ul>
+<li>Un <b>estado</b> contiene toda la información necesaria para predecir los
+efectos de una acción y determinar si el estado satisface la <b>meta</b>.</li>
+<li>Una <b>solución</b> es una secuencia de acciones que lleva del estado
+actual al estado que satisface la meta.</li>
+
+</ul></form>
+
+</section>
+<section>
+
+<form><ul>
+<li>Un <b>espacio de estados</b> consiste en:
+<form><ul>
+<li>Un conjunto de estados</li>
+<li>Un estado especial que llamamos <b>estado inicial</b></li>
+<li>Por cada estado, un conjunto de acciones disponibles en ese estado</li>
+<li>Una función de acción, que dado un estado y una acción, regresa un
+nuevo estado.</li>
+<li>Una meta, especificada como función booleana, que es verdadera
+cuando el estado \(s\) satisface la meta (si esto se cumple, \(s\) es
+un <b>estado final</b>.</li>
+<li>Un criterio que especifique la calidad de la solución
+aceptable. Si la solución es la mejor de acuerdo al criterio se
+llama <b>solución óptima</b></li>
+
+</ul></form></li>
+
+</ul></form>
+
+</section>
+<section>
+
+<form><ul>
+<li>Más adelante en este curso incluiremos en esta definición, casos en
+los cuales los estados tienen estructura o no son completamente
+observables, o las acciones son estocásticas, o hay funciones de
+preferencia complejas que incluyen recompensas y castigos, además de
+la meta.</li>
+
+</ul></form>
+
+</section>
+</section>
+<section>
+<section id="slide-orgc88c76c">
+<h2 id="orgc88c76c">Vocabulario</h2>
+<form><ul>
+<li><b>Grafo dirigido</b> Es un conjunto \(N\) de <span class="underline">nodos</span> y un conjunto \(A\) de
+<span class="underline">arcos</span>, donde cada arco es un conjunto ordenado de un par de nodos, \(G(N,A)\).</li>
+<li>\((n_1, n_2)\)   es un <span class="underline">arco saliente</span> de \(n_1\) a \(n_2\) y un <span class="underline">arco entrante</span>
+de \(n_2\) a \(n_1\).</li>
+<li>\(n_2\) es un <span class="underline">vecino</span> de \(n1\) si hay un arco de \(n_1\) a \(n_2\).</li>
+<li>Un <i>path</i> es una secuencia de nodos \((n_0, n_1, \ldots n_k)\)</li>
+<li>Una <b>meta</b> es una función booleana de los nodos, si <code>goal(n_k)</code> es
+verdadero, \(n_k\) es el <b>nodo meta</b></li>
+<li>El <b>costo</b> es un número <i>no negativo</i> asociado con los arcos. El costo
+de los arcos induce el costo de los <i>paths</i>. La  <b>solución óptima</b>  es
+aquella que minimiza el costo.</li>
+
+</ul></form>
+
+</section>
+<section>
+
+<form><ul>
+<li>Un <b>ciclo</b> es un <i>path</i>  no vacío cuyo nodo inicial es igual al nodo
+final.</li>
+<li>Una <b>DAG</b> es un grafo dirigido sin ciclos.</li>
+<li>Un <span class="underline">árbol</span> es un <b>DAG</b> con un nodo que no tiene arcos entrantes (<i>root</i>) y todos
+los demás nodos tienen <span class="underline">exactamente</span> un arco entrante (<i>leaf</i>).</li>
+
+</ul></form>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgeddb988">
+<h2 id="orgeddb988">Representación de redes</h2>
+<div class="outline-text-2" id="text-orgeddb988">
+</div>
+</section>
+<section id="slide-orgee59966">
+<h3 id="orgee59966">Matriz de Adyacencia</h3>
+<form><ul>
+<li>Una  matriz \(A\) 
+
+<form><ul>
+<li>\(a_{ij} = 1\) si hay una arista de \(i \to j\)</li>
+<li>\(a_{ij} = 0\) de otra manera</li>
+
+</ul></form></li>
+
+</ul></form>
+
+</section>
+<section id="slide-org43f48dc">
+<h3 id="org43f48dc">Lista de Adyacencia</h3>
+<form><ul>
+<li>Cada nodo tiene una lista de los nodos que están conectados mediante
+aristas salientes (i.e. de \(i \to j\))</li>
+
+</ul></form>
+
+
+</section>
+<section id="slide-org8439c1e">
+<h3 id="org8439c1e">Ejemplo</h3>
+
+<div class="figure">
+<p><img src="../images/graph-1.png" alt="graph-1.png" width="400px" height="400px">
+</p>
+</div>
+
+<p>
+Se puede representar como lista de adyacencia como sigue:
+</p>
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >graph = {}
+graph["A"] = {"B", "C"}
+graph["B"] = {"D", "E", "C"}
+graph["C"] = {"E"}
+graph["D"] = {"E", "F"}
+graph["E"] = {"F"}
+graph["F"] = set()
+graph["G"] = set()
+</code></pre>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org2e90df2">
+<h2 id="org2e90df2">Usando grafos y búsqueda</h2>
+
+<div class="figure">
+<p><img src="../images/graph-searching.png" alt="graph-searching.png" width="400px" height="400px">
+</p>
+<p><span class="figure-number">Figure 2: </span>Solucionando problemas usando un algoritmo de grafos. En negro los nodos explorados, en gris los nodos finales de los caminos (i.e. frontera), en blanco los nodos no explorados.</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org911fddb">
+<h2 id="org911fddb">Algoritmo genérico de búsqueda</h2>
+<p>
+<i>Pseudocódigo</i>
+</p>
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >def search(G, start, goal):
+    frontier = {start}
+    while frontier is not None:
+        path:{start, ...., n_k} = select_and_remove(frontier) # extraer el path de la frontera
+        if goal(n_k):
+            return path:{start, ..., n_k} # el path es la solución (quizá se puede intentar otra solución)
+        frontier = frontier U ({start, ...., n_k, n} : (n_k, n) \in A})  # por cada vecino agregar a la frontera el path a.k.a "expander"
+    return None # No hay solución
+</code></pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org021455c">
+<h2 id="org021455c">Intermezzo: Colas y pilas</h2>
+<div class="outline-text-2" id="text-org021455c">
+</div>
+</section>
+<section id="slide-org7262a08">
+<h3 id="org7262a08"><b>Stack</b> o <i>Pila</i></h3>
+
+<div class="figure">
+<p><img src="../images/stack.png" alt="stack.png">
+</p>
+</div>
+
+<p>
+Imágenes tomadas de: <a href="https://stackoverflow.com/a/35031174/754176">https://stackoverflow.com/a/35031174/754176</a>
+</p>
+
+</section>
+<section id="slide-orgb1ca7a8">
+<h3 id="orgb1ca7a8"><b>Queue</b> o <i>Cola</i></h3>
+
+<div class="figure">
+<p><img src="../images/queue.png" alt="queue.png">
+</p>
+</div>
+
+<p>
+Imágenes tomadas de: <a href="https://stackoverflow.com/a/35031174/754176">https://stackoverflow.com/a/35031174/754176</a>
+</p>
+
+</section>
+<section>
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >from collections import deque
+
+cola = deque()
+pila = deque()
+
+for i in [1,2,3,4]:
+    cola.append(i)
+    pila.appendleft(i)
+</code></pre>
+</div>
+
+</section>
+<section>
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >cola
+</code></pre>
+</div>
+
+<pre class="example">
+deque([1, 2, 3, 4])
+</pre>
+
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >cola.popleft()
+</code></pre>
+</div>
+
+<pre class="example">
+1
+</pre>
+
+
+</section>
+<section>
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >pila
+</code></pre>
+</div>
+
+<pre class="example">
+deque([4, 3, 2, 1])
+</pre>
+
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >pila.popleft()
+</code></pre>
+</div>
+
+<pre class="example">
+4
+</pre>
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-orge1338f0">
+<h2 id="orge1338f0">Estrategias de Búsquedas no informadas</h2>
+<div class="outline-text-2" id="text-orge1338f0">
+</div>
+</section>
+<section id="slide-org7c6b508">
+<h3 id="org7c6b508">Breadth-First search</h3>
+<form><ul>
+<li>La frontera es implementada como <b>FIFO</b> o <i>cola</i></li>
+<li>Espacio y tiempo crecen exponencialmente en esta estrategia</li>
+<li>Este método <b>garantiza</b> encontrar la solución, si existe alguna y
+encontrará la solución <span class="underline">con menos</span> arcos.</li>
+
+</ul></form>
+
+</section>
+<section>
+
+
+<div class="figure">
+<p><img src="../images/bfs.png" alt="bfs.png" width="400px" height="400px">
+</p>
+<p><span class="figure-number">Figure 5: </span>Orden en el cual se expanden los caminos en BFS</p>
+</div>
+
+</section>
+<section>
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >def BFS(G, start, goal):
+    """
+    Breadth First search
+    G es una lista de adyacencia
+    start es el nombre del nodo
+    goal es un predicado que devuelve true si el nodo es la solución
+    """
+    frontera = deque()  # En BFS la frontera es una cola
+
+    # Agrego por a derecha, ya que es una cola
+    frontera.append((start, [start])) # nodo y path
+    while frontera:
+        nodo, path = frontera.popleft() # Extraigo por la izquierda
+
+        for vecino in set(G[nodo]) - set(path): # Vecinos que no están en el path
+            if goal(vecino):
+                yield path + [vecino]
+            else:
+                frontera.append((vecino, path+[vecino]))
+                print(frontera)
+    return None
+</code></pre>
+</div>
+
+
+</section>
+<section id="slide-org07d5ce2">
+<h3 id="org07d5ce2">Depth-First search</h3>
+<form><ul>
+<li>La frontera es creada mediante un <b>LIFO</b> o <i>pila</i></li>
+<li>Este método utiliza <i>backtracking</i>: selecciona una primera
+alternativa, y luego <i>backtracks</i> a la siguiente alternativa, cuando
+ha agotado los caminos de la primera selección.</li>
+<li>Si el grafo contiene <span class="underline">ciclos</span> o un número infinito de nodos, DFS nunca
+terminará.</li>
+<li>La eficiencia de este método es sensible a como se ordenen los
+vecinos agregados a la frontera.</li>
+
+</ul></form>
+
+</section>
+<section>
+
+
+<div class="figure">
+<p><img src="../images/dfs.png" alt="dfs.png" width="400px" height="400px">
+</p>
+<p><span class="figure-number">Figure 6: </span>Orden en el cual se expanden los caminos en DFS</p>
+</div>
+
+</section>
+<section>
+
+<p>
+DFS es apropiado cuando:
+</p>
+
+<form><ul>
+<li>El espacio es limitado (no quieres guardar toda el grafo en memoria)</li>
+<li>Muchas soluciones pueden existir</li>
+<li>El orden en el cual los vecinos son agregados a la frontera puede
+ajustarse de tal manera que las soluciones puedan encontrarse a la
+primera.</li>
+
+</ul></form>
+
+</section>
+<section>
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >def DFS(G, start, goal):
+    """
+    Depth First search
+    G es una lista de adyacencia
+    start es el nombre del nodo
+    goal es un predicado que devuelve true si el nodo es la solución
+    """
+    frontera = deque()  # En DFS la frontera es una pila
+
+    # Agrego por la izquierda es una pila
+    frontera.appendleft((start, [start])) # nodo y path
+    while frontera:
+        nodo, path = frontera.popleft()
+
+        for vecino in set(G[nodo]) - set(path): # Vecinos que no están en el path
+            if goal(vecino):
+                yield path + [vecino]
+            else:
+                frontera.appendleft((vecino, path+[vecino]))
+                print(frontera)
+    return None
+</code></pre>
+</div>
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgb296bfd">
+<h2 id="orgb296bfd">Estrategias de Búsqueda heurística</h2>
+<p>
+Una <i>función heurística</i> \(h(n)\) regresa un número real no negativo que
+<b>estima</b> el costo de del camino de menor costo desde el nodo \(n\) al nodo
+meta.
+</p>
+
+<p>
+El función \(h(n)\) es <span class="underline">admisible</span> si siempre es menor o igual que el
+costo real del camino de menor costo del nodo \(n\) al nodo meta.
+</p>
+
+</section>
+<section id="slide-org1d8a3e3">
+<h3 id="org1d8a3e3">Búsqueda A*</h3>
+<p>
+A* usa: (1) el costo del camino, el de menor costo
+primero, e (2) información heurística <i>greedy</i> primero en el búsqueda,
+para seleccionar que camino debe de expandir.
+</p>
+
+<p>
+A* , para cada camino\(p\) de la frontera, define la función:
+</p>
+
+<p>
+\[
+\underbrace{\underbrace{n_o \xrightarrow{real} }_\text{costo(p)} n  \underbrace{\xrightarrow{estimado} n_g}_\text{h(p)}}_\text{f(p)}
+\]
+</p>
+
+<p class="backwardlink">
+A* se implementa usando el <a href="#slide-org911fddb" class="backwardlink">algoritmo genérico</a> pero la frontera es una cola
+ordenada por \(f(p)\).
+</p>
+
+</section>
+<section id="slide-orgac9783c">
+<h3 id="orgac9783c">Branch and Bound</h3>
+<p>
+<i>Branch and bound</i>  combina  DFS con información
+heurística para encontrar caminos óptimos \(h(n)\).
+</p>
+
+<p>
+En la implementación, se mantiene el camino de menor costo al nodo
+meta encontrado y su costo. Si la búsqueda encuentra un nuevo camino
+\(p\) cuyo costo es \(f(p) = costo(p) + h(p)\) mayor que el encontrado,
+\(p\) es <i>podado</i>. Si es menor que el costo encontrado, la nueva solución
+es guardada.
+</p>
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >def heuristica(nodo):
+    """ No hay heurística """
+    return 0
+
+def costo(path):
+    """ Suponemos que el costo es 1 en cada arco """
+    return len(path)
+
+def DF_branch_and_bound(G, start, goal, costo, heuristica, bound=float('inf')):
+    best_path = None
+    best_cost = bound
+    
+    frontera = deque()  # En BFS la frontera es una pila
+
+    # Agrego por a derecha, ya que es una cola
+    frontera.append((start, [start])) # nodo y path
+    
+    while frontera:
+        nodo, path = frontera.popleft() # Extraigo por la izquierda
+        if costo(path) + heuristica(nodo) &lt; best_cost:
+            print(f"Expandiendo {path} con costo {costo(path)}")
+            if goal(nodo):
+                best_path = path
+                best_cost = costo(path)
+                print(f"Nuevo mejor camino encontrado: {path}, costo: {costo(path)}")
+            else:            
+                for vecino in set(G[nodo]) - set(path): # Vecinos que no están en el path
+                    frontera.appendleft((vecino, path+[vecino]))
+        else:
+            print(f"{path} ha sido podado")
+    return best_path, best_cost
+</code></pre>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgec3986b">
+<h2 id="orgec3986b">Ejemplo</h2>
+<p>
+Tomado de <i>Artificial Intelligence  Foundations of computational agents</i>, 
+Poole and Mackworth, segunda edición
+</p>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org808f279">
+<h2 id="org808f279">Repaso</h2>
+<form><ul>
+<li class="fragment appear">Abstracción</li>
+<li class="fragment appear">Espacio de Estados</li>
+<li class="fragment appear">Vocabulario</li>
+<li class="fragment appear">Representación de redes</li>
+<li class="fragment appear">Usando grafos y búsqueda</li>
+<li class="fragment appear">Algoritmo genérico de búsqueda</li>
+<li class="fragment appear">Intermezzo: Colas y pilas</li>
+<li class="fragment appear">Estrategias de Búsquedas no informadas</li>
+<li class="fragment appear">Estrategias de Búsqueda heurística</li>
+<li class="fragment appear">Ejemplo</li>
+
+</ul></form>
+</section>
+</section>
+</div>
+</div>
+Adolfo De Unánue
+<script src="https://revealjs.com/js/reveal.js"></script>
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: true,
+center: true,
+slideNumber: 'c',
+rollingLinks: true,
+keyboard: true,
+mouseWheel: false,
+fragmentInURL: false,
+hashOneBasedIndex: false,
+pdfSeparateFragments: true,
+
+overview: true,
+width: 1400,
+height: 1000,
+margin: 0.10,
+minScale: 1.00,
+maxScale: 1.00,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'fade', // see README of reveal.js for options
+transitionSpeed: 'fast',
+controlsTutorial: false, controlsLayout: 'edges',
+
+// Optional libraries used to extend reveal.js
+dependencies: [
+{ src: 'https://revealjs.com/plugin/audio-slideshow/audio-slideshow.js', condition: function( ) { return !!document.body.classList && !Reveal.isSpeakerNotes(); } },
+{ src: 'https://revealjs.com/plugin/anything/anything.js' },
+{ src: 'https://revealjs.com/plugin/toc-progress/toc-progress.js', async: true, callback: function() { toc_progress.initialize('reduce', 'rgba(120,138,130,0.2)'); toc_progress.create(); } },
+{ src: 'https://revealjs.com/plugin/jump/jump.js', async: true },
+{ src: 'https://revealjs.com/plugin/quiz/js/quiz.js', async: true, callback: function() { prepareQuizzes({preventUnanswered: true, skipStartButton: true}); } },
+{ src: 'https://revealjs.com/plugin/coursemod/coursemod.js', async: true },
+ { src: 'https://revealjs.com/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+ { src: 'https://revealjs.com/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'https://revealjs.com/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }]
+
+,audioStartAtFragment: true,
+  audio: {
+    advance: -1, autoplay: false, defaultDuration: 0, defaultAudios: false, playerOpacity: 0.8, playerStyle: 'position: fixed; bottom: 9.5vh; left: 0%; width: 30%; height:30px; z-index: 33;' },
+anything: [
+        // Following initialization code for class animate from anything-demo.html.
+        // Copyright (c) 2016 Asvin Goel, under The MIT License (MIT).
+	{className: "animate",  initialize: (function(container, options){
+		Reveal.addEventListener( 'fragmentshown', function( event ) {
+			if (typeof event.fragment.beginElement === "function" ) {
+				event.fragment.beginElement();
+			}
+		});
+		Reveal.addEventListener( 'fragmenthidden', function( event ) {
+			if (event.fragment.hasAttribute('data-reverse') ) {
+				var reverse = event.fragment.parentElement.querySelector('[id=\"' + event.fragment.getAttribute('data-reverse') + '\"]');
+				if ( reverse && typeof reverse.beginElement === "function" ) {
+					reverse.beginElement();
+				}
+			}
+		});
+		if ( container.getAttribute("data-svg-src") ) {
+			var xhr = new XMLHttpRequest();
+			xhr.onload = function() {
+				if (xhr.readyState === 4) {
+					var svg = container.querySelector('svg');
+					container.removeChild( svg );
+					container.innerHTML = xhr.responseText + container.innerHTML;
+					if ( svg ) {
+						container.querySelector('svg').innerHTML = container.querySelector('svg').innerHTML + svg.innerHTML;
+					}
+				}
+				else {
+					console.warn( "Failed to get file. ReadyState: " + xhr.readyState + ", Status: " + xhr.status);
+				}
+			};
+			xhr.open( 'GET', container.getAttribute("data-svg-src"), true );
+			xhr.send();
+		}
+	}) },
+	{className: "randomPic",
+	 defaults: {imgalt: "Dummy alt text",
+		    imgcaption: "Image by {name}",
+		    choices: [ {name: "dummyname", path: "dummypath"} ]},
+	 initialize: (function(container, options){
+	     var choice = Math.trunc( Math.random()*(options.choices.length) );
+	     var img = "<img src='" + options.choices[choice].path + "' alt='" + options.choices[choice].imgalt + "' />";
+	     var caption = options.imgcaption.replace(new RegExp('\{name\}', 'gm'), options.choices[choice].name);
+	     container.innerHTML = img + caption;
+	 }) },
+	{className: "notes",
+	 initialize: (function(container, options){
+	     container.addEventListener('click', function(e) { RevealNotes.open(); });
+	 }) }
+],
+coursemod: { enabled: true, shown: false },
+});
+</script>
+<script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
+<script>
+/* Recompute layout upon changes by klipse.  Code fragment from
+   asciidoctor-revealjs-klipse by Timothy Pratley under GPLv3:
+   https://github.com/timothypratley/asciidoctor-revealjs-klipse/blob/master/docs/docinfo-footer.html */
+Reveal.addEventListener( 'slidechanged', function( event ) {
+    window.dispatchEvent( new Event('resize') );
+} );
+</script>
+</body>
+</html>

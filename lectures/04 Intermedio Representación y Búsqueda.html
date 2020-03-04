@@ -80,13 +80,13 @@ School specific teaching materials"/>
 <h1 class="title">Intermedio: Representación y Búsqueda</h1><h2 class="author">Adolfo De Unánue Adolfo De Unánue</h2>
 </section>
 <section>
-<section id="slide-orgdf57c8c">
-<h2 id="orgdf57c8c">Introduction and Recap of Last Class</h2>
-<div class="outline-text-2" id="text-orgdf57c8c">
+<section id="slide-orgebbfa20">
+<h2 id="orgebbfa20">Introduction and Recap of Last Class</h2>
+<div class="outline-text-2" id="text-orgebbfa20">
 </div>
 </section>
-<section id="slide-org93e16fc">
-<h3 id="org93e16fc">Anuncios</h3>
+<section id="slide-orgae56c87">
+<h3 id="orgae56c87">Anuncios</h3>
 <form><ul>
 <li><p>
 Hay un horario nuevo
@@ -126,8 +126,8 @@ Hay un horario nuevo
 </ul></form>
 
 </section>
-<section id="slide-orgd00cabc">
-<h3 id="orgd00cabc">Repaso de la última clase</h3>
+<section id="slide-orge3d6e48">
+<h3 id="orge3d6e48">Repaso de la última clase</h3>
 </section>
 <section id="slide-lectures/Intermedio Representación y Búsqueda/Outline">
 <h3 id="lectures/Intermedio Representación y Búsqueda/Outline">Lecture Outline</h3>
@@ -147,8 +147,8 @@ Hay un horario nuevo
 </section>
 </section>
 <section>
-<section id="slide-orgfb620a9">
-<h2 id="orgfb620a9">Abstracción</h2>
+<section id="slide-org0bc7c65">
+<h2 id="org0bc7c65">Abstracción</h2>
 <form><ul>
 <li>Tratar de representar el problema a resolver como un grafo dirigido,
 permite incorporar muchas técnicas que ayudarán a resolverlo.</li>
@@ -162,8 +162,8 @@ permite incorporar muchas técnicas que ayudarán a resolverlo.</li>
 </section>
 </section>
 <section>
-<section id="slide-org60c21fd">
-<h2 id="org60c21fd">Espacio de Estados</h2>
+<section id="slide-org0ef8569">
+<h2 id="org0ef8569">Espacio de Estados</h2>
 <form><ul>
 <li>Un <b>estado</b> contiene toda la información necesaria para predecir los
 efectos de una acción y determinar si el estado satisface la <b>meta</b>.</li>
@@ -209,8 +209,8 @@ la meta.</li>
 </section>
 </section>
 <section>
-<section id="slide-orgc88c76c">
-<h2 id="orgc88c76c">Vocabulario</h2>
+<section id="slide-orgd8d432a">
+<h2 id="orgd8d432a">Vocabulario</h2>
 <form><ul>
 <li><b>Grafo dirigido</b> Es un conjunto \(N\) de <span class="underline">nodos</span> y un conjunto \(A\) de
 <span class="underline">arcos</span>, donde cada arco es un conjunto ordenado de un par de nodos, \(G(N,A)\).</li>
@@ -242,13 +242,13 @@ los demás nodos tienen <span class="underline">exactamente</span> un arco entra
 </section>
 </section>
 <section>
-<section id="slide-orgeddb988">
-<h2 id="orgeddb988">Representación de redes</h2>
-<div class="outline-text-2" id="text-orgeddb988">
+<section id="slide-org47cec5b">
+<h2 id="org47cec5b">Representación de redes</h2>
+<div class="outline-text-2" id="text-org47cec5b">
 </div>
 </section>
-<section id="slide-orgee59966">
-<h3 id="orgee59966">Matriz de Adyacencia</h3>
+<section id="slide-orgc8848ac">
+<h3 id="orgc8848ac">Matriz de Adyacencia</h3>
 <form><ul>
 <li>Una  matriz \(A\) 
 
@@ -261,8 +261,8 @@ los demás nodos tienen <span class="underline">exactamente</span> un arco entra
 </ul></form>
 
 </section>
-<section id="slide-org43f48dc">
-<h3 id="org43f48dc">Lista de Adyacencia</h3>
+<section id="slide-orga10ee6e">
+<h3 id="orga10ee6e">Lista de Adyacencia</h3>
 <form><ul>
 <li>Cada nodo tiene una lista de los nodos que están conectados mediante
 aristas salientes (i.e. de \(i \to j\))</li>
@@ -271,8 +271,8 @@ aristas salientes (i.e. de \(i \to j\))</li>
 
 
 </section>
-<section id="slide-org8439c1e">
-<h3 id="org8439c1e">Ejemplo</h3>
+<section id="slide-orgfceccdb">
+<h3 id="orgfceccdb">Ejemplo</h3>
 
 <div class="figure">
 <p><img src="../images/graph-1.png" alt="graph-1.png" width="400px" height="400px">
@@ -298,8 +298,8 @@ graph["G"] = set()
 </section>
 </section>
 <section>
-<section id="slide-org2e90df2">
-<h2 id="org2e90df2">Usando grafos y búsqueda</h2>
+<section id="slide-org08f1e65">
+<h2 id="org08f1e65">Usando grafos y búsqueda</h2>
 
 <div class="figure">
 <p><img src="../images/graph-searching.png" alt="graph-searching.png" width="400px" height="400px">
@@ -310,8 +310,8 @@ graph["G"] = set()
 </section>
 </section>
 <section>
-<section id="slide-org911fddb">
-<h2 id="org911fddb">Algoritmo genérico de búsqueda</h2>
+<section id="slide-org0d43267">
+<h2 id="org0d43267">Algoritmo genérico de búsqueda</h2>
 <p>
 <i>Pseudocódigo</i>
 </p>
@@ -332,13 +332,13 @@ graph["G"] = set()
 </section>
 </section>
 <section>
-<section id="slide-org021455c">
-<h2 id="org021455c">Intermezzo: Colas y pilas</h2>
-<div class="outline-text-2" id="text-org021455c">
+<section id="slide-org2da669d">
+<h2 id="org2da669d">Intermezzo: Colas y pilas</h2>
+<div class="outline-text-2" id="text-org2da669d">
 </div>
 </section>
-<section id="slide-org7262a08">
-<h3 id="org7262a08"><b>Stack</b> o <i>Pila</i></h3>
+<section id="slide-org31c456d">
+<h3 id="org31c456d"><b>Stack</b> o <i>Pila</i></h3>
 
 <div class="figure">
 <p><img src="../images/stack.png" alt="stack.png">
@@ -350,8 +350,8 @@ Imágenes tomadas de: <a href="https://stackoverflow.com/a/35031174/754176">http
 </p>
 
 </section>
-<section id="slide-orgb1ca7a8">
-<h3 id="orgb1ca7a8"><b>Queue</b> o <i>Cola</i></h3>
+<section id="slide-org77a152c">
+<h3 id="org77a152c"><b>Queue</b> o <i>Cola</i></h3>
 
 <div class="figure">
 <p><img src="../images/queue.png" alt="queue.png">
@@ -432,13 +432,13 @@ deque([4, 3, 2, 1])
 </section>
 </section>
 <section>
-<section id="slide-orge1338f0">
-<h2 id="orge1338f0">Estrategias de Búsquedas no informadas</h2>
-<div class="outline-text-2" id="text-orge1338f0">
+<section id="slide-orga2bf442">
+<h2 id="orga2bf442">Estrategias de Búsquedas no informadas</h2>
+<div class="outline-text-2" id="text-orga2bf442">
 </div>
 </section>
-<section id="slide-org7c6b508">
-<h3 id="org7c6b508">Breadth-First search</h3>
+<section id="slide-org05de432">
+<h3 id="org05de432">Breadth-First search</h3>
 <form><ul>
 <li>La frontera es implementada como <b>FIFO</b> o <i>cola</i></li>
 <li>Espacio y tiempo crecen exponencialmente en esta estrategia</li>
@@ -488,8 +488,8 @@ encontrará la solución <span class="underline">con menos</span> arcos.</li>
 
 
 </section>
-<section id="slide-org07d5ce2">
-<h3 id="org07d5ce2">Depth-First search</h3>
+<section id="slide-org1a4cb5b">
+<h3 id="org1a4cb5b">Depth-First search</h3>
 <form><ul>
 <li>La frontera es creada mediante un <b>LIFO</b> o <i>pila</i></li>
 <li>Este método utiliza <i>backtracking</i>: selecciona una primera
@@ -562,8 +562,8 @@ primera.</li>
 </section>
 </section>
 <section>
-<section id="slide-orgb296bfd">
-<h2 id="orgb296bfd">Estrategias de Búsqueda heurística</h2>
+<section id="slide-orgbe7f915">
+<h2 id="orgbe7f915">Estrategias de Búsqueda heurística</h2>
 <p>
 Una <i>función heurística</i> \(h(n)\) regresa un número real no negativo que
 <b>estima</b> el costo de del camino de menor costo desde el nodo \(n\) al nodo
@@ -576,8 +576,8 @@ costo real del camino de menor costo del nodo \(n\) al nodo meta.
 </p>
 
 </section>
-<section id="slide-org1d8a3e3">
-<h3 id="org1d8a3e3">Búsqueda A*</h3>
+<section id="slide-org6257dc7">
+<h3 id="org6257dc7">Búsqueda A*</h3>
 <p>
 A* usa: (1) el costo del camino, el de menor costo
 primero, e (2) información heurística <i>greedy</i> primero en el búsqueda,
@@ -595,13 +595,13 @@ A* , para cada camino\(p\) de la frontera, define la función:
 </p>
 
 <p class="backwardlink">
-A* se implementa usando el <a href="#slide-org911fddb" class="backwardlink">algoritmo genérico</a> pero la frontera es una cola
+A* se implementa usando el <a href="#slide-org0d43267" class="backwardlink">algoritmo genérico</a> pero la frontera es una cola
 ordenada por \(f(p)\).
 </p>
 
 </section>
-<section id="slide-orgac9783c">
-<h3 id="orgac9783c">Branch and Bound</h3>
+<section id="slide-orgcda07e5">
+<h3 id="orgcda07e5">Branch and Bound</h3>
 <p>
 <i>Branch and bound</i>  combina  DFS con información
 heurística para encontrar caminos óptimos \(h(n)\).
@@ -651,23 +651,253 @@ def DF_branch_and_bound(G, start, goal, costo, heuristica, bound=float('inf')):
 </code></pre>
 </div>
 
+</section>
+<section id="slide-org6419c86">
+<h3 id="org6419c86">Relax don't do it!</h3>
+<p>
+Por ejemplo en el caso de  del \(0-1\) <i>knapsack</i> 
+</p>
+
+<p>
+Datos de entrada (archivo <code>data/ks_4_0</code>), 
+</p>
+
+<div class="mdframed">
+<p>
+4 11 <br>
+8 4 <br>
+10 5 <br>
+15 8 <br>
+4 3 <br>
+</p>
+
+</div>
+
+<p>
+se puede expresar como
+</p>
+
+<div>
+\begin{equation}
+\begin{array}{rrclcl}
+\textbf{maximize} & \sum_{i \in I} 8x_1 + 10x_2 + 15x_3 + 4x_4 \\
+\textbf{s.t.} & \displaystyle 4x_1 + 5x_2 + 8x_3 + 3x_4 & \leq & 11 \\
+ & x_i = \{ 0,1 \} &  i \in \{1,2,3,4\}
+\end{array}
+\end{equation}
+
+</div>
+
+</section>
+<section>
+
+<p>
+Y en <code>python</code> simplemente como
+</p>
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >from collections import namedtuple
+from operator import add, sub
+from functools import reduce
+from collections import deque
+
+Item = namedtuple("Item", 'index peso valor')
+capacidad = 11
+items = [Item(1, 4, 8), Item(2, 5, 10), Item(3, 8, 15), Item(4, 3, 4)]
+</code></pre>
+</div>
+
+
+</section>
+<section>
+
+<p>
+Nuestros nodos en el grafo, representan <i>estados</i> del knapsack:
+</p>
+
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >class Nodo:
+    def __init__(self, items, nivel):
+        self.nivel = nivel
+        self.items = items
+        self.valor = reduce(add, [item.valor for item in items], 0)
+        self.peso = reduce(add, [item.peso for item in items], 0)        
+        self.estimacion = None
+
+    def __repr__(self):
+        return f"Nodo(valor={self.valor}, peso={self.peso}, estimacion={self.estimacion}, nivel={self.nivel})"
+
+    def __str__(self):
+        return f"Nodo(valor={self.valor}, peso={self.peso}, estimacion={self.estimacion}, items={self.items}, nivel={self.nivel})"
+</code></pre>
+</div>
+
+</section>
+<section>
+
+
+<p>
+Podemos "relajar" algunas cosas, e.g. la capacidad (es decir, podemos
+tomar todo) o quizá restricción
+de que sean \(0\) o \(1\) las variables de decisión (podemos tomar
+fracciones de los objetos).
+</p>
+
+
+<p>
+Si relajamos la capacidad podemos definir la función heurística
+\(h(n)\): valor total de los objetos que potencialmente tomaremos, si es
+infinita la capacidad. 
+</p>
+
+<p>
+Recuerda, no estamos haciendo la capacidad infinita, estamos <i>relajando</i>
+la restricción de capacidad y esto significa que estamos <i>estimando</i> de
+manera optimista, bajo este supuesto.
+</p>
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >def bottomless_knapsack_heuristic(nodo, items, capacidad):
+    """No constraint in the capacity (greedy)"""
+    if nodo.peso &gt; capacidad:
+        return 0
+
+    sorted_items = sorted(items[nodo.nivel+1:], key=lambda item: item.valor, reverse=True)
+    return reduce(add, [item.valor for item in sorted_items], nodo.valor)
+</code></pre>
+</div>
+
+</section>
+<section>
+
+<p>
+Hasta ahora no habíamos visto un caso de ir generando el grafo
+mientras hacíamos la búsqueda, esta es nuestra oportunidad
+</p>
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >def generar_vecinos(nodo, items, capacidad, optimistic_estimate):
+    """Genera dos ramas, se elije o no el item siguiente en la lista de items"""
+    max_level = len(items) - 1
+
+    if nodo.nivel != max_level:
+        siguiente_nivel = nodo.nivel + 1
+        siguiente_item = items[siguiente_nivel]
+
+        taken = Nodo(items=nodo.items + [siguiente_item],
+                     nivel=siguiente_nivel)
+        taken.estimacion=optimistic_estimate(taken, items, capacidad) 
+
+        not_taken = Nodo(items=nodo.items,
+                         nivel=siguiente_nivel)
+        not_taken.estimacion=optimistic_estimate(not_taken, items, capacidad)
+                  
+        return (not_taken, taken)
+
+    else:
+        return []
+</code></pre>
+</div>
+
+</section>
+<section>
+
+<p>
+Finalmente, el algoritmo de <i>branch and bound</i> es:
+</p>
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >def knapsack_DF_branch_and_bound(items, capacidad, optimistic_estimate, bound=float('-inf')):
+    """ optimistic_estimate es una función que implementa la heurística """
+    mejor_path = []
+    mejor_valor = bound
+
+    # Iniciamos con el knapsack vacío
+    start = Nodo(items=[], nivel=-1)
+
+    start.estimacion = optimistic_estimate(start, items, capacidad)
+
+    frontera = deque()  # En BFS la frontera es una pila
+
+    # Agrego por a derecha, ya que es una cola
+    frontera.append((start, [start])) # nodo y path
+
+    while frontera:
+        nodo, path = frontera.popleft() # Extraigo por la izquierda
+    
+        for vecino in generar_vecinos(nodo, items, capacidad, optimistic_estimate): # Tomar o no tomar el siguiente objeto
+            # Si el peso acumulado es menor que la capacidad del knapsack y el valor es más grande
+            # que el valor previamente encontrado, actualizar
+            
+            if vecino.peso &lt;= capacidad:
+
+                if vecino.valor &gt; mejor_valor:
+                    mejor_path = path + [vecino]
+                    mejor_valor = vecino.valor
+                    print(f"Mejor solución encontrada: {vecino.items} con valor {mejor_valor}")
+                                
+
+                # Si el valor estimado es más grande que la solución encontrada,
+                # agregarlo a la lista para considerarlo
+                if vecino.estimacion &gt;=  mejor_valor:
+                    #print(f"Agregamos {vecino} a la frontera")
+                    frontera.appendleft((vecino, path+[vecino]))
+                else:
+                    print(f"{vecino} ha sido podado (bounds)")
+            else:
+                print(f"{vecino} ha sido podado (infeasible)")
+        print("="*20)
+
+    return mejor_path, mejor_valor
+</code></pre>
+</div>
 
 </section>
 </section>
 <section>
-<section id="slide-orgec3986b">
-<h2 id="orgec3986b">Ejemplo</h2>
+<section id="slide-orgcda0139">
+<h2 id="orgcda0139">Ejemplo</h2>
 <p>
 Tomado de <i>Artificial Intelligence  Foundations of computational agents</i>, 
 Poole and Mackworth, segunda edición
 </p>
 
 
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >robot_domain = { 'o109': {'o111', 'o119'},
+                 'o103': {'o109', 'b3', 'ts'},
+                 'o111': {},
+                 'ts': {'mail'},
+                 'mail': {},
+                 'b3': {'b4', 'b1'},
+                 'b4': {'o109'},
+                 'b1': {'b2', 'c2'},
+                 'b2': {'b4'},
+                 'c2': {'c3', 'c1'},
+                 'c1': {'c3'},
+                 'c3': {},
+                 'o119': {'storage', 'o123'},
+                 'storage': {},
+                 'o123': {'r123', 'o125'},
+                 'r123': {},
+                 'o125': {}
+                 }
+</code></pre>
+</div>
+
+
+
 </section>
 </section>
 <section>
-<section id="slide-org808f279">
-<h2 id="org808f279">Repaso</h2>
+<section id="slide-org8463ef0">
+<h2 id="org8463ef0">Repaso</h2>
 <form><ul>
 <li class="fragment appear">Abstracción</li>
 <li class="fragment appear">Espacio de Estados</li>

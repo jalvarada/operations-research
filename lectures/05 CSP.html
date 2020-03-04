@@ -80,20 +80,20 @@ School specific teaching materials"/>
 <h1 class="title">CSP</h1><h2 class="author">Adolfo De Unánue Adolfo De Unánue</h2>
 </section>
 <section>
-<section id="slide-org9d8160a">
-<h2 id="org9d8160a">Introduction and Recap of Last Class</h2>
-<div class="outline-text-2" id="text-org9d8160a">
+<section id="slide-orgc8c6d19">
+<h2 id="orgc8c6d19">Introduction and Recap of Last Class</h2>
+<div class="outline-text-2" id="text-orgc8c6d19">
 </div>
 </section>
-<section id="slide-orgec1a970">
-<h3 id="orgec1a970">Anuncios</h3>
+<section id="slide-orgca9f2b3">
+<h3 id="orgca9f2b3">Anuncios</h3>
 <form><ul>
 <li>&#x2026;</li>
 
 </ul></form>
 </section>
-<section id="slide-org40046c5">
-<h3 id="org40046c5">Repaso de la última clase</h3>
+<section id="slide-orgc557b75">
+<h3 id="orgc557b75">Repaso de la última clase</h3>
 </section>
 <section id="slide-lectures/CSP/Outline">
 <h3 id="lectures/CSP/Outline">Lecture Outline</h3>
@@ -111,8 +111,8 @@ School specific teaching materials"/>
 </section>
 </section>
 <section>
-<section id="slide-orgd543c7d">
-<h2 id="orgd543c7d">Constraint Programming</h2>
+<section id="slide-org73e12bd">
+<h2 id="org73e12bd">Constraint Programming</h2>
 <form><ul>
 <li>Usar los <i>constraints</i> (restricciones) para reducir el conjunto de valores que cada
 variable puede tomar.</li>
@@ -129,10 +129,23 @@ variable puede tomar.</li>
 </ul></form>
 
 </section>
+<section>
+
+
+<div class="figure">
+<p><img src="../images/csp-two-parts.png" alt="csp-two-parts.png" width="600px" height="600p">
+</p>
+<p><span class="figure-number">Figure 1: </span>Partes en la solución de un CSP</p>
+</div>
+
+
+
+
+</section>
 </section>
 <section>
-<section id="slide-orge0430f9">
-<h2 id="orge0430f9">Ejemplo: Problema de las 8 reinas</h2>
+<section id="slide-orge077974">
+<h2 id="orge077974">Ejemplo: Problema de las 8 reinas</h2>
 <form><ul>
 <li>Colocar 8 reinas en el tablero de ajedrez de tal manera que no
 puedan atacarse entre sí</li>
@@ -154,8 +167,8 @@ diagonal superior, no en la diagonal inferior</li>
 </section>
 </section>
 <section>
-<section id="slide-org9e8884e">
-<h2 id="org9e8884e">Ejemplo: Colorear un mapa</h2>
+<section id="slide-org222f859">
+<h2 id="org222f859">Ejemplo: Colorear un mapa</h2>
 <form><ul>
 <li>Colorear un mapa de tal manera que no dos territorios adyacentes
 tengan el mismo color</li>
@@ -176,8 +189,8 @@ tengan el mismo color</li>
 </section>
 </section>
 <section>
-<section id="slide-org0ce5150">
-<h2 id="org0ce5150">Branch and prune</h2>
+<section id="slide-org5158dca">
+<h2 id="org5158dca">Branch and prune</h2>
 <form><dl>
 <dt>Pruning</dt><dd>Reduce el espacio de búsqueda: usa las restricciones</dd>
 <dt>Branching</dt><dd>Parte el problema en subproblema y explorar el
@@ -190,12 +203,51 @@ solución se encuentre o se pruebe que no hay solución</li>
 
 </dl></form>
 
+</section>
+</section>
+<section>
+<section id="slide-org1c8dcca">
+<h2 id="org1c8dcca">Motor de propagación</h2>
+<form><ul>
+<li>Algoritmo iterativo de puto fijo</li>
+
+</ul></form>
+
+<p>
+<i>Pseudocódigo</i>
+</p>
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >def propagate():
+    do
+        c = select_a_constraint()
+        if not feasible(c):
+            return False
+        else:
+            prune(c)
+     while we can remove values from the domain of the variables
+    return True
+</code></pre>
+</div>
+
+
+<aside class="notes">
+<p>
+   SEND
++MORE
+</p>
+<hr>
+<p>
+MONEY
+</p>
+
+</aside>
 
 </section>
 </section>
 <section>
-<section id="slide-org1c2aec8">
-<h2 id="org1c2aec8">Definición</h2>
+<section id="slide-org6fccc30">
+<h2 id="org6fccc30">Definiciones</h2>
 <p>
 Un problema de satisfacción de restricciones (CSP) consiste en:
 </p>
@@ -208,10 +260,52 @@ Un problema de satisfacción de restricciones (CSP) consiste en:
 </ul></form>
 
 </section>
+<section>
+
+<p>
+Los problemas de satisfacción de restricciones se pueden describir en
+términos de <b>variables</b> y de <b>mundos posibles</b>.
+</p>
+
+<p>
+Un mundo posible está descrito por variables (símbolos) las cuales
+tienen asociado un <b>dominio</b>, el cual es el conjunto de <b>valores</b> que una
+variable puede tomar.
+</p>
+
+<p>
+Si a todas las variables se les asigna un valor de su dominio tenemos
+un mundo posible: \({X_1 = v_1, X_2 = v_2, \ldots , X_k = v_k}\). 
+</p>
+
+<p>
+El número de mundos dado \(n\) variables con dominios de tamaño de orden
+\(d\) es \(d^n\).
+</p>
+
 </section>
 <section>
-<section id="slide-orgcf24312">
-<h2 id="orgcf24312">Ejemplo: 8 reinas</h2>
+
+<p>
+Un <i>scope</i> es un conjunto de variables. Una <span class="underline">relación</span> en un <i>scope</i> \(S\) es
+una función de asignaciones en \(S\) a \({true, false}\). Una <span class="underline">restricción</span> \(c\)
+es un <i>scope</i> \(S\) y una relación en \(S\). 
+</p>
+
+<p>
+Una asignación \(A\) en \(S' \in S\) satisface \(c\) si \(A\) es mapeada a
+<i>true</i>. En caso contrario \(c\) es violada por la asignación.
+</p>
+
+<p>
+Un <span class="underline">modelo</span> es un mundo posible que satisface todas las restricciones.
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-lectures/CSP/8-queens">
+<h2 id="lectures/CSP/8-queens">Ejemplo: 8 reinas</h2>
 <form><ul>
 <li>Variables de decisión: e.g. la columna y el valor es el renglón</li>
 <li>Dominio de las variables de decisión</li>
@@ -221,11 +315,30 @@ diagonal superior, no en la diagonal inferior</li>
 </ul></form>
 
 
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" ># valores
+R = 1 .. 8
+# variables
+reinas = [None] * 8 \in R
+
+
+
+forall i \in R, j \in R, i &lt; j {
+reina[i] &lt;&gt; reina[j]  # row
+reina[i] &lt;&gt; reina[j] + (j - i)  # upward diagonal
+reina[i] &lt;&gt; reina[j[ - (j - i)  # downward diagonal
+}
+
+</code></pre>
+</div>
+
+
 </section>
 </section>
 <section>
-<section id="slide-org8d1bbff">
-<h2 id="org8d1bbff">CSP como grafo</h2>
+<section id="slide-org3b53181">
+<h2 id="org3b53181">CSP como grafo</h2>
 <form><ul>
 <li>Los nodos son los valores que puede tomar las variables</li>
 <li>Los vecino del nodo \(n\) se obtienen seleccionando la variable \(V\)
@@ -240,25 +353,36 @@ restricción.</li>
 
 </ul></form>
 
-<aside class="notes">
-<p>
-Del libro  <i>Artificial Intelligence  Foundations of computational agents</i>, 
-Poole and Mackworth, segunda edición
-</p>
+
+</section>
+<section>
+
 
 <p>
-variables: A, B, C
-dominio: {1,2,3,4}
-restrcciones: A &lt; B, B &lt; C
+<b>Ejemplo</b>:
 </p>
 
-</aside>
+<form><ul>
+<li>variables: \(A, B, C\)</li>
+<li>dominio: \({1,2,3,4}\)</li>
+<li>restricciones: \(A < B\), \(B < C\)</li>
+
+</ul></form>
+
+
+
+<div class="figure">
+<p><img src="../images/csp-graph.png" alt="csp-graph.png" width="900px" height="600px">
+</p>
+<p><span class="figure-number">Figure 2: </span>Posible árbol de búsqueda para el CSP del ejemplo. Rojo significa que el nodo fue podado (basado en el libro  <i>Artificial Intelligence  Foundations of computational agents</i>, Poole and Mackworth, segunda edición)</p>
+</div>
+
 
 </section>
 </section>
 <section>
-<section id="slide-orgaa3314b">
-<h2 id="orgaa3314b">CSP como multigrafo: grafo de restricción</h2>
+<section id="slide-orgf1370b7">
+<h2 id="orgf1370b7">CSP como multigrafo: grafo de restricción de arcos</h2>
 <form><ul>
 <li>Hay nodos para cada variable</li>
 <li>Hay otro tipo de nodo para cada restricción</li>
@@ -269,12 +393,506 @@ satisface la restricción.</li>
 
 </ul></form>
 
+</section>
+<section>
+
+<p>
+Usando el mismo ejemplo:
+</p>
+
+<form><ul>
+<li>variables: \(A, B, C\)</li>
+<li>dominio: \({1,2,3,4}\)</li>
+<li>restricciones: \(A < B\), \(B < C\)</li>
+
+</ul></form>
+
+
+<div class="figure">
+<p><img src="../images/csp-arc-consistency-graph.png" alt="csp-arc-consistency-graph.png" width="800px" height="250px">
+</p>
+<p><span class="figure-number">Figure 3: </span>Grafo de restricciones para el CSP del ejemplo. (basado en el libro  <i>Artificial Intelligence  Foundations of computational agents</i>, Poole and Mackworth, segunda edición)</p>
+</div>
+
 
 </section>
 </section>
 <section>
-<section id="slide-org872a213">
-<h2 id="org872a213">Repaso</h2>
+<section id="slide-org72047cd">
+<h2 id="org72047cd">Ejemplo de pizarrón: <i>Scheduling</i></h2>
+<p>
+Tomado de <i>Artificial Intelligence  Foundations of computational agents</i>, 
+Poole and Mackworth, segunda edición
+</p>
+
+<p>
+Suponga que un robot de reparto debe de llevar a cabo un número de
+actividades \(a, b, c, d, e\) y cada actividad puede ocurrir en los
+tiempos \(1,2,3,4\). Sea \(A\) el tiempo en el cual ocurre la actividad
+\(a\), etc.
+</p>
+
+<p>
+Suponga además que las siguientes restricciones deben de cumplirse:
+</p>
+
+<form><ul>
+<li>B &ne; 3</li>
+<li>C &ne; 2</li>
+<li>A &ne; B</li>
+<li>B &ne; C</li>
+<li>C &lt; D</li>
+<li>A = D</li>
+<li>E &lt; A</li>
+<li>E &lt; B</li>
+<li>E &lt; C</li>
+<li>E &lt; D</li>
+<li>B &ne; D</li>
+
+</ul></form>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org207a539">
+<h2 id="org207a539">Algoritmo de consistencia de arcos (GAC)</h2>
+<p>
+<i>pseudo algoritmo</i>
+</p>
+
+<p>
+Este algoritmo es conocido como <b>AC-3</b>
+</p>
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >def generar_arcos(variables, restricciones):
+    """ Regresa la lista de arcos de consistencia de la forma &lt;variable, restriccion&gt; """
+    pass
+
+def scope(restriccion):
+    """ Regresa la variables que involucran la restricción """
+    pass
+
+def GAC(variables, dominios, restricciones):
+    """Regresa dominios de variables que son consistentes
+    variables es una lista de variables del CSP
+    dominios es un diccionario de variable: {valores}
+    restricciones es un conjunto de predicados que reciben tuplas de variables
+    """
+    def GAC2(variables, dominios, restricciones, posibles_arcos_inconsistentes):
+        while posibles_arcos_inconsistentes:
+            arco := variable, restriccion = seleccionar_and_remove(posibles_arcos_inconsistentes)
+            otras_variables = scope(restriccion) - {variable}
+            nuevo_dominio = { x | x in dominios[variable] and exists y_1 in dominios[Y_1] ... y_k in dominios[Y_k] t.q. restriccion(X=variable, Y_1 = y_1, ..., Y_k = y_k)}
+            if nuevo_dominio &lt;&gt; dominios[variable]:
+                posibles_arcos_inconsistentes = posibles_arcos_inconsistentes + { &lt;Z, c'&gt; | {variable, Z} \in scope(c'), c' &lt;&gt; c, Z &lt;&gt; X}
+                dominios[X] = nuevo_dominio
+        return dominios
+    
+    posibles_arcos_inconsistentes = generar_arcos(variables, restricciones)
+    return GAC2(variables, dominios, restricciones, posibles_arcos_inconsistentes)
+</code></pre>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgaef1ebf">
+<h2 id="orgaef1ebf">Restricciones</h2>
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >from operator import lt, ne, eq, gt
+
+class Restriccion:
+    def __init__(self, scope, predicado):
+        self.scope = scope
+        self.predicado = predicado
+
+    def __call__(self, assigment):
+        """ assigment es un diccionario de variable: valor """
+        return self.predicado(*tuple(assigment[v] for v in self.scope))
+    
+# c = Restriccion(['A', 'B'], lt) # A &lt; B
+# c({'A':1, 'B':2}) # True
+
+# c = Restriccion(('B'), lambda x: x != 3) # B != 3
+
+# c = Restriccion(('A'), partial(eq, 5)) # A == 5
+
+</code></pre>
+</div>
+
+
+<aside class="notes">
+<form><ul>
+<li>Plantear restricción para coloreo de mapas</li>
+<li>Discutir como implementar QueensContraint</li>
+
+</ul></form>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-org2a6b325">
+<h2 id="org2a6b325">CSP en <code>python</code></h2>
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >class CSP:
+    def __init__(self, dominios, restricciones):
+        self.variables = dominios.keys() # quizá sea más eficiente set(dominios)
+        self.dominios = dominios
+        self.restricciones = restricciones
+
+    def consistente(self, assigment):
+        """assigment es un diccionario de variable: valor """
+        return all(c(assigment)
+                   for c in self.restricciones
+                   if all(v in assigment for v  in c.scope))
+
+    def __str__(self):
+        return str(self.dominios)
+
+    def __repr__(self):
+        return f"CSP({self.dominios}, {str([str(c) for c in self.restricciones])})"
+
+</code></pre>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgc32ddd6">
+<h2 id="orgc32ddd6">Reificación</h2>
+<form><ul>
+<li>Dada una restricción y la convierte en una variable \(0/1\)</li>
+<li>La variable toma el valor de \(1\) si la restricción se cumple y \(0\)
+en el otro caso.</li>
+
+</ul></form>
+
+<aside class="notes">
+<p>
+magic series
+</p>
+
+<p>
+restricciones:
+forall k &isin; D
+series[k] = &sum;<sub>i&isin; D</sub> (series[i] == k)  # reificación
+</p>
+
+
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >def booleq(x,v):
+     return (b = 1 and x == v) or (b = 0 and x != v)
+</code></pre>
+</div>
+
+</aside>
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-org5868ab0">
+<h2 id="org5868ab0">Restricción de elementos,  Combinación lógica</h2>
+<form><ul>
+<li>Habilidad de indexar un arreglo o matriz con una variable o una
+expresión que contiene variables</li>
+
+</ul></form>
+
+<div>
+\begin{equation}
+X, Y  \\
+c \  \text{es un arreglo de enteros} \\
+x = c[y] 
+\end{equation}
+
+</div>
+
+
+<form><ul>
+<li>Combinación lógica de variables (un caso de reificación)</li>
+
+</ul></form>
+
+<aside class="notes">
+<p>
+stable marriages
+</p>
+
+<p>
+restricciones:
+Men = ..
+Women = ..
+</p>
+
+<p>
+wrank[Men, Women]  # ranking of j in i preferences
+mrank[Women, Men] 
+</p>
+
+<p>
+wife[Man]
+husband[Women]
+</p>
+
+<p>
+forall (m in Men)
+     husband[wife[m]] == m
+forall (w in Women)
+     wife[husband[w]] == w
+</p>
+
+<p>
+forall (m in Men, w in Women)
+    wrank[m,w] &lt; wrank[w, wife[m]] then mrank[w, husband[w]] &lt;    mrank[w,m]  #logical implication!
+</p>
+
+<p>
+forall(w in Women, m in Men)
+   mrank[w,m] &lt; mrank[w, husband[m]] then wrank[m,wife[m]] &lt; wrank[m,w]
+</p>
+
+</aside>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgf27b30b">
+<h2 id="orgf27b30b">Restricciones globales</h2>
+<form><ul>
+<li>Representan subestructuras del problema</li>
+<li>Ayudan al <i>solver</i> ya que no tiene que descubrir por si misma estas estructuras</li>
+<li>Mejoran <i>feasibility testing</i> y <i>pruning</i></li>
+
+</ul></form>
+
+
+
+<aside class="notes">
+<p>
+alldifferent(x_1, x_2, x_3)
+D_1 = {1,2} D_2 = {1,2} D_3 = {1,2}
+</p>
+
+<p>
+Hacerlo a mano con restricciones normales o independientes
+</p>
+
+<p>
+Ahora con D_3 ={1,2,3}
+</p>
+
+<p>
+Otra importante es:
+atmost(&#x2026;)
+lexleq(all(j in cols) m[i,j], all(j in Cols) m[i+1,j])
+</p>
+
+</aside>
+
+</section>
+<section id="slide-org68d1413">
+<h3 id="org68d1413">Feasibility testing</h3>
+<p>
+\[
+\exists  v_1 \in D_1, \ldots, v_n \in D_n : \\
+c(x_1 = v_1, \ldots, x_n = v_n) = true
+\]
+</p>
+
+</section>
+<section id="slide-orgab0a161">
+<h3 id="orgab0a161">Pruning</h3>
+<p>
+Dado \(v_i\)  en \(D_i\) ¿existe una solución  tal que \(x_i = v_i\)?
+</p>
+
+<p>
+¿Encontrar valores en los dominios de las variables tales que la
+restricción  se mantienen?
+</p>
+
+<p>
+\[
+\text{Dado} v_i \in D_i, x_i = v_i \\
+\exists v_1 \in D_1, \ldots, v_{i-1} \in D_{i-1},  \\
+v_{i+1} \in D_{i+1}, \ldots, v_n \in D_n: \\
+c(x_1=v_1, \ldots, x_n=v_n) = true
+\]
+</p>
+
+</section>
+<section id="slide-orgfae4ec4">
+<h3 id="orgfae4ec4">Ejemplo: 8 reinas</h3>
+<form><ul>
+<li>Variables de decisión: e.g. la columna y el valor es el renglón</li>
+<li>Dominio de las variables de decisión</li>
+<li>Expresar las restricciones: No en el mismo renglón, no en la
+diagonal superior, no en la diagonal inferior</li>
+
+</ul></form>
+
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" ># valores
+R = 1 .. 8
+# variables
+reinas = [None] * 8 \in R
+
+
+
+forall i \in R, j \in R, i &lt; j {
+reina[i] &lt;&gt; reina[j]  # row
+reina[i] &lt;&gt; reina[j] + (j - i)  # upward diagonal
+reina[i] &lt;&gt; reina[j[ - (j - i)  # downward diagonal
+}
+
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org752efbb">
+<h3 id="org752efbb">Ejemplo: 8 reinas y <code>alldifferent</code></h3>
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" ># valores
+R = 1 .. 8
+# variables
+reinas = [None] * 8 \in R
+
+
+
+forall i \in R, j \in R, i &lt; j {
+alldifferent(reina) # row
+alldifferent((all i in R) reina[i] + i )  # upward diagonal
+alldifferent((all i in R) reina[i] - i )  # downward diagonal
+}
+
+</code></pre>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org04e5f1f">
+<h2 id="org04e5f1f">Simetrías</h2>
+<form><ul>
+<li>Explorar partes del espacio de soluciones que son simétricas es una
+perdida de tiempo</li>
+<li>Puede haber simetrías en:
+<form><ul>
+<li>variables</li>
+<li>valores</li>
+
+</ul></form></li>
+
+</ul></form>
+
+</section>
+</section>
+<section>
+<section id="slide-org8200b4c">
+<h2 id="org8200b4c">Scene problem (Operations problem)</h2>
+<form><ul>
+<li>Un personal médico participa en alguna de las operaciones</li>
+<li>Existen \(k\) salas de operación en el hospital</li>
+<li>Cada médico es pagado por día
+<form><ul>
+<li>No importa si participa en las \(k\) escenas o en una sola</li>
+
+</ul></form></li>
+<li>Cada médico tiene su propio salario</li>
+<li>Tu objetivo es minimizar el costo total</li>
+
+</ul></form>
+
+</section>
+<section>
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >max_operaciones = # Numero de operaciones por día
+max_dias = # Número de días
+operaciones = # Lista de operaciones a realizar
+dias =  # Lista de días
+medicos = # Lista de los médicos
+salarios[medicos] # Cuánto gana cada médico
+{medicos}: aparece[operaciones] = # ¿qué médicos se necesitan en qué operaciones?
+{operaciones}: which[m in medicos] = {o | o en operaciones : a in aparece[o] }
+
+# variable de decision
+operar[operaciones] in dias 
+
+minimizar:
+sum(m in medicos) sum(d in dias) salario[m] * (or(o in which[m]) operar[o] = d)
+
+sujeto a:
+atmost(all(i in dias) max_operaciones, all(i in dias) i, operar)
+
+</code></pre>
+</div>
+
+<p>
+<b>Simetría</b>: ¡Los días son intercambiables!
+</p>
+
+<aside class="notes">
+<form><ul>
+<li>Simetría en el valor</li>
+<li>Puedes cambiar todas las escenas del día 1 a las escenas del día 2 y
+sigue siendo una solución</li>
+<li>Nada hay que ayue a distinguir los días</li>
+<li>Si  \(p\) es una permutación y \(s\) es una solución, \(p(s)\) también es
+una solución</li>
+<li>Para romper la simetría asigna la escena a días asignados y a un
+nuevo día adicional:</li>
+
+</ul></form>
+<p>
+Restringimos el dominio:
+\[
+D(s_k) = {1, 2, \ldots, max(s_1, ldots, s_{k-1}) + 1}
+\]
+</p>
+<form><ul>
+<li>Este orden afectará la búsqueda pero veremos como resolverlo en
+búsqueda local</li>
+
+</ul></form>
+
+</aside>
+
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >sujeto a:
+atmost(all(i in dias) max_operaciones, all(i in dias) i, operar)
+operaciones[0] = 1
+forall(o in operaciones: o &gt; 0):
+operaciones[o] &lt;= 1 + max(k in ..s-1) operaciones[k]
+</code></pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org3ada189">
+<h2 id="org3ada189">Repaso</h2>
 <form><ul>
 <li class="fragment appear">Constraint Programming</li>
 <li class="fragment appear">Ejemplo: Problema de las 8 reinas</li>

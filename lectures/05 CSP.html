@@ -80,20 +80,20 @@ School specific teaching materials"/>
 <h1 class="title">CSP</h1><h2 class="author">Adolfo De Unánue Adolfo De Unánue</h2>
 </section>
 <section>
-<section id="slide-orgc8c6d19">
-<h2 id="orgc8c6d19">Introduction and Recap of Last Class</h2>
-<div class="outline-text-2" id="text-orgc8c6d19">
+<section id="slide-org92d5a2a">
+<h2 id="org92d5a2a">Introduction and Recap of Last Class</h2>
+<div class="outline-text-2" id="text-org92d5a2a">
 </div>
 </section>
-<section id="slide-orgca9f2b3">
-<h3 id="orgca9f2b3">Anuncios</h3>
+<section id="slide-org079c6a9">
+<h3 id="org079c6a9">Anuncios</h3>
 <form><ul>
 <li>&#x2026;</li>
 
 </ul></form>
 </section>
-<section id="slide-orgc557b75">
-<h3 id="orgc557b75">Repaso de la última clase</h3>
+<section id="slide-org1f716c1">
+<h3 id="org1f716c1">Repaso de la última clase</h3>
 </section>
 <section id="slide-lectures/CSP/Outline">
 <h3 id="lectures/CSP/Outline">Lecture Outline</h3>
@@ -111,8 +111,8 @@ School specific teaching materials"/>
 </section>
 </section>
 <section>
-<section id="slide-org73e12bd">
-<h2 id="org73e12bd">Constraint Programming</h2>
+<section id="slide-org399731c">
+<h2 id="org399731c">Constraint Programming</h2>
 <form><ul>
 <li>Usar los <i>constraints</i> (restricciones) para reducir el conjunto de valores que cada
 variable puede tomar.</li>
@@ -144,8 +144,8 @@ variable puede tomar.</li>
 </section>
 </section>
 <section>
-<section id="slide-orge077974">
-<h2 id="orge077974">Ejemplo: Problema de las 8 reinas</h2>
+<section id="slide-org0987e4d">
+<h2 id="org0987e4d">Ejemplo: Problema de las 8 reinas</h2>
 <form><ul>
 <li>Colocar 8 reinas en el tablero de ajedrez de tal manera que no
 puedan atacarse entre sí</li>
@@ -167,8 +167,8 @@ diagonal superior, no en la diagonal inferior</li>
 </section>
 </section>
 <section>
-<section id="slide-org222f859">
-<h2 id="org222f859">Ejemplo: Colorear un mapa</h2>
+<section id="slide-orga71c424">
+<h2 id="orga71c424">Ejemplo: Colorear un mapa</h2>
 <form><ul>
 <li>Colorear un mapa de tal manera que no dos territorios adyacentes
 tengan el mismo color</li>
@@ -189,8 +189,8 @@ tengan el mismo color</li>
 </section>
 </section>
 <section>
-<section id="slide-org5158dca">
-<h2 id="org5158dca">Branch and prune</h2>
+<section id="slide-orge204b43">
+<h2 id="orge204b43">Branch and prune</h2>
 <form><dl>
 <dt>Pruning</dt><dd>Reduce el espacio de búsqueda: usa las restricciones</dd>
 <dt>Branching</dt><dd>Parte el problema en subproblema y explorar el
@@ -206,8 +206,8 @@ solución se encuentre o se pruebe que no hay solución</li>
 </section>
 </section>
 <section>
-<section id="slide-org1c8dcca">
-<h2 id="org1c8dcca">Motor de propagación</h2>
+<section id="slide-orgb6ec35c">
+<h2 id="orgb6ec35c">Motor de propagación</h2>
 <form><ul>
 <li>Algoritmo iterativo de puto fijo</li>
 
@@ -246,8 +246,8 @@ MONEY
 </section>
 </section>
 <section>
-<section id="slide-org6fccc30">
-<h2 id="org6fccc30">Definiciones</h2>
+<section id="slide-org1f2a0ea">
+<h2 id="org1f2a0ea">Definiciones</h2>
 <p>
 Un problema de satisfacción de restricciones (CSP) consiste en:
 </p>
@@ -337,8 +337,8 @@ reina[i] &lt;&gt; reina[j[ - (j - i)  # downward diagonal
 </section>
 </section>
 <section>
-<section id="slide-org3b53181">
-<h2 id="org3b53181">CSP como grafo</h2>
+<section id="slide-org5ba0bb6">
+<h2 id="org5ba0bb6">CSP como grafo</h2>
 <form><ul>
 <li>Los nodos son los valores que puede tomar las variables</li>
 <li>Los vecino del nodo \(n\) se obtienen seleccionando la variable \(V\)
@@ -381,8 +381,8 @@ restricción.</li>
 </section>
 </section>
 <section>
-<section id="slide-orgf1370b7">
-<h2 id="orgf1370b7">CSP como multigrafo: grafo de restricción de arcos</h2>
+<section id="slide-org6fe73de">
+<h2 id="org6fe73de">CSP como multigrafo: grafo de restricción de arcos</h2>
 <form><ul>
 <li>Hay nodos para cada variable</li>
 <li>Hay otro tipo de nodo para cada restricción</li>
@@ -418,8 +418,8 @@ Usando el mismo ejemplo:
 </section>
 </section>
 <section>
-<section id="slide-org72047cd">
-<h2 id="org72047cd">Ejemplo de pizarrón: <i>Scheduling</i></h2>
+<section id="slide-org79f5d90">
+<h2 id="org79f5d90">Ejemplo de pizarrón: <i>Scheduling</i></h2>
 <p>
 Tomado de <i>Artificial Intelligence  Foundations of computational agents</i>, 
 Poole and Mackworth, segunda edición
@@ -455,8 +455,8 @@ Suponga además que las siguientes restricciones deben de cumplirse:
 </section>
 </section>
 <section>
-<section id="slide-org207a539">
-<h2 id="org207a539">Algoritmo de consistencia de arcos (GAC)</h2>
+<section id="slide-org6452174">
+<h2 id="org6452174">Algoritmo de consistencia de arcos (GAC)</h2>
 <p>
 <i>pseudo algoritmo</i>
 </p>
@@ -500,8 +500,8 @@ def GAC(variables, dominios, restricciones):
 </section>
 </section>
 <section>
-<section id="slide-orgaef1ebf">
-<h2 id="orgaef1ebf">Restricciones</h2>
+<section id="slide-orga72b8c2">
+<h2 id="orga72b8c2">Restricciones</h2>
 <div class="org-src-container">
 
 <pre><code class=" jupyter-python" >from operator import lt, ne, eq, gt
@@ -538,8 +538,8 @@ class Restriccion:
 </section>
 </section>
 <section>
-<section id="slide-org2a6b325">
-<h2 id="org2a6b325">CSP en <code>python</code></h2>
+<section id="slide-org030129f">
+<h2 id="org030129f">CSP en <code>python</code></h2>
 <div class="org-src-container">
 
 <pre><code class=" jupyter-python" >class CSP:
@@ -567,8 +567,8 @@ class Restriccion:
 </section>
 </section>
 <section>
-<section id="slide-orgc32ddd6">
-<h2 id="orgc32ddd6">Reificación</h2>
+<section id="slide-orgc8a5da1">
+<h2 id="orgc8a5da1">Reificación</h2>
 <form><ul>
 <li>Dada una restricción y la convierte en una variable \(0/1\)</li>
 <li>La variable toma el valor de \(1\) si la restricción se cumple y \(0\)
@@ -603,8 +603,8 @@ series[k] = &sum;<sub>i&isin; D</sub> (series[i] == k)  # reificación
 </section>
 </section>
 <section>
-<section id="slide-org5868ab0">
-<h2 id="org5868ab0">Restricción de elementos,  Combinación lógica</h2>
+<section id="slide-org79d2ef8">
+<h2 id="org79d2ef8">Restricción de elementos,  Combinación lógica</h2>
 <form><ul>
 <li>Habilidad de indexar un arreglo o matriz con una variable o una
 expresión que contiene variables</li>
@@ -670,8 +670,8 @@ forall(w in Women, m in Men)
 </section>
 </section>
 <section>
-<section id="slide-orgf27b30b">
-<h2 id="orgf27b30b">Restricciones globales</h2>
+<section id="slide-orgbf68351">
+<h2 id="orgbf68351">Restricciones globales</h2>
 <form><ul>
 <li>Representan subestructuras del problema</li>
 <li>Ayudan al <i>solver</i> ya que no tiene que descubrir por si misma estas estructuras</li>
@@ -704,8 +704,8 @@ lexleq(all(j in cols) m[i,j], all(j in Cols) m[i+1,j])
 </aside>
 
 </section>
-<section id="slide-org68d1413">
-<h3 id="org68d1413">Feasibility testing</h3>
+<section id="slide-org2487837">
+<h3 id="org2487837">Feasibility testing</h3>
 <p>
 \[
 \exists  v_1 \in D_1, \ldots, v_n \in D_n : \\
@@ -714,8 +714,8 @@ c(x_1 = v_1, \ldots, x_n = v_n) = true
 </p>
 
 </section>
-<section id="slide-orgab0a161">
-<h3 id="orgab0a161">Pruning</h3>
+<section id="slide-org53cb709">
+<h3 id="org53cb709">Pruning</h3>
 <p>
 Dado \(v_i\)  en \(D_i\) ¿existe una solución  tal que \(x_i = v_i\)?
 </p>
@@ -735,8 +735,8 @@ c(x_1=v_1, \ldots, x_n=v_n) = true
 </p>
 
 </section>
-<section id="slide-orgfae4ec4">
-<h3 id="orgfae4ec4">Ejemplo: 8 reinas</h3>
+<section id="slide-org2e94c67">
+<h3 id="org2e94c67">Ejemplo: 8 reinas</h3>
 <form><ul>
 <li>Variables de decisión: e.g. la columna y el valor es el renglón</li>
 <li>Dominio de las variables de decisión</li>
@@ -765,8 +765,8 @@ reina[i] &lt;&gt; reina[j[ - (j - i)  # downward diagonal
 </div>
 
 </section>
-<section id="slide-org752efbb">
-<h3 id="org752efbb">Ejemplo: 8 reinas y <code>alldifferent</code></h3>
+<section id="slide-org17a4a6e">
+<h3 id="org17a4a6e">Ejemplo: 8 reinas y <code>alldifferent</code></h3>
 <div class="org-src-container">
 
 <pre><code class=" jupyter-python" ># valores
@@ -789,8 +789,8 @@ alldifferent((all i in R) reina[i] - i )  # downward diagonal
 </section>
 </section>
 <section>
-<section id="slide-org04e5f1f">
-<h2 id="org04e5f1f">Simetrías</h2>
+<section id="slide-orgd2a556e">
+<h2 id="orgd2a556e">Simetrías</h2>
 <form><ul>
 <li>Explorar partes del espacio de soluciones que son simétricas es una
 perdida de tiempo</li>
@@ -803,11 +803,73 @@ perdida de tiempo</li>
 
 </ul></form>
 
+
 </section>
 </section>
 <section>
-<section id="slide-org8200b4c">
-<h2 id="org8200b4c">Scene problem (Operations problem)</h2>
+<section id="slide-org8be5683">
+<h2 id="org8be5683">Redundancias</h2>
+<form><ul>
+<li>Expresan propiedades de las soluciones</li>
+<li>Agregar redundancias tiene dos efectos:
+<form><ul>
+<li>No excluyen ninguna solución (son semánticamente redundantes)</li>
+<li>Reducen el espacio de búsqueda</li>
+
+</ul></form></li>
+
+</ul></form>
+
+
+<aside class="notes">
+<p>
+magic series
+</p>
+
+<p>
+sum(i in D) series[i] = n
+sum(i in d) i * series[i] = n
+</p>
+
+</aside>
+
+<form><ul>
+<li>Al igual que ruptura de simetría, pueden ser la diferencia entre
+resolver o no un problema</li>
+
+<li>Puedes combinar restricciones, no hay nada que lo impida
+(<i>surrogate constraints</i>)
+<form><ul>
+<li>mejora la  combinación, como la restricciones globales</li>
+
+</ul></form></li>
+
+</ul></form>
+
+<aside class="notes">
+<p>
+C= ..
+V =..
+w[C,V] = #weight
+rhs[C] = #capacity
+x[v] in 0..1
+</p>
+
+<p>
+forall c in C
+sum(v inV) w[c,v] * x[v] = rhs[c]
+</p>
+
+<p>
+sum(v in V) (sum(c in c) alpha^c * w[c,v] *x[v]) = sum(c in C) alpha^c * rhs[c]
+</p>
+
+</aside>
+</section>
+</section>
+<section>
+<section id="slide-org41b3083">
+<h2 id="org41b3083">Scene problem (Operations problem)</h2>
 <form><ul>
 <li>Un personal médico participa en alguna de las operaciones</li>
 <li>Existen \(k\) salas de operación en el hospital</li>
@@ -891,8 +953,8 @@ operaciones[o] &lt;= 1 + max(k in ..s-1) operaciones[k]
 </section>
 </section>
 <section>
-<section id="slide-org3ada189">
-<h2 id="org3ada189">Repaso</h2>
+<section id="slide-org50c17fb">
+<h2 id="org50c17fb">Repaso</h2>
 <form><ul>
 <li class="fragment appear">Constraint Programming</li>
 <li class="fragment appear">Ejemplo: Problema de las 8 reinas</li>

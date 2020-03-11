@@ -80,20 +80,20 @@ School specific teaching materials"/>
 <h1 class="title">CSP</h1><h2 class="author">Adolfo De Unánue Adolfo De Unánue</h2>
 </section>
 <section>
-<section id="slide-org92d5a2a">
-<h2 id="org92d5a2a">Introduction and Recap of Last Class</h2>
-<div class="outline-text-2" id="text-org92d5a2a">
+<section id="slide-orgd3d84e7">
+<h2 id="orgd3d84e7">Introduction and Recap of Last Class</h2>
+<div class="outline-text-2" id="text-orgd3d84e7">
 </div>
 </section>
-<section id="slide-org079c6a9">
-<h3 id="org079c6a9">Anuncios</h3>
+<section id="slide-orgfc04eab">
+<h3 id="orgfc04eab">Anuncios</h3>
 <form><ul>
 <li>&#x2026;</li>
 
 </ul></form>
 </section>
-<section id="slide-org1f716c1">
-<h3 id="org1f716c1">Repaso de la última clase</h3>
+<section id="slide-org0cd0cf0">
+<h3 id="org0cd0cf0">Repaso de la última clase</h3>
 </section>
 <section id="slide-lectures/CSP/Outline">
 <h3 id="lectures/CSP/Outline">Lecture Outline</h3>
@@ -102,17 +102,25 @@ School specific teaching materials"/>
 <li class="fragment appear">Ejemplo: Problema de las 8 reinas</li>
 <li class="fragment appear">Ejemplo: Colorear un mapa</li>
 <li class="fragment appear">Branch and prune</li>
-<li class="fragment appear">Definición</li>
+<li class="fragment appear">Motor de propagación</li>
+<li class="fragment appear">Definiciones</li>
 <li class="fragment appear">Ejemplo: 8 reinas</li>
 <li class="fragment appear">CSP como grafo</li>
-<li class="fragment appear">CSP como multigrafo: grafo de restricción</li>
+<li class="fragment appear">CSP como multigrafo: grafo de restricción de arcos</li>
+<li class="fragment appear">Ejemplo de pizarrón: <i>Scheduling</i></li>
+<li class="fragment appear">Algoritmo de consistencia de arcos (GAC)</li>
+<li class="fragment appear">Restricciones en <code>python</code></li>
+<li class="fragment appear">CSP en <code>python</code></li>
+<li class="fragment appear">Resolver CSP con búsqueda</li>
+<li class="fragment appear">Mejorando la búsqueda</li>
+<li class="fragment appear">Ejemplos de CSP planteados</li>
 
 </ul></form>
 </section>
 </section>
 <section>
-<section id="slide-org399731c">
-<h2 id="org399731c">Constraint Programming</h2>
+<section id="slide-orgdc400b5">
+<h2 id="orgdc400b5">Constraint Programming</h2>
 <form><ul>
 <li>Usar los <i>constraints</i> (restricciones) para reducir el conjunto de valores que cada
 variable puede tomar.</li>
@@ -144,8 +152,8 @@ variable puede tomar.</li>
 </section>
 </section>
 <section>
-<section id="slide-org0987e4d">
-<h2 id="org0987e4d">Ejemplo: Problema de las 8 reinas</h2>
+<section id="slide-orgac821ff">
+<h2 id="orgac821ff">Ejemplo: Problema de las 8 reinas</h2>
 <form><ul>
 <li>Colocar 8 reinas en el tablero de ajedrez de tal manera que no
 puedan atacarse entre sí</li>
@@ -167,8 +175,8 @@ diagonal superior, no en la diagonal inferior</li>
 </section>
 </section>
 <section>
-<section id="slide-orga71c424">
-<h2 id="orga71c424">Ejemplo: Colorear un mapa</h2>
+<section id="slide-org878efb6">
+<h2 id="org878efb6">Ejemplo: Colorear un mapa</h2>
 <form><ul>
 <li>Colorear un mapa de tal manera que no dos territorios adyacentes
 tengan el mismo color</li>
@@ -189,8 +197,8 @@ tengan el mismo color</li>
 </section>
 </section>
 <section>
-<section id="slide-orge204b43">
-<h2 id="orge204b43">Branch and prune</h2>
+<section id="slide-orgf1781bf">
+<h2 id="orgf1781bf">Branch and prune</h2>
 <form><dl>
 <dt>Pruning</dt><dd>Reduce el espacio de búsqueda: usa las restricciones</dd>
 <dt>Branching</dt><dd>Parte el problema en subproblema y explorar el
@@ -206,10 +214,10 @@ solución se encuentre o se pruebe que no hay solución</li>
 </section>
 </section>
 <section>
-<section id="slide-orgb6ec35c">
-<h2 id="orgb6ec35c">Motor de propagación</h2>
+<section id="slide-orge137dfc">
+<h2 id="orge137dfc">Motor de propagación</h2>
 <form><ul>
-<li>Algoritmo iterativo de puto fijo</li>
+<li>Algoritmo iterativo de punto fijo</li>
 
 </ul></form>
 
@@ -246,8 +254,8 @@ MONEY
 </section>
 </section>
 <section>
-<section id="slide-org1f2a0ea">
-<h2 id="org1f2a0ea">Definiciones</h2>
+<section id="slide-org98436b9">
+<h2 id="org98436b9">Definiciones</h2>
 <p>
 Un problema de satisfacción de restricciones (CSP) consiste en:
 </p>
@@ -337,8 +345,8 @@ reina[i] &lt;&gt; reina[j[ - (j - i)  # downward diagonal
 </section>
 </section>
 <section>
-<section id="slide-org5ba0bb6">
-<h2 id="org5ba0bb6">CSP como grafo</h2>
+<section id="slide-org7cdea0a">
+<h2 id="org7cdea0a">CSP como grafo</h2>
 <form><ul>
 <li>Los nodos son los valores que puede tomar las variables</li>
 <li>Los vecino del nodo \(n\) se obtienen seleccionando la variable \(V\)
@@ -381,8 +389,8 @@ restricción.</li>
 </section>
 </section>
 <section>
-<section id="slide-org6fe73de">
-<h2 id="org6fe73de">CSP como multigrafo: grafo de restricción de arcos</h2>
+<section id="slide-org0ea0cc5">
+<h2 id="org0ea0cc5">CSP como multigrafo: grafo de restricción de arcos</h2>
 <form><ul>
 <li>Hay nodos para cada variable</li>
 <li>Hay otro tipo de nodo para cada restricción</li>
@@ -418,8 +426,8 @@ Usando el mismo ejemplo:
 </section>
 </section>
 <section>
-<section id="slide-org79f5d90">
-<h2 id="org79f5d90">Ejemplo de pizarrón: <i>Scheduling</i></h2>
+<section id="slide-orgf0219b2">
+<h2 id="orgf0219b2">Ejemplo de pizarrón: <i>Scheduling</i></h2>
 <p>
 Tomado de <i>Artificial Intelligence  Foundations of computational agents</i>, 
 Poole and Mackworth, segunda edición
@@ -455,8 +463,8 @@ Suponga además que las siguientes restricciones deben de cumplirse:
 </section>
 </section>
 <section>
-<section id="slide-org6452174">
-<h2 id="org6452174">Algoritmo de consistencia de arcos (GAC)</h2>
+<section id="slide-org980ab5f">
+<h2 id="org980ab5f">Algoritmo de consistencia de arcos (GAC)</h2>
 <p>
 <i>pseudo algoritmo</i>
 </p>
@@ -500,8 +508,8 @@ def GAC(variables, dominios, restricciones):
 </section>
 </section>
 <section>
-<section id="slide-orga72b8c2">
-<h2 id="orga72b8c2">Restricciones</h2>
+<section id="slide-org3c79ef6">
+<h2 id="org3c79ef6">Restricciones en <code>python</code></h2>
 <div class="org-src-container">
 
 <pre><code class=" jupyter-python" >from operator import lt, ne, eq, gt
@@ -514,7 +522,7 @@ class Restriccion:
     def __call__(self, assigment):
         """ assigment es un diccionario de variable: valor """
         return self.predicado(*tuple(assigment[v] for v in self.scope))
-    
+
 # c = Restriccion(['A', 'B'], lt) # A &lt; B
 # c({'A':1, 'B':2}) # True
 
@@ -536,24 +544,34 @@ class Restriccion:
 </aside>
 
 </section>
+<section id="slide-orgff77c88">
+<h3 id="orgff77c88">Ejemplo: 8-queens</h3>
+
+
+</section>
 </section>
 <section>
-<section id="slide-org030129f">
-<h2 id="org030129f">CSP en <code>python</code></h2>
+<section id="slide-orgfc658be">
+<h2 id="orgfc658be">CSP en <code>python</code></h2>
 <div class="org-src-container">
 
 <pre><code class=" jupyter-python" >class CSP:
     def __init__(self, dominios, restricciones):
-        self.variables = dominios.keys() # quizá sea más eficiente set(dominios)
+        self.variables = set(dominios) # quizá sea más eficiente que dominios.keys()
         self.dominios = dominios
         self.restricciones = restricciones
+        # Diccionario inverso
+        self.variables_restricciones = {variable:set() for variable in self.variables}
+        for restriccion in self.restricciones:
+            for variable in restriccion.scope:
+                self.variables_restricciones[variable].add(restriccion)
 
     def consistente(self, assigment):
         """assigment es un diccionario de variable: valor """
         return all(c(assigment)
                    for c in self.restricciones
-                   if all(v in assigment for v  in c.scope))
-
+                   if all(variable in assigment for variable  in c.scope))
+    
     def __str__(self):
         return str(self.dominios)
 
@@ -563,12 +581,97 @@ class Restriccion:
 </code></pre>
 </div>
 
+</section>
+<section id="slide-org9478c50">
+<h3 id="org9478c50">Ejemplo: 8 queens</h3>
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >queens = [ f'Q{i}' for  i in range(NQUEENS) ]
+nqueens = CSP(queens, same_row+upper_diagonal+downward_diagonal)
+
+
+ def print_tablero(queens):
+    NQUEENS = len(queens)
+    tablero = [['.'] * NQUEENS  for i in range(NQUEENS)]
+    for queen in queens.items():
+        renglon = int(queen[0][1])
+        columna = queen[1]
+        tablero[renglon][columna] = 'Q'
+    for renglon in range(NQUEENS):
+        print(*tuple(tablero[renglon][columna] for columna in range(NQUEENS)))
+</code></pre>
+</div>
 
 </section>
 </section>
 <section>
-<section id="slide-orgc8a5da1">
-<h2 id="orgc8a5da1">Reificación</h2>
+<section id="slide-org969e1f9">
+<h2 id="org969e1f9">Resolver CSP con búsqueda</h2>
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >from collections import deque
+
+def dict_union(d1, d2):
+    """ Simplifica la unión de dos diccionarios """
+    d = dict(d1)
+    d.update(d2)
+    return d
+
+def generar_vecinos(csp, nodo):
+    """ nodo es un un diccionario variable: valor """
+    variable = list(csp.variables)[len(nodo)]
+    vecinos = []
+    for value in csp.dominios[variable]:
+        assigment = dict_union(nodo, {variable:value})
+        if csp.consistente(assigment):
+            vecinos.append(assigment)
+    return vecinos
+</code></pre>
+</div>
+
+</section>
+<section>
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >def backtracking(csp):
+    def goal(csp, nodo):
+        return len(nodo) == len(csp.variables)
+
+    mejor_path = []
+
+    start = {}
+
+    frontera = deque()  # En BFS la frontera es una pila
+
+    # Agrego por a derecha, ya que es una cola
+    frontera.append((start, [start])) # nodo y path
+
+    while frontera:
+        nodo, path = frontera.popleft() # Extraigo por la izquierda
+        print(nodo)
+        if goal(csp, nodo):
+            mejor_path = path
+            mejor_solucion = nodo
+            yield mejor_solucion, mejor_path
+        else:
+            vecinos = reversed(generar_vecinos(csp, nodo))
+            for vecino in vecinos:
+                frontera.appendleft((vecino, path+[vecino]))
+</code></pre>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgf7728a9">
+<h2 id="orgf7728a9">Algunos trucos para mejorar las restricciones</h2>
+<div class="outline-text-2" id="text-orgf7728a9">
+</div>
+</section>
+<section id="slide-orgba3417d">
+<h3 id="orgba3417d">Reificación</h3>
 <form><ul>
 <li>Dada una restricción y la convierte en una variable \(0/1\)</li>
 <li>La variable toma el valor de \(1\) si la restricción se cumple y \(0\)
@@ -601,10 +704,8 @@ series[k] = &sum;<sub>i&isin; D</sub> (series[i] == k)  # reificación
 
 
 </section>
-</section>
-<section>
-<section id="slide-org79d2ef8">
-<h2 id="org79d2ef8">Restricción de elementos,  Combinación lógica</h2>
+<section id="slide-org3560b44">
+<h3 id="org3560b44">Restricción de elementos,  Combinación lógica</h3>
 <form><ul>
 <li>Habilidad de indexar un arreglo o matriz con una variable o una
 expresión que contiene variables</li>
@@ -668,13 +769,14 @@ forall(w in Women, m in Men)
 
 
 </section>
-</section>
-<section>
-<section id="slide-orgbf68351">
-<h2 id="orgbf68351">Restricciones globales</h2>
+<section id="slide-org2a343de">
+<h3 id="org2a343de">Restricciones globales</h3>
 <form><ul>
 <li>Representan subestructuras del problema</li>
+<li>El modelado es más natural y más sencillo</li>
 <li>Ayudan al <i>solver</i> ya que no tiene que descubrir por si misma estas estructuras</li>
+<li>Están implementadas en algoritmos específicos</li>
+<li>Es un tema de investigación actual</li>
 <li>Mejoran <i>feasibility testing</i> y <i>pruning</i></li>
 
 </ul></form>
@@ -688,6 +790,10 @@ D_1 = {1,2} D_2 = {1,2} D_3 = {1,2}
 </p>
 
 <p>
+<i>pigeon principle</i>
+</p>
+
+<p>
 Hacerlo a mano con restricciones normales o independientes
 </p>
 
@@ -696,16 +802,26 @@ Ahora con D_3 ={1,2,3}
 </p>
 
 <p>
+x_3 &ne; 1, x_3 &ne; 2
+</p>
+
+<p>
+Si no lo haces con global constraints, no hay pruning: x_1 &ne; x_2, x_2
+&ne; x_3, x_3 &ne; x_1
+</p>
+
+<p>
 Otra importante es:
 atmost(&#x2026;)
 lexleq(all(j in cols) m[i,j], all(j in Cols) m[i+1,j])
+circuit(jump)) ciclo Hamiltoniano en un grafo dirigido
 </p>
 
 </aside>
 
 </section>
-<section id="slide-org2487837">
-<h3 id="org2487837">Feasibility testing</h3>
+<section id="slide-orgab5bf68">
+<h3 id="orgab5bf68">Feasibility testing</h3>
 <p>
 \[
 \exists  v_1 \in D_1, \ldots, v_n \in D_n : \\
@@ -713,16 +829,21 @@ c(x_1 = v_1, \ldots, x_n = v_n) = true
 \]
 </p>
 
+
+<p>
+Detectan <i>feasibility</i> más rápidamente
+</p>
+
 </section>
-<section id="slide-org53cb709">
-<h3 id="org53cb709">Pruning</h3>
+<section id="slide-org030894b">
+<h3 id="org030894b">Pruning</h3>
 <p>
 Dado \(v_i\)  en \(D_i\) ¿existe una solución  tal que \(x_i = v_i\)?
 </p>
 
 <p>
-¿Encontrar valores en los dominios de las variables tales que la
-restricción  se mantienen?
+Encontrar valores en los dominios de las variables tales que la
+restricción  se mantienen
 </p>
 
 <p>
@@ -734,9 +855,13 @@ c(x_1=v_1, \ldots, x_n=v_n) = true
 \]
 </p>
 
+<p>
+Realizan un <i>pruning</i> más agresivo del espacio de soluciones
+</p>
+
 </section>
-<section id="slide-org2e94c67">
-<h3 id="org2e94c67">Ejemplo: 8 reinas</h3>
+<section id="slide-orgecca97d">
+<h3 id="orgecca97d">Ejemplo: 8 reinas</h3>
 <form><ul>
 <li>Variables de decisión: e.g. la columna y el valor es el renglón</li>
 <li>Dominio de las variables de decisión</li>
@@ -765,38 +890,75 @@ reina[i] &lt;&gt; reina[j[ - (j - i)  # downward diagonal
 </div>
 
 </section>
-<section id="slide-org17a4a6e">
-<h3 id="org17a4a6e">Ejemplo: 8 reinas y <code>alldifferent</code></h3>
+<section id="slide-orge16025e">
+<h3 id="orge16025e">Ejemplo: 8 reinas y <code>alldifferent</code></h3>
 <div class="org-src-container">
 
 <pre><code class=" jupyter-python" ># valores
 R = 1 .. 8
 # variables
-reinas = [None] * 8 \in R
+reinas = [None] * 8 in R
 
-
-
-forall i \in R, j \in R, i &lt; j {
-alldifferent(reina) # row
-alldifferent((all i in R) reina[i] + i )  # upward diagonal
-alldifferent((all i in R) reina[i] - i )  # downward diagonal
+solve {
+alldifferent(reinas) # row
+alldifferent(all(i in R) reinas[i] + i )  # upward diagonal
+alldifferent(all(i in R) reinas[i] - i )  # downward diagonal
 }
 
 </code></pre>
 </div>
 
+</section>
+<section id="slide-org3b3802f">
+<h3 id="org3b3802f">Table constraints</h3>
+<form><ul>
+<li>El <i>constraint global</i> más sencillo</li>
+
+<li>Especifica un subconjunto del total de posibilidades (producto
+cartesiano)  como legal</li>
+
+</ul></form>
 
 </section>
+<section id="slide-orga88211a">
+<h3 id="orga88211a">alldiff: implementación</h3>
+<form><ul>
+<li><code>alldiff</code> es probablemente la restricción global más usada</li>
+<li>La restricción  <code>alldiff(x_1, \dots, x_n)</code> requiere que las variables 
+\(x_1, \ldots, x_n\) tomen distintos valores.</li>
+<li><code>alldiff</code> puede implementarse como un problema de <i>matching</i> en un grafo
+bipartita.</li>
+
+<li>El grafo G, tendrá nodos en un lado siendo las variables y en el otro lado los
+valores de todos los dominos de las variables. El grafo tendrá arcos
+\((x_j, i)\) si \(i \in D_{x_j}\).</li>
+<li>Podemos verificar <i>feasibility</i> siel <i>matching</i>  de máxima cardinalidad
+(<i>maximum cardinality matching</i>) cubre a todas las variables \(x_i\). Un
+algoritmo para encontrarlo es <i>maximun flow</i> (lo veremos más adelante
+en la clase).</li>
+<li><i>Pruning</i> puede ser obtenido con el mismo algoritmo.
+<form><ul>
+<li>Regresaremos a este punto cuando lleguemos a los algoritmos de
+flujo en redes.</li>
+
+</ul></form></li>
+<li>Ver <i>Integrated Methods for Optimization</i>  de Jogn N. Hooker.</li>
+
+</ul></form>
+
 </section>
-<section>
-<section id="slide-orgd2a556e">
-<h2 id="orgd2a556e">Simetrías</h2>
+<section id="slide-org55bc548">
+<h3 id="org55bc548">Simetrías</h3>
 <form><ul>
 <li>Explorar partes del espacio de soluciones que son simétricas es una
 perdida de tiempo</li>
 <li>Puede haber simetrías en:
 <form><ul>
-<li>variables</li>
+<li>variables
+<form><ul>
+<li>e.g. Imponer ordenes en las variables (con una restricción global: <code>lexleq</code>)</li>
+
+</ul></form></li>
 <li>valores</li>
 
 </ul></form></li>
@@ -805,10 +967,8 @@ perdida de tiempo</li>
 
 
 </section>
-</section>
-<section>
-<section id="slide-org8be5683">
-<h2 id="org8be5683">Redundancias</h2>
+<section id="slide-org95c80a7">
+<h3 id="org95c80a7">Redundancias</h3>
 <form><ul>
 <li>Expresan propiedades de las soluciones</li>
 <li>Agregar redundancias tiene dos efectos:
@@ -865,12 +1025,283 @@ sum(v in V) (sum(c in c) alpha^c * w[c,v] *x[v]) = sum(c in C) alpha^c * rhs[c]
 </p>
 
 </aside>
+
+</section>
+<section id="slide-orgd60ebe2">
+<h3 id="orgd60ebe2">Ejemplo: 8 queens</h3>
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" ># valores
+C = 1 .. 8 
+R = 1 .. 8
+# variables
+reinas_col = [None] * 8 in C
+reinas_row = [None] * 8 in R
+
+solve {
+    forall (i in R, j in R i &lt; j)
+        reinas_row[i] != reinas_row[j]
+        reinas_row[i] + i != reinas_row[j] + j
+        reinas_row[i] - i != reinas_row[j] - j
+    forall (i in C, j in C i &lt; j)
+        reinas_col[i] != reinas_col[j]
+        reinas_col[i] + i != reinas_col[j] + j
+        reinas_col[i] - i != reinas_col[j] - j
+    forall (r in R , c in C)
+        (reinas_row[c] = r) &lt;=&gt; (reinas_col[r] = c)
+}
+
+</code></pre>
+</div>
+
+
 </section>
 </section>
 <section>
-<section id="slide-org41b3083">
-<h2 id="org41b3083">Scene problem (Operations problem)</h2>
+<section id="slide-org27fc96f">
+<h2 id="org27fc96f">Mejorando la búsqueda</h2>
 <form><ul>
+<li>Usar la información sobre <i>feasibility</i> para realizar el <i>branching</i></li>
+<li>Usar el <b>first-fail principle</b>: Intenta primero donde es más probable
+que falles
+<form><ul>
+<li>Variables que tengan un dominio pequeño</li>
+<li>Variables que estén muy conectadas (la más restringida)</li>
+
+</ul></form></li>
+<li>Crea árboles de búsqueda más pequeños</li>
+
+</ul></form>
+
+
+
+</section>
+<section id="slide-orgcd4e763">
+<h3 id="orgcd4e763">Ejemplo: 8-queens</h3>
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" ># valores
+R = 1 .. 8
+# variables
+reinas = [None] * 8 in R
+
+solve {
+    forall (i in R, j in R i &lt; j)
+        reinas[i] != reinas[j]
+        reinas[i] + i != reinas[j] + j
+        reinas[i] - i != reinas[j] - j
+}
+
+# procedimiento de búsqueda
+using {
+    forall(r in R) by reinas[r].size(), abs(r-n/2) # Variable/value, first fail: tamaño, restricciones
+        tryall(v in R)  # no determinístico si redundancias by col[v].size()
+           row[r] = v
+}
+</code></pre>
+</div>
+
+<form><ul>
+<li>Recuerda, el procedimiento de búsqueda está agregando nuevas
+restricciones al almacén de restricciones (el cual las valida)</li>
+<li>En el <code>tryall</code> , si hay un fallo al agregar la restricción,  el
+programa se regresa al anterior <code>tryall</code> y asigna una variable que no
+se haya usado anteriormente.</li>
+<li>Si no existe dicho valor, el programa regresa a la última
+instrucción exitosa no determinística.</li>
+
+</ul></form>
+
+
+<aside class="notes">
+<form><ul>
+<li>forall se convierte en una serie de tryall(v in R) row[1] = v</li>
+<li>tryall se convierte en</li>
+
+</ul></form>
+<p>
+try
+row[r] = 1 or row[r] = 2 or row[r] = 3 etc
+endtry
+</p>
+
+</aside>
+</section>
+<section id="slide-org2cf2924">
+<h3 id="org2cf2924">Variable/Value labeling</h3>
+<form><ul>
+<li><i>labeling</i> se refiere a la asignación</li>
+<li>Variable/Value indica el orden de elección, i.e.
+<form><ul>
+<li>primero seleccionas la variable (la del dominio menor,la más restringida)</li>
+<li>luego el valor (escoge aquel que deja muchas opciones abiertas)</li>
+
+</ul></form></li>
+
+</ul></form>
+
+
+</section>
+<section id="slide-orge2d9961">
+<h3 id="orge2d9961">Domain splitting</h3>
+<form><ul>
+<li>Idea: Dividir el problema en dos casos disjuntos y resolver cada uno
+de manera separada. El conjunto de todas las soluciones  del
+problema inicial es la <span class="underline">unión</span> de las soluciones de cada caso.</li>
+<li>Si el dominio de una variable tiene dos elementos, separar es
+sencillo, si tiene más hay más maneras de dividirlo:
+<form><ul>
+<li>Dividir un caso por valor (más rápido)</li>
+<li>Dividir en dos conjuntos no vacíos, disjuntos (más <i>pruning</i>, no hay
+que redescubrir cosas)</li>
+
+</ul></form></li>
+<li>Una manera efectiva es usar AC-3 antes de cada paso de división:
+<form><ul>
+<li>Simplifica el problema con AC-3</li>
+<li>Si el problema no se ha resuelto, selecciona la variable a dividir
+usando el fast-fail principle.</li>
+
+</ul></form></li>
+
+</ul></form>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgf219afa">
+<h2 id="orgf219afa">Ejemplos de CSP planteados</h2>
+<div class="outline-text-2" id="text-orgf219afa">
+</div>
+</section>
+<section id="slide-org1fccd08">
+<h3 id="org1fccd08">SEND + MORE = MONEY</h3>
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >letras = { s, e, n, d, m, o, r, y }
+N = 0 .. 9
+
+solve {
+alldiff(letras)
+
+...    
+}
+</code></pre>
+</div>
+
+
+<p>
+Una alternativa: 
+</p>
+
+<p>
+1000(s+m) + 100(e + o) + 10(n+r) +d + e = 10000m +
+1000o +100 n + 10 e + y
+</p>
+
+
+
+</section>
+<section id="slide-org36c02c3">
+<h3 id="org36c02c3">Magic series</h3>
+<p>
+Una serie \(S = (S_0, \dots, S_n)\) es <i>mágica</i> , si \(S_i\) representa el número
+de ocurrencias de \(i\) en \(S\).
+</p>
+
+
+
+<table>
+
+
+<colgroup>
+<col  class="org-right">
+
+<col  class="org-right">
+
+<col  class="org-right">
+
+<col  class="org-right">
+
+<col  class="org-right">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">0</th>
+<th scope="col" class="org-right">1</th>
+<th scope="col" class="org-right">2</th>
+<th scope="col" class="org-right">3</th>
+<th scope="col" class="org-right">4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">2</td>
+<td class="org-right">1</td>
+<td class="org-right">2</td>
+<td class="org-right">0</td>
+<td class="org-right">0</td>
+</tr>
+</tbody>
+</table>
+
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >n = 5
+D = 0 .. n -1
+
+solve {
+    forall k \in D
+       series[k] = \sum_{i\in D} (series[i] == k)  # reificación
+
+    # Redundancias
+    #sum(i in D) series[i] = n
+    #sum(i in D) series[i] = sum(i in D) i * series[i] = n
+}
+</code></pre>
+</div>
+
+
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >def booleq(x,v):
+     return (b = 1 and x == v) or (b = 0 and x != v)
+</code></pre>
+</div>
+
+
+</section>
+<section id="slide-org92fe308">
+<h3 id="org92fe308">Sudoku</h3>
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" ># valores
+R = 1..9
+# variables
+s[R,R] in R
+
+# restricciones
+solve {
+    # restricciones en las posiciones fijas
+    forall (i in R)   # rows
+        alldifferent(all(j in R) s[i,j])
+    forall(j in R) # columns
+        alldifferent(all(i in R) s[i,j])
+    forall(i in 0 .2, j in 0..2) # squares
+        alldifferent(all(r in i*3+1 .. i*3+3, c in j*3+1..j*3+3) s[i,j])
+}
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orga93e21d">
+<h3 id="orga93e21d">Scene allocation problem (Operations problem)</h3>
+<form><ul>
+<li>Ver <i>Constraint and Integer Programming in OPL</i> de P.V. Hentenryck
+para más detalle</li>
 <li>Un personal médico participa en alguna de las operaciones</li>
 <li>Existen \(k\) salas de operación en el hospital</li>
 <li>Cada médico es pagado por día
@@ -950,20 +1381,69 @@ operaciones[o] &lt;= 1 + max(k in ..s-1) operaciones[k]
 </code></pre>
 </div>
 
+
+</section>
+<section id="slide-org49d9b26">
+<h3 id="org49d9b26">Ejercicio: Magic Square</h3>
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >R = 1 .. n
+D = 1 .. n^2
+T = n*(n^2 + 1) / 2
+s[R,R] in D
+
+solve {
+
+
+}
+</code></pre>
+</div>
+
+
+<form><ul>
+<li>¿Cuáles son las restricciones?</li>
+<li>¿Cómo las programas en <code>python</code>?</li>
+
+</ul></form>
+
 </section>
 </section>
 <section>
-<section id="slide-org50c17fb">
-<h2 id="org50c17fb">Repaso</h2>
+<section id="slide-org8105f7d">
+<h2 id="org8105f7d">Optimización con CSP</h2>
+<form><ul>
+<li>CSP se enfoca en <i>feasibility</i></li>
+<li>Para lograr optimización, una manera de hacerlo es resolver una
+<b>secuencia</b> de problemas de CSP</li>
+<li>Cada que encuentras una solución, agregas la restricción de que la
+siguiente solución en la secuencia debe de ser mejor</li>
+
+</ul></form>
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-orge8350a3">
+<h2 id="orge8350a3">Repaso</h2>
 <form><ul>
 <li class="fragment appear">Constraint Programming</li>
 <li class="fragment appear">Ejemplo: Problema de las 8 reinas</li>
 <li class="fragment appear">Ejemplo: Colorear un mapa</li>
 <li class="fragment appear">Branch and prune</li>
-<li class="fragment appear">Definición</li>
+<li class="fragment appear">Motor de propagación</li>
+<li class="fragment appear">Definiciones</li>
 <li class="fragment appear">Ejemplo: 8 reinas</li>
 <li class="fragment appear">CSP como grafo</li>
-<li class="fragment appear">CSP como multigrafo: grafo de restricción</li>
+<li class="fragment appear">CSP como multigrafo: grafo de restricción de arcos</li>
+<li class="fragment appear">Ejemplo de pizarrón: <i>Scheduling</i></li>
+<li class="fragment appear">Algoritmo de consistencia de arcos (GAC)</li>
+<li class="fragment appear">Restricciones en <code>python</code></li>
+<li class="fragment appear">CSP en <code>python</code></li>
+<li class="fragment appear">Resolver CSP con búsqueda</li>
+<li class="fragment appear">Mejorando la búsqueda</li>
+<li class="fragment appear">Ejemplos de CSP planteados</li>
 
 </ul></form>
 </section>

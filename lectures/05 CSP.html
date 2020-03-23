@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <title>CSP</title>
-<meta name="author" content="Adolfo De Unánue Adolfo De Unánue"/>
+<meta name="author" content="Adolfo De Unánue Adolfo De Unánue Adolfo De Unánue"/>
 <meta name="description" content="Description
 School specific teaching materials"/>
 <style type="text/css">
@@ -20,6 +20,8 @@ School specific teaching materials"/>
 <link rel="stylesheet" href="./reveal.js/css/theme/toc-style.css"/>
 
 <link rel="stylesheet" href="./reveal.js/lib/font/source-sans-pro/source-sans-pro.css"/>
+
+<link rel="stylesheet" href="./css/or.css"/>
 <link rel="stylesheet" href="https://revealjs.com/lib/css/zenburn.css"/>
 <link rel="stylesheet" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"/>
 <style>
@@ -77,50 +79,29 @@ School specific teaching materials"/>
 <div class="reveal">
 <div class="slides">
 <section id="sec-title-slide">
-<h1 class="title">CSP</h1><h2 class="author">Adolfo De Unánue Adolfo De Unánue</h2>
+<h1 class="title">CSP</h1><h2 class="author">Adolfo De Unánue Adolfo De Unánue Adolfo De Unánue</h2>
 </section>
 <section>
-<section id="slide-orgc5eea6a">
-<h2 id="orgc5eea6a">Introduction and Recap of Last Class</h2>
-<div class="outline-text-2" id="text-orgc5eea6a">
-</div>
+<section id="slide-orga9c2f8f">
+<h2 id="orga9c2f8f">Introduction and Recap of Last Class</h2>
 </section>
-<section id="slide-orgb274e69">
-<h3 id="orgb274e69">Anuncios</h3>
+<section id="slide-orgf8b62c1">
+<h3 id="orgf8b62c1">Anuncios</h3>
 <form><ul>
 <li>&#x2026;</li>
 
 </ul></form>
 </section>
-<section id="slide-org01954d9">
-<h3 id="org01954d9">Repaso de la última clase</h3>
+<section id="slide-org9203565">
+<h3 id="org9203565">Repaso de la última clase</h3>
 </section>
-<section id="slide-lectures/CSP/Outline">
-<h3 id="lectures/CSP/Outline">Lecture Outline</h3>
-<form><ul>
-<li class="fragment appear">Constraint Programming</li>
-<li class="fragment appear">Ejemplo: Problema de las 8 reinas</li>
-<li class="fragment appear">Ejemplo: Colorear un mapa</li>
-<li class="fragment appear">Branch and prune</li>
-<li class="fragment appear">Motor de propagación</li>
-<li class="fragment appear">Definiciones</li>
-<li class="fragment appear">Ejemplo: 8 reinas</li>
-<li class="fragment appear">CSP como grafo</li>
-<li class="fragment appear">CSP como multigrafo: grafo de restricción de arcos</li>
-<li class="fragment appear">Ejemplo de pizarrón: <i>Scheduling</i></li>
-<li class="fragment appear">Algoritmo de consistencia de arcos (GAC)</li>
-<li class="fragment appear">Restricciones en <code>python</code></li>
-<li class="fragment appear">CSP en <code>python</code></li>
-<li class="fragment appear">Resolver CSP con búsqueda</li>
-<li class="fragment appear">Mejorando la búsqueda</li>
-<li class="fragment appear">Ejemplos de CSP planteados</li>
-
-</ul></form>
+<section id="slide-lectures/Introduction and Recap of Last Class/Outline">
+<h3 id="lectures/Introduction and Recap of Last Class/Outline">Lecture Outline</h3>
 </section>
 </section>
 <section>
-<section id="slide-org789e60b">
-<h2 id="org789e60b">Constraint Programming</h2>
+<section id="slide-org5c8395f">
+<h2 id="org5c8395f">Constraint Programming</h2>
 <form><ul>
 <li>Usar los <i>constraints</i> (restricciones) para reducir el conjunto de valores que cada
 variable puede tomar.</li>
@@ -152,8 +133,8 @@ variable puede tomar.</li>
 </section>
 </section>
 <section>
-<section id="slide-org58335f3">
-<h2 id="org58335f3">Ejemplo: Problema de las 8 reinas</h2>
+<section id="slide-org54e1c3b">
+<h2 id="org54e1c3b">Ejemplo: Problema de las 8 reinas</h2>
 <form><ul>
 <li>Colocar 8 reinas en el tablero de ajedrez de tal manera que no
 puedan atacarse entre sí</li>
@@ -175,8 +156,8 @@ diagonal superior, no en la diagonal inferior</li>
 </section>
 </section>
 <section>
-<section id="slide-orge3c6fed">
-<h2 id="orge3c6fed">Ejemplo: Colorear un mapa</h2>
+<section id="slide-org0a292d7">
+<h2 id="org0a292d7">Ejemplo: Colorear un mapa</h2>
 <form><ul>
 <li>Colorear un mapa de tal manera que no dos territorios adyacentes
 tengan el mismo color</li>
@@ -197,8 +178,8 @@ tengan el mismo color</li>
 </section>
 </section>
 <section>
-<section id="slide-org5680e3d">
-<h2 id="org5680e3d">Branch and prune</h2>
+<section id="slide-org58ac754">
+<h2 id="org58ac754">Branch and prune</h2>
 <form><dl>
 <dt>Pruning</dt><dd>Reduce el espacio de búsqueda: usa las restricciones</dd>
 <dt>Branching</dt><dd>Parte el problema en subproblema y explorar el
@@ -211,11 +192,12 @@ solución se encuentre o se pruebe que no hay solución</li>
 
 </dl></form>
 
+
 </section>
 </section>
 <section>
-<section id="slide-orgf16cdfd">
-<h2 id="orgf16cdfd">Motor de propagación</h2>
+<section id="slide-orgf77fbf3">
+<h2 id="orgf77fbf3">Motor de propagación</h2>
 <form><ul>
 <li>Algoritmo iterativo de punto fijo</li>
 
@@ -251,11 +233,12 @@ MONEY
 
 </aside>
 
+
 </section>
 </section>
 <section>
-<section id="slide-org4fdb3ed">
-<h2 id="org4fdb3ed">Definiciones</h2>
+<section id="slide-org5aca452">
+<h2 id="org5aca452">Definiciones</h2>
 <p>
 Un problema de satisfacción de restricciones (CSP) consiste en:
 </p>
@@ -309,6 +292,7 @@ Una asignación \(A\) en \(S' \in S\) satisface \(c\) si \(A\) es mapeada a
 Un <span class="underline">modelo</span> es un mundo posible que satisface todas las restricciones.
 </p>
 
+
 </section>
 </section>
 <section>
@@ -346,8 +330,8 @@ reina[i] &lt;&gt; reina[j[ - (j - i)  # downward diagonal
 </section>
 </section>
 <section>
-<section id="slide-org76fd990">
-<h2 id="org76fd990">CSP como grafo</h2>
+<section id="slide-org1e284e3">
+<h2 id="org1e284e3">CSP como grafo</h2>
 <form><ul>
 <li>Los nodos son los valores que puede tomar las variables</li>
 <li>Los vecino del nodo \(n\) se obtienen seleccionando la variable \(V\)
@@ -390,8 +374,8 @@ restricción.</li>
 </section>
 </section>
 <section>
-<section id="slide-org5c4ead7">
-<h2 id="org5c4ead7">CSP como multigrafo: grafo de restricción de arcos</h2>
+<section id="slide-org6d5ebcb">
+<h2 id="org6d5ebcb">CSP como multigrafo: grafo de restricción de arcos</h2>
 <form><ul>
 <li>Hay nodos para cada variable</li>
 <li>Hay otro tipo de nodo para cada restricción</li>
@@ -427,8 +411,8 @@ Usando el mismo ejemplo:
 </section>
 </section>
 <section>
-<section id="slide-org2cdcc22">
-<h2 id="org2cdcc22">Ejemplo de pizarrón: <i>Scheduling</i></h2>
+<section id="slide-org8669877">
+<h2 id="org8669877">Ejemplo de pizarrón: <i>Scheduling</i></h2>
 <p>
 Tomado de <i>Artificial Intelligence  Foundations of computational agents</i>, 
 Poole and Mackworth, segunda edición
@@ -464,8 +448,8 @@ Suponga además que las siguientes restricciones deben de cumplirse:
 </section>
 </section>
 <section>
-<section id="slide-orge1cbfc5">
-<h2 id="orge1cbfc5">Algoritmo de consistencia de arcos (GAC)</h2>
+<section id="slide-org3f74fcc">
+<h2 id="org3f74fcc">Algoritmo de consistencia de arcos (GAC)</h2>
 <p>
 <i>pseudo algoritmo</i>
 </p>
@@ -509,8 +493,8 @@ def GAC(variables, dominios, restricciones):
 </section>
 </section>
 <section>
-<section id="slide-orgf2871ce">
-<h2 id="orgf2871ce">Restricciones en <code>python</code></h2>
+<section id="slide-org5fa97a3">
+<h2 id="org5fa97a3">Restricciones en <code>python</code></h2>
 <div class="org-src-container">
 
 <pre><code class=" jupyter-python" >from operator import lt, ne, eq, gt
@@ -545,8 +529,8 @@ class Restriccion:
 </aside>
 
 </section>
-<section id="slide-org25276d0">
-<h3 id="org25276d0">Ejemplo: 8-queens</h3>
+<section id="slide-org133d47f">
+<h3 id="org133d47f">Ejemplo: 8-queens</h3>
 <div class="org-src-container">
 
 <pre><code class=" jupyter-python" >from functools import partial
@@ -568,13 +552,11 @@ downward_diagonal = [ Restriccion([f'Q{i}', f'Q{j}'],  partial(check_downward_di
 </div>
 
 
-
-
 </section>
 </section>
 <section>
-<section id="slide-orgb952cf5">
-<h2 id="orgb952cf5">CSP en <code>python</code></h2>
+<section id="slide-orgbdef7d9">
+<h2 id="orgbdef7d9">CSP en <code>python</code></h2>
 <div class="org-src-container">
 
 <pre><code class=" jupyter-python" >class CSP:
@@ -604,8 +586,8 @@ downward_diagonal = [ Restriccion([f'Q{i}', f'Q{j}'],  partial(check_downward_di
 </div>
 
 </section>
-<section id="slide-org57a1235">
-<h3 id="org57a1235">Ejemplo: 8 queens</h3>
+<section id="slide-org76bc765">
+<h3 id="org76bc765">Ejemplo: 8 queens</h3>
 <div class="org-src-container">
 
 <pre><code class=" jupyter-python" >queens = { f'Q{i}':range(NQUEENS) for  i in range(NQUEENS) }
@@ -624,11 +606,12 @@ nqueens = CSP(queens, same_row+upper_diagonal+downward_diagonal)
 </code></pre>
 </div>
 
+
 </section>
 </section>
 <section>
-<section id="slide-orgb7dd7f3">
-<h2 id="orgb7dd7f3">Resolver CSP con búsqueda</h2>
+<section id="slide-org5e636b8">
+<h2 id="org5e636b8">Resolver CSP con búsqueda</h2>
 <div class="org-src-container">
 
 <pre><code class=" jupyter-python" >from collections import deque
@@ -687,13 +670,11 @@ def generar_vecinos(csp, nodo):
 </section>
 </section>
 <section>
-<section id="slide-org1bf2c81">
-<h2 id="org1bf2c81">Algunos trucos para mejorar las restricciones</h2>
-<div class="outline-text-2" id="text-org1bf2c81">
-</div>
+<section id="slide-org656157d">
+<h2 id="org656157d">Algunos trucos para mejorar las restricciones</h2>
 </section>
-<section id="slide-org8698871">
-<h3 id="org8698871">Reificación</h3>
+<section id="slide-orgfb54a33">
+<h3 id="orgfb54a33">Reificación</h3>
 <form><ul>
 <li>Dada una restricción y la convierte en una variable \(0/1\)</li>
 <li>La variable toma el valor de \(1\) si la restricción se cumple y \(0\)
@@ -726,8 +707,8 @@ series[k] = &sum;<sub>i&isin; D</sub> (series[i] == k)  # reificación
 
 
 </section>
-<section id="slide-org50cf4a4">
-<h3 id="org50cf4a4">Restricción de elementos,  Combinación lógica</h3>
+<section id="slide-org480a9ac">
+<h3 id="org480a9ac">Restricción de elementos,  Combinación lógica</h3>
 <form><ul>
 <li>Habilidad de indexar un arreglo o matriz con una variable o una
 expresión que contiene variables</li>
@@ -791,8 +772,8 @@ forall(w in Women, m in Men)
 
 
 </section>
-<section id="slide-orgfbeb32c">
-<h3 id="orgfbeb32c">Restricciones globales</h3>
+<section id="slide-org97de579">
+<h3 id="org97de579">Restricciones globales</h3>
 <form><ul>
 <li>Representan subestructuras del problema</li>
 <li>El modelado es más natural y más sencillo</li>
@@ -842,8 +823,8 @@ circuit(jump)) ciclo Hamiltoniano en un grafo dirigido
 </aside>
 
 </section>
-<section id="slide-org06c8931">
-<h3 id="org06c8931">Feasibility testing</h3>
+<section id="slide-orgd9c1b9b">
+<h3 id="orgd9c1b9b">Feasibility testing</h3>
 <p>
 \[
 \exists  v_1 \in D_1, \ldots, v_n \in D_n : \\
@@ -857,8 +838,8 @@ Detectan <i>feasibility</i> más rápidamente
 </p>
 
 </section>
-<section id="slide-orge3757c6">
-<h3 id="orge3757c6">Pruning</h3>
+<section id="slide-org05670b5">
+<h3 id="org05670b5">Pruning</h3>
 <p>
 Dado \(v_i\)  en \(D_i\) ¿existe una solución  tal que \(x_i = v_i\)?
 </p>
@@ -882,8 +863,8 @@ Realizan un <i>pruning</i> más agresivo del espacio de soluciones
 </p>
 
 </section>
-<section id="slide-orgd58a4d7">
-<h3 id="orgd58a4d7">Ejemplo: 8 reinas</h3>
+<section id="slide-orge3752f7">
+<h3 id="orge3752f7">Ejemplo: 8 reinas</h3>
 <form><ul>
 <li>Variables de decisión: e.g. la columna y el valor es el renglón</li>
 <li>Dominio de las variables de decisión</li>
@@ -913,8 +894,8 @@ reina[i] &lt;&gt; reina[j[ - (j - i)  # downward diagonal
 </div>
 
 </section>
-<section id="slide-orgde79819">
-<h3 id="orgde79819">Ejemplo: 8 reinas y <code>alldifferent</code></h3>
+<section id="slide-org22739ff">
+<h3 id="org22739ff">Ejemplo: 8 reinas y <code>alldifferent</code></h3>
 <div class="org-src-container">
 
 <pre><code class=" jupyter-python" ># valores
@@ -932,8 +913,8 @@ alldifferent(all(i in R) reinas[i] - i )  # downward diagonal
 </div>
 
 </section>
-<section id="slide-orga86f440">
-<h3 id="orga86f440">Table constraints</h3>
+<section id="slide-org99afa0e">
+<h3 id="org99afa0e">Table constraints</h3>
 <form><ul>
 <li>El <i>constraint global</i> más sencillo</li>
 
@@ -943,8 +924,8 @@ cartesiano)  como legal</li>
 </ul></form>
 
 </section>
-<section id="slide-orgbb168b8">
-<h3 id="orgbb168b8">alldiff: implementación</h3>
+<section id="slide-org0460219">
+<h3 id="org0460219">alldiff: implementación</h3>
 <form><ul>
 <li><code>alldiff</code> es probablemente la restricción global más usada</li>
 <li>La restricción  <code>alldiff(x_1, \dots, x_n)</code> requiere que las variables 
@@ -970,8 +951,8 @@ flujo en redes.</li>
 </ul></form>
 
 </section>
-<section id="slide-org24487a8">
-<h3 id="org24487a8">Simetrías</h3>
+<section id="slide-org3f8c8fa">
+<h3 id="org3f8c8fa">Simetrías</h3>
 <form><ul>
 <li>Explorar partes del espacio de soluciones que son simétricas es una
 perdida de tiempo</li>
@@ -990,8 +971,8 @@ perdida de tiempo</li>
 
 
 </section>
-<section id="slide-org3127600">
-<h3 id="org3127600">Redundancias</h3>
+<section id="slide-org35ce981">
+<h3 id="org35ce981">Redundancias</h3>
 <form><ul>
 <li>Expresan propiedades de las soluciones</li>
 <li>Agregar redundancias tiene dos efectos:
@@ -1050,8 +1031,8 @@ sum(v in V) (sum(c in c) alpha^c * w[c,v] *x[v]) = sum(c in C) alpha^c * rhs[c]
 </aside>
 
 </section>
-<section id="slide-orgec7004d">
-<h3 id="orgec7004d">Ejemplo: 8 queens</h3>
+<section id="slide-org2014d04">
+<h3 id="org2014d04">Ejemplo: 8 queens</h3>
 <div class="org-src-container">
 
 <pre><code class=" jupyter-python" ># valores
@@ -1081,8 +1062,8 @@ solve {
 </section>
 </section>
 <section>
-<section id="slide-orgf60662c">
-<h2 id="orgf60662c">Mejorando la búsqueda</h2>
+<section id="slide-org40e3f6b">
+<h2 id="org40e3f6b">Mejorando la búsqueda</h2>
 <form><ul>
 <li>Usar la información sobre <i>feasibility</i> para realizar el <i>branching</i></li>
 <li>Usar el <b>first-fail principle</b>: Intenta primero donde es más probable
@@ -1099,8 +1080,8 @@ que falles
 
 
 </section>
-<section id="slide-orgfdf103f">
-<h3 id="orgfdf103f">Ejemplo: 8-queens</h3>
+<section id="slide-org00cec81">
+<h3 id="org00cec81">Ejemplo: 8-queens</h3>
 <div class="org-src-container">
 
 <pre><code class=" jupyter-python" ># valores
@@ -1150,8 +1131,8 @@ endtry
 
 </aside>
 </section>
-<section id="slide-org81fc5d5">
-<h3 id="org81fc5d5">Variable/Value labeling</h3>
+<section id="slide-org220eed9">
+<h3 id="org220eed9">Variable/Value labeling</h3>
 <form><ul>
 <li><i>labeling</i> se refiere a la asignación</li>
 <li>Variable/Value indica el orden de elección, i.e.
@@ -1165,8 +1146,8 @@ endtry
 
 
 </section>
-<section id="slide-org11cca3a">
-<h3 id="org11cca3a">Domain splitting</h3>
+<section id="slide-org3b56b60">
+<h3 id="org3b56b60">Domain splitting</h3>
 <form><ul>
 <li>Idea: Dividir el problema en dos casos disjuntos y resolver cada uno
 de manera separada. El conjunto de todas las soluciones  del
@@ -1193,13 +1174,11 @@ usando el fast-fail principle.</li>
 </section>
 </section>
 <section>
-<section id="slide-org2b26443">
-<h2 id="org2b26443">Ejemplos de CSP planteados</h2>
-<div class="outline-text-2" id="text-org2b26443">
-</div>
+<section id="slide-orgbae8124">
+<h2 id="orgbae8124">Ejemplos de CSP planteados</h2>
 </section>
-<section id="slide-org5b99745">
-<h3 id="org5b99745">SEND + MORE = MONEY</h3>
+<section id="slide-org86b3d28">
+<h3 id="org86b3d28">SEND + MORE = MONEY</h3>
 <div class="org-src-container">
 
 <pre><code class=" jupyter-python" >letras = { s, e, n, d, m, o, r, y }
@@ -1226,8 +1205,8 @@ Una alternativa:
 
 
 </section>
-<section id="slide-orge249d29">
-<h3 id="orge249d29">Magic series</h3>
+<section id="slide-orgc26d76d">
+<h3 id="orgc26d76d">Magic series</h3>
 <p>
 Una serie \(S = (S_0, \dots, S_n)\) es <i>mágica</i> , si \(S_i\) representa el número
 de ocurrencias de \(i\) en \(S\).
@@ -1297,8 +1276,8 @@ solve {
 
 
 </section>
-<section id="slide-org11df4a0">
-<h3 id="org11df4a0">Sudoku</h3>
+<section id="slide-org81f78bd">
+<h3 id="org81f78bd">Sudoku</h3>
 <div class="org-src-container">
 
 <pre><code class=" jupyter-python" ># valores
@@ -1320,8 +1299,8 @@ solve {
 </div>
 
 </section>
-<section id="slide-orgd0284f6">
-<h3 id="orgd0284f6">Scene allocation problem (Operations problem)</h3>
+<section id="slide-org7f566e2">
+<h3 id="org7f566e2">Scene allocation problem (Operations problem)</h3>
 <form><ul>
 <li>Ver <i>Constraint and Integer Programming in OPL</i> de P.V. Hentenryck
 para más detalle</li>
@@ -1406,8 +1385,8 @@ operaciones[o] &lt;= 1 + max(k in ..s-1) operaciones[k]
 
 
 </section>
-<section id="slide-orgce55b01">
-<h3 id="orgce55b01">Ejercicio: Magic Square</h3>
+<section id="slide-org20856ab">
+<h3 id="org20856ab">Ejercicio: Magic Square</h3>
 <div class="org-src-container">
 
 <pre><code class=" jupyter-python" >R = 1 .. n
@@ -1429,11 +1408,12 @@ solve {
 
 </ul></form>
 
+
 </section>
 </section>
 <section>
-<section id="slide-orgdc186fb">
-<h2 id="orgdc186fb">Optimización con CSP</h2>
+<section id="slide-orgd159734">
+<h2 id="orgd159734">Optimización con CSP</h2>
 <form><ul>
 <li>CSP se enfoca en <i>feasibility</i></li>
 <li>Para lograr optimización, una manera de hacerlo es resolver una
@@ -1448,27 +1428,8 @@ siguiente solución en la secuencia debe de ser mejor</li>
 </section>
 </section>
 <section>
-<section id="slide-org6144212">
-<h2 id="org6144212">Repaso</h2>
-<form><ul>
-<li class="fragment appear">Constraint Programming</li>
-<li class="fragment appear">Ejemplo: Problema de las 8 reinas</li>
-<li class="fragment appear">Ejemplo: Colorear un mapa</li>
-<li class="fragment appear">Branch and prune</li>
-<li class="fragment appear">Motor de propagación</li>
-<li class="fragment appear">Definiciones</li>
-<li class="fragment appear">Ejemplo: 8 reinas</li>
-<li class="fragment appear">CSP como grafo</li>
-<li class="fragment appear">CSP como multigrafo: grafo de restricción de arcos</li>
-<li class="fragment appear">Ejemplo de pizarrón: <i>Scheduling</i></li>
-<li class="fragment appear">Algoritmo de consistencia de arcos (GAC)</li>
-<li class="fragment appear">Restricciones en <code>python</code></li>
-<li class="fragment appear">CSP en <code>python</code></li>
-<li class="fragment appear">Resolver CSP con búsqueda</li>
-<li class="fragment appear">Mejorando la búsqueda</li>
-<li class="fragment appear">Ejemplos de CSP planteados</li>
-
-</ul></form>
+<section id="slide-orgbd64a04">
+<h2 id="orgbd64a04">Repaso</h2>
 </section>
 </section>
 </div>

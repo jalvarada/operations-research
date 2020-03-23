@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Técnicas de Optimización Modernas</title>
+<meta name="author" content="Adolfo De Unánue Adolfo De Unánue Adolfo De Unánue"/>
+<meta name="description" content="Description
+School specific teaching materials"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://revealjs.com/css/reveal.css"/>
+
+<link rel="stylesheet" href="https://revealjs.com/css/theme/black.css" id="theme"/>
+
+<link rel="stylesheet" href="./css/mozilla-light.css"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/toc-progress/toc-progress.css"/>
+
+<link rel="stylesheet" href="./reveal.js/css/theme/toc-style.css"/>
+
+<link rel="stylesheet" href="./reveal.js/lib/font/source-sans-pro/source-sans-pro.css"/>
+
+<link rel="stylesheet" href="./css/or.css"/>
+<link rel="stylesheet" href="https://revealjs.com/lib/css/zenburn.css"/>
+<link rel="stylesheet" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"/>
+<style>
+/* Position computations of klipse get confused by reveal.js's scaling.
+   Hence, scaling should be disabled with this code.  Fix height of code area
+   with scrollbar (use overflow instead of overflow-y to restore CodeMirror
+   setting afterwards): */
+.reveal section pre { max-height: 70vh; height: auto; overflow: auto; }
+/* Reset some reveal.js and oer-reveal settings: */
+.reveal section pre .CodeMirror pre { font-size: 2em; box-shadow: none; width: auto; padding: 0.4em; display: block; overflow: visible; }
+/* Enlarge cursor: */
+.CodeMirror-cursor { border-left: 3px solid black; }
+</style>
+<script>
+    window.klipse_settings = {
+        selector: '.language-klipse',
+        selector_eval_html: '.language-klipse-html',
+        selector_eval_js: '.language-klipse-javascript',
+        selector_eval_js: '.language-klipse-js',
+        selector_eval_php: '.language-klipse-php',
+        selector_eval_python_client: '.language-klipse-python',
+        selector_eval_ruby: '.language-klipse-ruby',
+        selector_eval_scheme: '.language-klipse-scheme',
+        selector_sql: '.language-klipse-sql'
+    };
+</script>
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'https://revealjs.com/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<meta name="description" content="Investigación de Operaciones 2020.">
+<base target="_blank">
+<base href="../">
+
+          <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic,700italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+          <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:400,700' rel='stylesheet' type='text/css'>
+          <style type='text/css'>
+             body {
+                font-family: 'Source Sans Pro', sans-serif;
+             }
+             pre, code {
+                font-family: 'Source Code Pro', monospace;
+             }
+          </style>
+</head>
+<body prefix="dc: http://purl.org/dc/elements/1.1/ dcterms: http://purl.org/dc/terms/ dcmitype: http://purl.org/dc/dcmitype/ cc: http://creativecommons.org/ns#" typeof="dcmitype:InteractiveResource">
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide">
+<h1 class="title">Técnicas de Optimización Modernas</h1><h2 class="author">Adolfo De Unánue Adolfo De Unánue Adolfo De Unánue</h2>
+</section>
+<section>
+<section id="slide-org2e2ee54">
+<h2 id="org2e2ee54">Introduction and Recap of Last Class</h2>
+</section>
+<section id="slide-org06628d3">
+<h3 id="org06628d3">Anuncios</h3>
+<form><ul>
+<li>Clases remotas</li>
+
+</ul></form>
+</section>
+<section id="slide-org4bb4aa3">
+<h3 id="org4bb4aa3">Repaso de la última clase</h3>
+</section>
+<section id="slide-lectures/Introduction and Recap of Last Class/Outline">
+<h3 id="lectures/Introduction and Recap of Last Class/Outline">Lecture Outline</h3>
+</section>
+</section>
+<section>
+<section id="slide-orge1d27e3">
+<h2 id="orge1d27e3">Local Search</h2>
+</section>
+<section id="slide-org96428f8">
+<h3 id="org96428f8">Idea intuitiva</h3>
+<p>
+En el espacio de configuraciones, las técnicas de búsqueda local
+(<i>local search</i>) se mueven de un punto a otro, tratando la solución. Los
+movimientos son <span class="underline">locales</span>, es decir, ocurre entre vecinos.
+</p>
+
+<p>
+Nota que el "movimiento" ocurre entre <span class="underline">asignaciones completas</span>, a
+diferencia de CSP o Programación Dinámica. El movimiento es una
+"pequeña" modificación al valor de las variables.
+</p>
+
+<p>
+En problemas de satisfacción el movimiento va de lo <i>infeasible</i> a lo
+<i>feasible</i>, en optimización va de lo <i>subóptimo</i> hacia configuraciones <i>óptimas</i>.
+</p>
+
+</section>
+<section id="slide-org2ffcd31">
+<h3 id="org2ffcd31">Mínimo local</h3>
+<p>
+Una configuración \(c\) está en <span class="underline">mínimo local</span> con respecto a una vecindad \(N\)
+si \(\forall n \in N(c) : f(n) \ge f(c)\)
+</p>
+
+<p>
+Los diferentes métodos que veremos tratan de evitar estar atrapado en
+el mínimo local.
+</p>
+
+
+</section>
+<section id="slide-org88f1033">
+<h3 id="org88f1033">Algoritmo general</h3>
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >c = obtener_configuracion(configuraciones)
+vecinos = obtener_mejores_vecinos(c)
+while vecinos:
+    c = obtener_configuracion(vecinos)
+    vecinos = obtener_mejores_vecinos(c)
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org9e693ea">
+<h3 id="org9e693ea">Conflicto Max/Min</h3>
+<form><ul>
+<li>El ejemplo más sencillo de <i>local search</i> es <i>max-min conflict</i>.</li>
+<li>Usando el concepto de <span class="underline">violación</span> de restricción, establecemos cuántas
+restricciones viola esta configuración y nos movemos hacia
+configuraciones que disminuyan el número de violaciones.</li>
+<li>Función \(f\): Número de restricciones violadas (\(f(c) = 0\), entonces
+\(c\) es <i>feasible</i>).</li>
+<li>Movimiento local: Asignar un valor a la variable</li>
+<li><i>Max</i>: Selecciona la variable que tenga la mayor cantidad de violaciones</li>
+<li><i>Min</i>:  Asigna a esa variable un valor que minimice el número de violaciones</li>
+
+</ul></form>
+
+</section>
+<section id="slide-org64bd50c">
+<h3 id="org64bd50c">Warehouse Location</h3>
+<p>
+Dado &#x2026;
+</p>
+<form><ul>
+<li>Un conjunto \(W\) de almacenes, cada uno con un costo fijo de
+construcción \(f_w\).</li>
+<li>Un conjunto \(C\) de clientes</li>
+<li>Costo de transportación \(t_{w,c}\) del almacén \(w\) al cliente \(c\)</li>
+<li>Variables de decisión: \(o_w : {0,1}\) el almacén está abierto o no,
+\(a[c]\) el almacén está asignado al cliente \(c\).</li>
+<li>Encontrar: ¿Qué almacenes abrir que minimicen el costo combinado de
+transporte y construcción?</li>
+
+</ul></form>
+
+<p>
+\[
+\text{minimizar} \sum_{w \in W} f_w o_w + \sum_{c \in C} t_{a[c], c}
+\]
+</p>
+
+</section>
+<section id="slide-org9163667">
+<h3 id="org9163667">Traveling Salesman Problem (TSP)</h3>
+<p>
+Dado
+</p>
+
+<form><ul>
+<li>Un conjunto \(C\) de ciudades a visitar</li>
+<li>Matriz simétrica \(d\) de distancias  entre dos ciudades</li>
+<li>¿Cuál es la ruta cerrada (<i>tour</i>) de costo mínimo que visita cada una
+de las ciudades  exactamente una vez?</li>
+
+</ul></form>
+
+<p>
+\[
+\text{minimizar} \sum_{c \in C} d[c, \text{next}(c)]
+\]
+</p>
+
+</section>
+<section id="slide-orge270a71">
+<h3 id="orge270a71">Hill Climbing</h3>
+
+</section>
+<section id="slide-org2ca7533">
+<h3 id="org2ca7533">Simulated Anneling</h3>
+
+</section>
+<section id="slide-org16524dc">
+<h3 id="org16524dc">Tabu search</h3>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org2dda033">
+<h2 id="org2dda033">Population based search</h2>
+</section>
+<section id="slide-org2d93fc2">
+<h3 id="org2d93fc2">Algoritmos genéticos y evolutivos</h3>
+
+</section>
+<section id="slide-org4476eed">
+<h3 id="org4476eed">Particle swarm</h3>
+
+</section>
+<section id="slide-org76201be">
+<h3 id="org76201be">Programación genética</h3>
+</section>
+</section>
+<section>
+<section id="slide-orgfbf08d5">
+<h2 id="orgfbf08d5">Repaso</h2>
+</section>
+</section>
+</div>
+</div>
+Adolfo De Unánue
+<script src="https://revealjs.com/js/reveal.js"></script>
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: true,
+center: true,
+slideNumber: 'c',
+rollingLinks: true,
+keyboard: true,
+mouseWheel: false,
+fragmentInURL: false,
+hashOneBasedIndex: false,
+pdfSeparateFragments: true,
+
+overview: true,
+width: 1400,
+height: 1000,
+margin: 0.10,
+minScale: 1.00,
+maxScale: 1.00,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'fade', // see README of reveal.js for options
+transitionSpeed: 'fast',
+controlsTutorial: false, controlsLayout: 'edges',
+
+// Optional libraries used to extend reveal.js
+dependencies: [
+{ src: 'https://revealjs.com/plugin/audio-slideshow/audio-slideshow.js', condition: function( ) { return !!document.body.classList && !Reveal.isSpeakerNotes(); } },
+{ src: 'https://revealjs.com/plugin/anything/anything.js' },
+{ src: 'https://revealjs.com/plugin/toc-progress/toc-progress.js', async: true, callback: function() { toc_progress.initialize('reduce', 'rgba(120,138,130,0.2)'); toc_progress.create(); } },
+{ src: 'https://revealjs.com/plugin/jump/jump.js', async: true },
+{ src: 'https://revealjs.com/plugin/quiz/js/quiz.js', async: true, callback: function() { prepareQuizzes({preventUnanswered: true, skipStartButton: true}); } },
+{ src: 'https://revealjs.com/plugin/coursemod/coursemod.js', async: true },
+ { src: 'https://revealjs.com/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+ { src: 'https://revealjs.com/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'https://revealjs.com/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }]
+
+,audioStartAtFragment: true,
+  audio: {
+    advance: -1, autoplay: false, defaultDuration: 0, defaultAudios: false, playerOpacity: 0.8, playerStyle: 'position: fixed; bottom: 9.5vh; left: 0%; width: 30%; height:30px; z-index: 33;' },
+anything: [
+        // Following initialization code for class animate from anything-demo.html.
+        // Copyright (c) 2016 Asvin Goel, under The MIT License (MIT).
+	{className: "animate",  initialize: (function(container, options){
+		Reveal.addEventListener( 'fragmentshown', function( event ) {
+			if (typeof event.fragment.beginElement === "function" ) {
+				event.fragment.beginElement();
+			}
+		});
+		Reveal.addEventListener( 'fragmenthidden', function( event ) {
+			if (event.fragment.hasAttribute('data-reverse') ) {
+				var reverse = event.fragment.parentElement.querySelector('[id=\"' + event.fragment.getAttribute('data-reverse') + '\"]');
+				if ( reverse && typeof reverse.beginElement === "function" ) {
+					reverse.beginElement();
+				}
+			}
+		});
+		if ( container.getAttribute("data-svg-src") ) {
+			var xhr = new XMLHttpRequest();
+			xhr.onload = function() {
+				if (xhr.readyState === 4) {
+					var svg = container.querySelector('svg');
+					container.removeChild( svg );
+					container.innerHTML = xhr.responseText + container.innerHTML;
+					if ( svg ) {
+						container.querySelector('svg').innerHTML = container.querySelector('svg').innerHTML + svg.innerHTML;
+					}
+				}
+				else {
+					console.warn( "Failed to get file. ReadyState: " + xhr.readyState + ", Status: " + xhr.status);
+				}
+			};
+			xhr.open( 'GET', container.getAttribute("data-svg-src"), true );
+			xhr.send();
+		}
+	}) },
+	{className: "randomPic",
+	 defaults: {imgalt: "Dummy alt text",
+		    imgcaption: "Image by {name}",
+		    choices: [ {name: "dummyname", path: "dummypath"} ]},
+	 initialize: (function(container, options){
+	     var choice = Math.trunc( Math.random()*(options.choices.length) );
+	     var img = "<img src='" + options.choices[choice].path + "' alt='" + options.choices[choice].imgalt + "' />";
+	     var caption = options.imgcaption.replace(new RegExp('\{name\}', 'gm'), options.choices[choice].name);
+	     container.innerHTML = img + caption;
+	 }) },
+	{className: "notes",
+	 initialize: (function(container, options){
+	     container.addEventListener('click', function(e) { RevealNotes.open(); });
+	 }) }
+],
+coursemod: { enabled: true, shown: false },
+});
+</script>
+<script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
+<script>
+/* Recompute layout upon changes by klipse.  Code fragment from
+   asciidoctor-revealjs-klipse by Timothy Pratley under GPLv3:
+   https://github.com/timothypratley/asciidoctor-revealjs-klipse/blob/master/docs/docinfo-footer.html */
+Reveal.addEventListener( 'slidechanged', function( event ) {
+    window.dispatchEvent( new Event('resize') );
+} );
+</script>
+</body>
+</html>

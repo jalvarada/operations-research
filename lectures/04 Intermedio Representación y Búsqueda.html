@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <title>Intermedio: Representación y Búsqueda</title>
-<meta name="author" content="Adolfo De Unánue Adolfo De Unánue"/>
+<meta name="author" content="Adolfo De Unánue Adolfo De Unánue Adolfo De Unánue"/>
 <meta name="description" content="Description
 School specific teaching materials"/>
 <style type="text/css">
@@ -20,6 +20,8 @@ School specific teaching materials"/>
 <link rel="stylesheet" href="./reveal.js/css/theme/toc-style.css"/>
 
 <link rel="stylesheet" href="./reveal.js/lib/font/source-sans-pro/source-sans-pro.css"/>
+
+<link rel="stylesheet" href="./css/or.css"/>
 <link rel="stylesheet" href="https://revealjs.com/lib/css/zenburn.css"/>
 <link rel="stylesheet" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"/>
 <style>
@@ -77,16 +79,14 @@ School specific teaching materials"/>
 <div class="reveal">
 <div class="slides">
 <section id="sec-title-slide">
-<h1 class="title">Intermedio: Representación y Búsqueda</h1><h2 class="author">Adolfo De Unánue Adolfo De Unánue</h2>
+<h1 class="title">Intermedio: Representación y Búsqueda</h1><h2 class="author">Adolfo De Unánue Adolfo De Unánue Adolfo De Unánue</h2>
 </section>
 <section>
-<section id="slide-orgebbfa20">
-<h2 id="orgebbfa20">Introduction and Recap of Last Class</h2>
-<div class="outline-text-2" id="text-orgebbfa20">
-</div>
+<section id="slide-org5f4fb05">
+<h2 id="org5f4fb05">Introduction and Recap of Last Class</h2>
 </section>
-<section id="slide-orgae56c87">
-<h3 id="orgae56c87">Anuncios</h3>
+<section id="slide-org3722160">
+<h3 id="org3722160">Anuncios</h3>
 <form><ul>
 <li><p>
 Hay un horario nuevo
@@ -126,29 +126,16 @@ Hay un horario nuevo
 </ul></form>
 
 </section>
-<section id="slide-orge3d6e48">
-<h3 id="orge3d6e48">Repaso de la última clase</h3>
+<section id="slide-orgc47b34c">
+<h3 id="orgc47b34c">Repaso de la última clase</h3>
 </section>
-<section id="slide-lectures/Intermedio Representación y Búsqueda/Outline">
-<h3 id="lectures/Intermedio Representación y Búsqueda/Outline">Lecture Outline</h3>
-<form><ul>
-<li class="fragment appear">Abstracción</li>
-<li class="fragment appear">Espacio de Estados</li>
-<li class="fragment appear">Vocabulario</li>
-<li class="fragment appear">Representación de redes</li>
-<li class="fragment appear">Usando grafos y búsqueda</li>
-<li class="fragment appear">Algoritmo genérico de búsqueda</li>
-<li class="fragment appear">Intermezzo: Colas y pilas</li>
-<li class="fragment appear">Estrategias de Búsquedas no informadas</li>
-<li class="fragment appear">Estrategias de Búsqueda heurística</li>
-<li class="fragment appear">Ejemplo</li>
-
-</ul></form>
+<section id="slide-lectures/Introduction and Recap of Last Class/Outline">
+<h3 id="lectures/Introduction and Recap of Last Class/Outline">Lecture Outline</h3>
 </section>
 </section>
 <section>
-<section id="slide-org0bc7c65">
-<h2 id="org0bc7c65">Abstracción</h2>
+<section id="slide-org7379689">
+<h2 id="org7379689">Abstracción</h2>
 <form><ul>
 <li>Tratar de representar el problema a resolver como un grafo dirigido,
 permite incorporar muchas técnicas que ayudarán a resolverlo.</li>
@@ -162,8 +149,8 @@ permite incorporar muchas técnicas que ayudarán a resolverlo.</li>
 </section>
 </section>
 <section>
-<section id="slide-org0ef8569">
-<h2 id="org0ef8569">Espacio de Estados</h2>
+<section id="slide-org50da978">
+<h2 id="org50da978">Espacio de Estados</h2>
 <form><ul>
 <li>Un <b>estado</b> contiene toda la información necesaria para predecir los
 efectos de una acción y determinar si el estado satisface la <b>meta</b>.</li>
@@ -209,10 +196,11 @@ la meta.</li>
 </section>
 </section>
 <section>
-<section id="slide-orgd8d432a">
-<h2 id="orgd8d432a">Vocabulario</h2>
+<section id="slide-lectures/Grafos/Conceptos">
+<h2 id="lectures/Grafos/Conceptos">Grafo: Vocabulario</h2>
 <form><ul>
-<li><b>Grafo dirigido</b> Es un conjunto \(N\) de <span class="underline">nodos</span> y un conjunto \(A\) de
+<li>Otros nombres para el nodo son <span class="underline">vértices</span>, para los arcos, <span class="underline">aristas</span></li>
+<li><b>Grafo dirigido</b> o <i>digrafo</i> Es un conjunto \(N\) de <span class="underline">nodos</span> y un conjunto \(A\) de
 <span class="underline">arcos</span>, donde cada arco es un conjunto ordenado de un par de nodos, \(G(N,A)\).</li>
 <li>\((n_1, n_2)\)   es un <span class="underline">arco saliente</span> de \(n_1\) a \(n_2\) y un <span class="underline">arco entrante</span>
 de \(n_2\) a \(n_1\).</li>
@@ -238,17 +226,38 @@ los demás nodos tienen <span class="underline">exactamente</span> un arco entra
 
 </ul></form>
 
+</section>
+<section>
+
+<form><ul>
+<li>El <b>grado</b> de un nodo \(n\), \(deg(n)\) es el número de arcos que salen y entran de
+él, es decir, los arcos incidentes al nodo.</li>
+<li>En un <span class="underline">multigrafo</span> los <i>loops</i> son contados dos veces.</li>
+<li>En un grafo dirigido, este concepto se extienda a <i>indegree</i> y
+<i>outdegree</i> para los arcos que entran y salen del nodo respectivamente.</li>
+
+</ul></form>
+
+</section>
+<section>
+
+<form><ul>
+<li>Un <span class="underline">multigrafo</span> es un grafo que puede tener múltiples arcos,
+i.e. arcos que tienen el mismo nodo terminal en común.</li>
+
+<li>Un <span class="underline">hipergrafo</span> es un grafo en el cual un arco puede conectar
+cualquier número de nodos, en lugar de solamente dos.</li>
+
+</ul></form>
 
 </section>
 </section>
 <section>
-<section id="slide-org47cec5b">
-<h2 id="org47cec5b">Representación de redes</h2>
-<div class="outline-text-2" id="text-org47cec5b">
-</div>
+<section id="slide-lectures/Grafos/Representación">
+<h2 id="lectures/Grafos/Representación">Representación de redes</h2>
 </section>
-<section id="slide-orgc8848ac">
-<h3 id="orgc8848ac">Matriz de Adyacencia</h3>
+<section id="slide-org2124999">
+<h3 id="org2124999">Matriz de Adyacencia</h3>
 <form><ul>
 <li>Una  matriz \(A\) 
 
@@ -261,8 +270,8 @@ los demás nodos tienen <span class="underline">exactamente</span> un arco entra
 </ul></form>
 
 </section>
-<section id="slide-orga10ee6e">
-<h3 id="orga10ee6e">Lista de Adyacencia</h3>
+<section id="slide-orgf175eda">
+<h3 id="orgf175eda">Lista de Adyacencia</h3>
 <form><ul>
 <li>Cada nodo tiene una lista de los nodos que están conectados mediante
 aristas salientes (i.e. de \(i \to j\))</li>
@@ -271,8 +280,8 @@ aristas salientes (i.e. de \(i \to j\))</li>
 
 
 </section>
-<section id="slide-orgfceccdb">
-<h3 id="orgfceccdb">Ejemplo</h3>
+<section id="slide-org429d2bd">
+<h3 id="org429d2bd">Ejemplo</h3>
 
 <div class="figure">
 <p><img src="../images/graph-1.png" alt="graph-1.png" width="400px" height="400px">
@@ -298,8 +307,8 @@ graph["G"] = set()
 </section>
 </section>
 <section>
-<section id="slide-org08f1e65">
-<h2 id="org08f1e65">Usando grafos y búsqueda</h2>
+<section id="slide-org7af1630">
+<h2 id="org7af1630">Usando grafos y búsqueda</h2>
 
 <div class="figure">
 <p><img src="../images/graph-searching.png" alt="graph-searching.png" width="400px" height="400px">
@@ -310,8 +319,8 @@ graph["G"] = set()
 </section>
 </section>
 <section>
-<section id="slide-org0d43267">
-<h2 id="org0d43267">Algoritmo genérico de búsqueda</h2>
+<section id="slide-org93ddf5c">
+<h2 id="org93ddf5c">Algoritmo genérico de búsqueda</h2>
 <p>
 <i>Pseudocódigo</i>
 </p>
@@ -332,13 +341,11 @@ graph["G"] = set()
 </section>
 </section>
 <section>
-<section id="slide-org2da669d">
-<h2 id="org2da669d">Intermezzo: Colas y pilas</h2>
-<div class="outline-text-2" id="text-org2da669d">
-</div>
+<section id="slide-org646c4b5">
+<h2 id="org646c4b5">Intermezzo: Colas y pilas</h2>
 </section>
-<section id="slide-org31c456d">
-<h3 id="org31c456d"><b>Stack</b> o <i>Pila</i></h3>
+<section id="slide-orga0038ee">
+<h3 id="orga0038ee"><b>Stack</b> o <i>Pila</i></h3>
 
 <div class="figure">
 <p><img src="../images/stack.png" alt="stack.png">
@@ -350,8 +357,8 @@ Imágenes tomadas de: <a href="https://stackoverflow.com/a/35031174/754176">http
 </p>
 
 </section>
-<section id="slide-org77a152c">
-<h3 id="org77a152c"><b>Queue</b> o <i>Cola</i></h3>
+<section id="slide-org828a8ad">
+<h3 id="org828a8ad"><b>Queue</b> o <i>Cola</i></h3>
 
 <div class="figure">
 <p><img src="../images/queue.png" alt="queue.png">
@@ -432,13 +439,11 @@ deque([4, 3, 2, 1])
 </section>
 </section>
 <section>
-<section id="slide-orga2bf442">
-<h2 id="orga2bf442">Estrategias de Búsquedas no informadas</h2>
-<div class="outline-text-2" id="text-orga2bf442">
-</div>
+<section id="slide-org7aa9ae8">
+<h2 id="org7aa9ae8">Estrategias de Búsquedas no informadas</h2>
 </section>
-<section id="slide-org05de432">
-<h3 id="org05de432">Breadth-First search</h3>
+<section id="slide-org2a18b81">
+<h3 id="org2a18b81">Breadth-First search</h3>
 <form><ul>
 <li>La frontera es implementada como <b>FIFO</b> o <i>cola</i></li>
 <li>Espacio y tiempo crecen exponencialmente en esta estrategia</li>
@@ -488,8 +493,8 @@ encontrará la solución <span class="underline">con menos</span> arcos.</li>
 
 
 </section>
-<section id="slide-org1a4cb5b">
-<h3 id="org1a4cb5b">Depth-First search</h3>
+<section id="slide-org53b9067">
+<h3 id="org53b9067">Depth-First search</h3>
 <form><ul>
 <li>La frontera es creada mediante un <b>LIFO</b> o <i>pila</i></li>
 <li>Este método utiliza <i>backtracking</i>: selecciona una primera
@@ -562,8 +567,8 @@ primera.</li>
 </section>
 </section>
 <section>
-<section id="slide-orgbe7f915">
-<h2 id="orgbe7f915">Estrategias de Búsqueda heurística</h2>
+<section id="slide-org759831f">
+<h2 id="org759831f">Estrategias de Búsqueda heurística</h2>
 <p>
 Una <i>función heurística</i> \(h(n)\) regresa un número real no negativo que
 <b>estima</b> el costo de del camino de menor costo desde el nodo \(n\) al nodo
@@ -576,8 +581,8 @@ costo real del camino de menor costo del nodo \(n\) al nodo meta.
 </p>
 
 </section>
-<section id="slide-org6257dc7">
-<h3 id="org6257dc7">Búsqueda A*</h3>
+<section id="slide-orgc6968dc">
+<h3 id="orgc6968dc">Búsqueda A*</h3>
 <p>
 A* usa: (1) el costo del camino, el de menor costo
 primero, e (2) información heurística <i>greedy</i> primero en el búsqueda,
@@ -595,13 +600,13 @@ A* , para cada camino\(p\) de la frontera, define la función:
 </p>
 
 <p class="backwardlink">
-A* se implementa usando el <a href="#slide-org0d43267" class="backwardlink">algoritmo genérico</a> pero la frontera es una cola
+A* se implementa usando el <a href="#slide-org93ddf5c" class="backwardlink">algoritmo genérico</a> pero la frontera es una cola
 ordenada por \(f(p)\).
 </p>
 
 </section>
-<section id="slide-orgcda07e5">
-<h3 id="orgcda07e5">Branch and Bound</h3>
+<section id="slide-orga62f4d0">
+<h3 id="orga62f4d0">Branch and Bound</h3>
 <p>
 <i>Branch and bound</i>  combina  DFS con información
 heurística para encontrar caminos óptimos \(h(n)\).
@@ -652,8 +657,8 @@ def DF_branch_and_bound(G, start, goal, costo, heuristica, bound=float('inf')):
 </div>
 
 </section>
-<section id="slide-org6419c86">
-<h3 id="org6419c86">Relax don't do it!</h3>
+<section id="slide-org016da80">
+<h3 id="org016da80">Relax don't do it!</h3>
 <p>
 Por ejemplo en el caso de  del \(0-1\) <i>knapsack</i> 
 </p>
@@ -860,8 +865,8 @@ Finalmente, el algoritmo de <i>branch and bound</i> es:
 </section>
 </section>
 <section>
-<section id="slide-orgcda0139">
-<h2 id="orgcda0139">Ejemplo</h2>
+<section id="slide-org032ab47">
+<h2 id="org032ab47">Ejemplo</h2>
 <p>
 Tomado de <i>Artificial Intelligence  Foundations of computational agents</i>, 
 Poole and Mackworth, segunda edición
@@ -896,21 +901,8 @@ Poole and Mackworth, segunda edición
 </section>
 </section>
 <section>
-<section id="slide-org8463ef0">
-<h2 id="org8463ef0">Repaso</h2>
-<form><ul>
-<li class="fragment appear">Abstracción</li>
-<li class="fragment appear">Espacio de Estados</li>
-<li class="fragment appear">Vocabulario</li>
-<li class="fragment appear">Representación de redes</li>
-<li class="fragment appear">Usando grafos y búsqueda</li>
-<li class="fragment appear">Algoritmo genérico de búsqueda</li>
-<li class="fragment appear">Intermezzo: Colas y pilas</li>
-<li class="fragment appear">Estrategias de Búsquedas no informadas</li>
-<li class="fragment appear">Estrategias de Búsqueda heurística</li>
-<li class="fragment appear">Ejemplo</li>
-
-</ul></form>
+<section id="slide-org3a65b07">
+<h2 id="org3a65b07">Repaso</h2>
 </section>
 </section>
 </div>

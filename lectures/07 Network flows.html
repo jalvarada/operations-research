@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Network flows</title>
+<meta name="author" content="Adolfo De Unánue Adolfo De Unánue Adolfo De Unánue"/>
+<meta name="description" content="Description
+School specific teaching materials"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://revealjs.com/css/reveal.css"/>
+
+<link rel="stylesheet" href="https://revealjs.com/css/theme/black.css" id="theme"/>
+
+<link rel="stylesheet" href="./css/mozilla-light.css"/>
+
+<link rel="stylesheet" href="./reveal.js/plugin/toc-progress/toc-progress.css"/>
+
+<link rel="stylesheet" href="./reveal.js/css/theme/toc-style.css"/>
+
+<link rel="stylesheet" href="./reveal.js/lib/font/source-sans-pro/source-sans-pro.css"/>
+
+<link rel="stylesheet" href="./css/or.css"/>
+<link rel="stylesheet" href="https://revealjs.com/lib/css/zenburn.css"/>
+<link rel="stylesheet" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"/>
+<style>
+/* Position computations of klipse get confused by reveal.js's scaling.
+   Hence, scaling should be disabled with this code.  Fix height of code area
+   with scrollbar (use overflow instead of overflow-y to restore CodeMirror
+   setting afterwards): */
+.reveal section pre { max-height: 70vh; height: auto; overflow: auto; }
+/* Reset some reveal.js and oer-reveal settings: */
+.reveal section pre .CodeMirror pre { font-size: 2em; box-shadow: none; width: auto; padding: 0.4em; display: block; overflow: visible; }
+/* Enlarge cursor: */
+.CodeMirror-cursor { border-left: 3px solid black; }
+</style>
+<script>
+    window.klipse_settings = {
+        selector: '.language-klipse',
+        selector_eval_html: '.language-klipse-html',
+        selector_eval_js: '.language-klipse-javascript',
+        selector_eval_js: '.language-klipse-js',
+        selector_eval_php: '.language-klipse-php',
+        selector_eval_python_client: '.language-klipse-python',
+        selector_eval_ruby: '.language-klipse-ruby',
+        selector_eval_scheme: '.language-klipse-scheme',
+        selector_sql: '.language-klipse-sql'
+    };
+</script>
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'https://revealjs.com/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<meta name="description" content="Investigación de Operaciones 2020.">
+<base target="_blank">
+<base href="../">
+
+          <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic,700italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+          <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:400,700' rel='stylesheet' type='text/css'>
+          <style type='text/css'>
+             body {
+                font-family: 'Source Sans Pro', sans-serif;
+             }
+             pre, code {
+                font-family: 'Source Code Pro', monospace;
+             }
+          </style>
+</head>
+<body prefix="dc: http://purl.org/dc/elements/1.1/ dcterms: http://purl.org/dc/terms/ dcmitype: http://purl.org/dc/dcmitype/ cc: http://creativecommons.org/ns#" typeof="dcmitype:InteractiveResource">
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide">
+<h1 class="title">Network flows</h1><h2 class="author">Adolfo De Unánue Adolfo De Unánue Adolfo De Unánue</h2>
+</section>
+<section>
+<section id="slide-orgd0be46d">
+<h2 id="orgd0be46d">Introduction and Recap of Last Class</h2>
+</section>
+<section id="slide-org6a30e09">
+<h3 id="org6a30e09">Anuncios</h3>
+<form><ul>
+<li>&#x2026;</li>
+
+</ul></form>
+</section>
+<section id="slide-orgbb7e163">
+<h3 id="orgbb7e163">Repaso de la última clase</h3>
+</section>
+<section id="slide-lectures/Introduction and Recap of Last Class/Outline">
+<h3 id="lectures/Introduction and Recap of Last Class/Outline">Lecture Outline</h3>
+</section>
+</section>
+<section>
+<section id="slide-org5bc3f58">
+<h2 id="org5bc3f58">Grafos</h2>
+
+</section>
+</section>
+<section>
+<section id="slide-org5c1d0ae">
+<h2 id="org5c1d0ae">Conceptos</h2>
+<form><ul>
+<li>Otros nombres para el nodo son <span class="underline">vértices</span>, para los arcos, <span class="underline">aristas</span></li>
+<li><b>Grafo dirigido</b> o <i>digrafo</i> Es un conjunto \(N\) de <span class="underline">nodos</span> y un conjunto \(A\) de
+<span class="underline">arcos</span>, donde cada arco es un conjunto ordenado de un par de nodos, \(G(N,A)\).</li>
+<li>\((n_1, n_2)\)   es un <span class="underline">arco saliente</span> de \(n_1\) a \(n_2\) y un <span class="underline">arco entrante</span>
+de \(n_2\) a \(n_1\).</li>
+<li>\(n_2\) es un <span class="underline">vecino</span> de \(n1\) si hay un arco de \(n_1\) a \(n_2\).</li>
+<li>Un <i>path</i> es una secuencia de nodos \((n_0, n_1, \ldots n_k)\)</li>
+<li>Una <b>meta</b> es una función booleana de los nodos, si <code>goal(n_k)</code> es
+verdadero, \(n_k\) es el <b>nodo meta</b></li>
+<li>El <b>costo</b> es un número <i>no negativo</i> asociado con los arcos. El costo
+de los arcos induce el costo de los <i>paths</i>. La  <b>solución óptima</b>  es
+aquella que minimiza el costo.</li>
+
+</ul></form>
+
+</section>
+<section>
+
+<form><ul>
+<li>Un <b>ciclo</b> es un <i>path</i>  no vacío cuyo nodo inicial es igual al nodo
+final.</li>
+<li>Una <b>DAG</b> es un grafo dirigido sin ciclos.</li>
+<li>Un <span class="underline">árbol</span> es un <b>DAG</b> con un nodo que no tiene arcos entrantes (<i>root</i>) y todos
+los demás nodos tienen <span class="underline">exactamente</span> un arco entrante (<i>leaf</i>).</li>
+
+</ul></form>
+
+</section>
+<section>
+
+<form><ul>
+<li>El <b>grado</b> de un nodo \(n\), \(deg(n)\) es el número de arcos que salen y entran de
+él, es decir, los arcos incidentes al nodo.</li>
+<li>En un <span class="underline">multigrafo</span> los <i>loops</i> son contados dos veces.</li>
+<li>En un grafo dirigido, este concepto se extienda a <i>indegree</i> y
+<i>outdegree</i> para los arcos que entran y salen del nodo respectivamente.</li>
+
+</ul></form>
+
+</section>
+<section>
+
+<form><ul>
+<li>Un <span class="underline">multigrafo</span> es un grafo que puede tener múltiples arcos,
+i.e. arcos que tienen el mismo nodo terminal en común.</li>
+
+<li>Un <span class="underline">hipergrafo</span> es un grafo en el cual un arco puede conectar
+cualquier número de nodos, en lugar de solamente dos.</li>
+
+</ul></form>
+
+</section>
+</section>
+<section>
+<section id="slide-org8c0edb9">
+<h2 id="org8c0edb9">Representación</h2>
+</section>
+<section id="slide-orgadbdaec">
+<h3 id="orgadbdaec">Matriz de Adyacencia</h3>
+<form><ul>
+<li>Una  matriz \(A\) 
+
+<form><ul>
+<li>\(a_{ij} = 1\) si hay una arista de \(i \to j\)</li>
+<li>\(a_{ij} = 0\) de otra manera</li>
+
+</ul></form></li>
+
+</ul></form>
+
+</section>
+<section id="slide-org9361f03">
+<h3 id="org9361f03">Lista de Adyacencia</h3>
+<form><ul>
+<li>Cada nodo tiene una lista de los nodos que están conectados mediante
+aristas salientes (i.e. de \(i \to j\))</li>
+
+</ul></form>
+
+
+</section>
+<section id="slide-org1fa7473">
+<h3 id="org1fa7473">Ejemplo</h3>
+
+<div class="figure">
+<p><img src="../images/graph-1.png" alt="graph-1.png" width="400px" height="400px">
+</p>
+</div>
+
+<p>
+Se puede representar como lista de adyacencia como sigue:
+</p>
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >graph = {}
+graph["A"] = {"B", "C"}
+graph["B"] = {"D", "E", "C"}
+graph["C"] = {"E"}
+graph["D"] = {"E", "F"}
+graph["E"] = {"F"}
+graph["F"] = set()
+graph["G"] = set()
+</code></pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orgfe3c99b">
+<h2 id="orgfe3c99b">Orden Topológico</h2>
+<p>
+<i>Entrada</i>: <b><b>DAG</b></b> \(G = (N, A)\)
+</p>
+
+<p>
+<i>Salida</i>: Una lista ordenada de nodos tal que para cada arista \(i \to j\), \(i\) aparezca primero que \(j\).
+</p>
+
+<p>
+Obviamente puede haber varias respuestas
+</p>
+
+<p>
+Uno de los algoritmos más fáciles de implementar (y bastante rápido \(\mathcal{O}(n + m)\)) es el <span class="underline">algoritmo de Kahn</span>.
+</p>
+
+</section>
+<section id="slide-org42cdc76">
+<h3 id="org42cdc76">Algoritmo de Kahn</h3>
+<p>
+La idea básica es remover repetidamente los nodos \(v\) que tienen \(indeg(v) = 0\).
+</p>
+
+<form><ol>
+<li>Determinar el <i>in-degree</i> de cada nodo</li>
+<li>Colocar los nodos con \(indeg(v) = 0\) en una cola</li>
+<li>Mientras la cola no esté vacía
+<form><ul>
+<li>u \(\leftarrow\) pop()</li>
+<li>Remover \(u\) del grafo</li>
+<li>Verificar si no hay un nuevo nodo con \(indeg(v) = 0\) entre los vecinos de \(u\)</li>
+<li>Si existe, agregarlo a la cola</li>
+
+</ul></form></li>
+<li>Mantenemos una lista con los nodos en el orden en que son removidos</li>
+<li>Si la cola está vacía
+<form><ul>
+<li>Regresar la lista</li>
+<li>Si está vacía <span class="underline">hay ciclos</span></li>
+
+</ul></form></li>
+
+</ol></form>
+
+
+</section>
+<section id="slide-orga71a0db">
+<h3 id="orga71a0db">Ejemplo</h3>
+<p>
+(<i>Tomado del libro</i> <b>A Gentle Introduction to Optimization</b>) 
+</p>
+
+<p>
+Quieres construir una casa y has dividio el proceso en un conjunto de tareas:
+</p>
+
+<form><ul>
+<li>\(B\) :  Excavación y construcción de los fundamentos</li>
+<li>\(F\) :  Establecer el marco de madera</li>
+<li>\(E\) :  Cableado eléctrico</li>
+<li>\(P\) :  Plomería interna</li>
+<li>\(D\) :  Paredes y pisos</li>
+<li>\(L\) :  <i>Landscaping</i></li>
+
+</ul></form>
+
+<p>
+Las cuales tienen los siguientes estimados (en semanas):
+</p>
+
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-right">
+
+<col  class="org-right">
+
+<col  class="org-right">
+
+<col  class="org-right">
+
+<col  class="org-right">
+
+<col  class="org-right">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Tarea</th>
+<th scope="col" class="org-right">B</th>
+<th scope="col" class="org-right">F</th>
+<th scope="col" class="org-right">E</th>
+<th scope="col" class="org-right">P</th>
+<th scope="col" class="org-right">D</th>
+<th scope="col" class="org-right">L</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Duración</td>
+<td class="org-right">3</td>
+<td class="org-right">2</td>
+<td class="org-right">3</td>
+<td class="org-right">4</td>
+<td class="org-right">1</td>
+<td class="org-right">2</td>
+</tr>
+</tbody>
+</table>
+
+</section>
+<section>
+
+<p>
+Algunas tareas sólo pueden empezar cuando las otras han concluido:
+</p>
+
+<form><ul>
+<li>\(F\) puede empezar sólo si \(B\) ya se completó</li>
+<li>\(L\) puede empezar sólo si \(B\) ya se completó</li>
+<li>\(E\) puede empezar sólo si \(F\) ya se completó</li>
+<li>\(P\) puede empezar sólo si \(F\) ya se completó</li>
+<li>\(D\) puede empezar sólo si \(E\) ya se completó</li>
+<li>\(D\) puede empezar sólo si \(P\) ya se completó</li>
+
+</ul></form>
+
+<p>
+La meta es determinar los tiempos de cada tarea tal que el proyecto
+completo sea terminado lo antes posible
+</p>
+
+</section>
+<section>
+
+
+<div class="figure">
+<p><img src="../images/landscaping_example.png" alt="landscaping_example.png" width="300px" height="350px">
+</p>
+<p><span class="figure-number">Figure 2: </span>Grafo de dependencia de actividades del ejemplo de <i>landscaping</i></p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orgf652cfa">
+<h2 id="orgf652cfa">Rutas más cortas</h2>
+<p>
+El algoritmo <b>BFS</b> nos da la ruta más corta entre dos nodos, si todos
+los vértices tienen un costo \(1\). En el caso contrario no nos da la
+ruta más corta. Para eso, debemos de utilizar el <i>algoritmo de Dijkstra</i> 
+</p>
+
+</section>
+<section>
+
+<p>
+El problema  es planteado como un problema de optimización de la manera siguiente:
+</p>
+
+<p>
+Sea un grafo \(G = (N,A)\) con un <b>costo</b> en
+cada arco \((i,j) \in  A\), \(c_{ij}\).
+\(G\) tiene un nodo especial, designado por \(s\)
+(<b>source</b>). 
+ Sea \(A(i)\) la lista de arcos
+adyacentes al nodo \(i\) y sea \(C = max\{c_{ij}: (i,j) \in  A\}\). 
+</p>
+
+<p>
+Definimos
+la <b>longitud de un camino dirigido</b> como la suma de costos de los arcos
+en el camino (<b>path</b>). El problema  de la distancia mínima es encontrar
+para cada nodo $ i &isin; N &ne; s$ la longitud de camino dirgido desde \(s\) a
+\(i\).  
+</p>
+
+</section>
+<section>
+
+<p>
+También se puede plantear como el problema de mandar una unidad de
+flujo tan baratamente como sea posible del nodo \(s\) a cada uno de los
+nodos en \(N - \{s\}\): 
+</p>
+
+<div>
+\begin{equation*}
+\begin{aligned}
+& \text{min}  
+& & \sum_{(i,j) \in A} c_{ij}x_{ij}  \\
+& \text{s.t.}   \\
+& & & \sum_{j:(i,j) \in A} x_{ij} - \sum_{j:(j,i) \in A} x_{ji} = \Bigg\{
+\begin{array}{ll} 
+n -1 & \text{para} \ &  i = s \\
+-1 & \text{para todo} & i \in N - s
+\end{array} 
+\\ 
+& & & x_{ij} \geq 0 \ \ \  \text{para todo} \  (i,j) \in A
+\end{aligned}
+\end{equation*}
+
+</div>
+
+</section>
+<section>
+
+<p>
+Las suposiciones que hace este problema son:
+</p>
+
+<form><ol>
+<li>Todas las longitudes de arco son enteras</li>
+<li>La red contiene un camino dirigido del nodo \(s\) a cualquier otro
+nodo de la red  (Si esto no se cumple siempre podemos agregar arcos
+"<b>ficticios</b>" con un costo muy grande)</li>
+<li>El grafo no contiene un ciclo negativo</li>
+
+</ol></form>
+
+<p>
+Si se violan las suposiciones 1 y 3, se debe de utilizar el algoritmo
+de Bellman-Ford.
+</p>
+
+</section>
+<section id="slide-org523cbbd">
+<h3 id="org523cbbd">Algoritmo de Dijkstra</h3>
+<p>
+El algoritmo de Dijkstra no es complicado en sí:
+</p>
+
+<form><ol>
+<li>Encuentra el nodo más <b>barato</b>, i.e. el nodo al que puedes llegar con el menor costo.</li>
+<li>Actualiza los costos de los vecinos a ese nodo.</li>
+<li>Repite hasta que se haya hecho esto para todos los nodos del grafo.</li>
+<li>Calcula el <b>path</b> final.</li>
+
+</ol></form>
+
+<p>
+Es importante mencionar, que al igual que el algoritmo de ordenamiento
+topológico, el algoritmo de Dijkstra sólo funciona con DAGs. 
+</p>
+
+</section>
+<section>
+
+<p>
+Escrito como <b>pseudocódigo</b> es lo siguiente:
+</p>
+
+<pre class="example">
+       algoritmo dijkstra ( G, costs, source, target )
+           S = {}, S' = {N}
+           d[i] = infinity para todos los nodos i en N
+           d[source] &lt;- 0
+           pred[source] &lt;- 0
+           while S 
+               i &lt;- arg{d[i] = min{d[j] j in S'}}
+               S &lt;- S + i
+               S' &lt;- S' - i
+               for each (i,j) en A 
+                   if d[j] &gt; d[i] + costs[i,j]  then 
+                       d[j] &lt;- d[i] + costs[i,j]
+                       pred[j] &lt;- i
+</pre>
+
+</section>
+<section id="slide-org8b4b6d7">
+<h3 id="org8b4b6d7">Ejemplo</h3>
+
+<div class="figure">
+<p><img src="../images/shortest_path_example.png" alt="shortest_path_example.png" width="500px" height="250px">
+</p>
+<p><span class="figure-number">Figure 3: </span>Grafo para el ejemplo de la ruta más corta</p>
+</div>
+
+<p>
+<i>Ejercicio</i>: ¿Cuál es el costo usando <b>BFS</b>?
+</p>
+
+
+</section>
+<section id="slide-org1705015">
+<h3 id="org1705015">Ejemplo</h3>
+
+<div class="figure">
+<p><img src="../images/shortest_path_example_2.png" alt="shortest_path_example_2.png" width="500px" height="350px">
+</p>
+<p><span class="figure-number">Figure 4: </span>Grafo para el segundo ejemplo de la ruta más corta</p>
+</div>
+
+</section>
+<section id="slide-org320af8b">
+<h3 id="org320af8b">Ejemplo</h3>
+<p>
+<i>¿Cuál es la programación más efectiva en costo para remplazar equipo en un periodo de tiempo?</i>
+(Tomado de:  <b>Operations Research A practical Introduction</b>)
+</p>
+
+<p>
+Supongamos que tienes circuitos para conversión de analógico a digital
+en una computadora de navegación que deben de ser remplazados en
+intervalos en un periodo de 6 meses. Idealmente, el reemplazo debe
+ocurrir <b>antes</b> de que ocurra una falla, pero, reemplazos frecuentes
+incurren en costos de capital y costos de labor para la instalación,
+por otro lado, si no se hacen, es decir, hay pocos reemplazos, quizá
+esta decisión lleve a costos de mantenimiento y a tiempos muy grandes
+sin operación. 
+</p>
+
+<p>
+Se han recolectado costos de la compra, instalación, mantenimiento,
+costos de downtime que han sido resumidos en la siguiente tabla:  
+</p>
+
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+
+<col  class="org-right">
+
+<col  class="org-right">
+
+<col  class="org-right">
+
+<col  class="org-right">
+
+<col  class="org-right">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">PCB Reemplazado</th>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-right">Feb</th>
+<th scope="col" class="org-right">Mar</th>
+<th scope="col" class="org-right">Abr</th>
+<th scope="col" class="org-right">May</th>
+<th scope="col" class="org-right">Jun</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><b>PCB instalado</b></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Ene</td>
+<td class="org-right">5.00</td>
+<td class="org-right">6.75</td>
+<td class="org-right">8.25</td>
+<td class="org-right">12.50</td>
+<td class="org-right">16.80</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Feb</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-right">5.25</td>
+<td class="org-right">6.25</td>
+<td class="org-right">9.50</td>
+<td class="org-right">11.50</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Mar</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-right">5.25</td>
+<td class="org-right">7.25</td>
+<td class="org-right">9.00</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Abr</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-right">5.50</td>
+<td class="org-right">8.20</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">May</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-right">5.80</td>
+</tr>
+</tbody>
+</table>
+
+</section>
+<section>
+
+<p>
+<i>Ejercicio</i>  
+</p>
+<form><ul>
+<li>Plantea el problema como un grafo: Cada nodo representa un  mes y
+los arcos están etiquetados con los costos de la tabla</li>
+<li>¿Cuál es el camino más corto para cada <b>A/D</b> instalado en los meses de
+Enero y Febrero?</li>
+
+</ul></form>
+
+</section>
+</section>
+<section>
+<section id="slide-org13fa032">
+<h2 id="org13fa032">Maximum Flow</h2>
+<p>
+El problema de flujo máximo (<b>maximum flow problem</b>) está muy
+relacionado con el de <b>shortest path</b>, pero en lugar de hacer uso de los
+<span class="underline">costos</span> como este, se encarga de las <span class="underline">capacidades</span>.
+</p>
+
+</section>
+<section>
+
+<p>
+El problema de flujo máximo se puede plantear como sigue: Sea \(G(N,A)\) un grafo
+en el cual los nodos \(1\) y \(n\) \(\in N\) se denominan <b>source</b> y <b>target</b> (también los
+llamaremos \(s\) y \(t\)). Las variables de decisión \(x_{ij}\)  denotan la cantidad de
+flujo a lo largo del arco \((i,j) \in A\). La capacidad del arco \((i,j) \in A\) se denota
+por \(u_{ij}\).
+</p>
+
+<div>
+\begin{equation*}
+\begin{aligned}
+& \text{max}  
+& & z = f  \\
+& \text{s.t.}   \\
+& & & \sum_{i = 2}^n x_{1i} = f \\
+& & & \sum_{i = 1}^{n -1} x_{in} = f \\
+& & & \sum_{i = 1}^n x_{ij} - \sum_{k = 1}^n x_{jk} & \ \text{para} \ j  = 2,3,\ldots,n - 1 \\
+& & & x_{ij} \leq u_{ij}  & \ \text{para todo} i, j = 1,  \ldots, n \\
+& & & x_{ij} \geq 0
+\end{aligned}
+\end{equation*}
+
+</div>
+
+</section>
+<section>
+
+<p>
+La función a optimizar, \(f\), representa el
+flujo total a lo largo de la red. La primera restricción asegura que
+el flujo \(f\) salga del <b>source</b> y la segunda que el flujo \(f\) llegue a
+<b>target</b>. La tercera restricción se conoce como <b>ecuaciones de
+conservación de flujo</b> y las últimas dos aseguran que no se violen las
+limitantes físicas del arco. En particular las <b>ecuaciones de
+conservación de flujo</b> hacen redundante la segunda restricción. 
+</p>
+
+
+<p>
+Las restricciones se pueden resumir en 
+</p>
+
+<p>
+(a) La cantidad de flujo que <b>entra</b> a cualquier nodo, excepto \(s\) y \(t\)
+es igual a la cantidad de flujo que <b>sale</b> de él; y  
+</p>
+
+<p>
+(b) un máximo de \(u_{ij}\) puede moverse a lo largo de cualquier arco en \(A\).
+</p>
+
+</section>
+<section>
+
+<p>
+Las suposiciones son:
+</p>
+
+<form><ol>
+<li>La red es dirigida</li>
+<li>Todas las capacidades son <b>enteros</b> no negativos i.e. \(u_{ij} \geq 0 \in  \mathbf{Z}\)</li>
+<li>La red no contiene un camino dirigido de \(s\) a \(t\) compuesto únicamente por arcos de capacidad infinita.</li>
+<li>Siempre que haya un arco \((i,j) \in A\), \((j,i)\) también pertenece a \(A\).
+<form><ul>
+<li>No es restrictiva ya que los arcos que no aparecen, tienen capacidad cero.</li>
+
+</ul></form></li>
+<li>La red no contiene arcos paralelos.
+<form><ul>
+<li>Esta última suposición es para que la notación sea más sencilla.</li>
+
+</ul></form></li>
+
+</ol></form>
+
+</section>
+<section id="slide-org4d145fb">
+<h3 id="org4d145fb">Algoritmo Ford Fulkerson</h3>
+<p>
+El algoritmo para resolver el problema de flujo máximo, es el algoritmo de <span class="underline">Ford-Fulkerson</span>, en <b>pseudocódigo</b> es:
+</p>
+
+<pre class="example">
+algoritmo ford_fulkerson(grafo, s, t)
+    flujos[i,j] &lt;- 0, para todo (i,j) en A
+    invocar función encontrar_flujo
+    si existen caminos por aumentar
+        encontrar aumentar_camino
+        incrementar el flujo
+        invocar incrementar_flujo
+</pre>
+
+<p>
+Hay varias maneras de explicar el algoritmo que resuelve este
+problema. En estas notas usaremos el método de la <b>red residual</b>,
+siguiendo a <i>Network Flows Theory, Algorithms and Applications</i>
+</p>
+
+</section>
+<section id="slide-org2ffbacc">
+<h3 id="org2ffbacc">Red residual</h3>
+<p>
+Dado un flujo \(x\), la capacidad residual \(r_{ij}\) de \((i,j) \in A\) es el
+máximo flujo adicional que puede ser mandado de \(i\) a \(j\) usando los
+arcos \((i,j)\) y \((j.i)\). 
+</p>
+
+<p>
+La capacidad residual \(r_{ij}\) tiene dos componentes (1) \(u_{ij} - x_{ij}\), la
+capacidad disponible \(u_{ij}\)  de \((i,j)\) y (2) El flujo actual \(x_{ji}\) en el arco
+\((j,i)\) el cual podemos cancelar al incrementar el flujo de \(i\) a
+\(j\). 
+</p>
+
+<p>
+\[
+r_{ij} = u_{ij} - x_{ij} +  x_{ji}
+\]
+</p>
+
+</section>
+<section>
+
+<p>
+Diremos que \(G(x)\) es la <b>red residual</b> respecto al flujo \(x\), como
+aquella red que contiene los arcos con \(r_{ij} \geq 0\). 
+</p>
+
+
+
+<div class="figure">
+<p><img src="../images/red_original_max_flow.png" alt="red_original_max_flow.png" width="500px" height="350px">
+</p>
+<p><span class="figure-number">Figure 5: </span>Red original. Antes de aplicar el algoritmo de red residual.</p>
+</div>
+
+</section>
+<section>
+
+<p>
+La red residual se ve así:
+</p>
+
+
+<div class="figure">
+<p><a href="file:///home/nanounanue/pCloudDrive/org/clases/operations-research/images/red_residual_max_flow.png" width="300px" height="250px"><img src="../images/red_residual_max_flow.png" alt="red_residual_max_flow.png" width="300px" height="250px"></a>
+</p>
+<p><span class="figure-number">Figure 6: </span>Red residual que se obtiene después de aplicar el algoritmo de red residual.</p>
+</div>
+
+
+
+</section>
+<section id="slide-org13a6830">
+<h3 id="org13a6830">Forward y Backward edges</h3>
+<p>
+Sea \(x\) un flujo en la red. Si el flujo, \(x_{ij}\) que cruza el arco
+\((i,j)\) es menor que \(u_{ij}\), decimos que la red residual tiene un
+<b>forward edge</b> entre \(i\) y \(j\)  con una capacidad igual a la \(u_{ij} -
+x_{ij}\), llamada capacidad residual, \(r_{ij}\).  
+</p>
+
+<p>
+Si \(x_{ij}\) es positivo hay un <b>backward edge</b> \((j,i)\) con una capacidad
+igual a \(x_{ij}\). 
+</p>
+
+<p>
+Nota que en la red aumentada los arcos con flujo igual a cero, son
+removidos. 
+</p>
+
+</section>
+<section id="slide-org3896f03">
+<h3 id="org3896f03">Augmenting path</h3>
+<p>
+Un camino aumentado (<b>augmenting path</b>) es simplemente un camino que va
+de \(s\) a \(t\) en la red residual \(G(x)\).  
+</p>
+
+</section>
+<section id="slide-org0d3d933">
+<h3 id="org0d3d933">Algoritmo de Ford-Fulkerson (de nuevo)</h3>
+<p>
+Empieza sin flujo en la red, luego incrementa el flujo de la red
+mientras haya un <b>augmenting path</b> de \(s\) a \(t\) que no contenga <b>forward
+edges</b> llenos o <b>backward edges</b> vacíos, i.e. mientras haya un camino en
+la red residual. 
+</p>
+
+
+<pre class="example">
+algoritmo ford_fulkerson(G, s, t)
+    f[i,j] &lt;- 0 , para todo (i,j) en A
+    G_x &lt;- G
+    while augmenting_path
+        p &lt;- find directed path en G_x de s a t
+        si p
+            d_f = min { u_ij, (i,j) en p }
+            for (i,j) en p
+                if forward(i,j)
+                    f[i,j] = f[i,j] + d_f
+                if backward(i,j)
+                    f[i,j] = f[i,j] - d_f
+             actualizar G_x
+    return f, suma de flujos que llegan a t
+</pre>
+
+<p>
+Lo único que queda por especificar es como encontrar un camino
+dirigido en \(G(x)\) de \(s\) a \(t\). Una opción es utilizar los algoritmos
+de búsqueda, en particular, podemos usar el algoritmo <b>BFS</b>. Si lo
+hacemos así, el algoritmo se llama <span class="underline">algoritmo de Edmons-Karp</span>.
+</p>
+
+</section>
+<section>
+
+<p>
+<i>Ejercicio</i>
+</p>
+
+<p>
+Implementa el algoritmo Ford-Fulkerson, con la siguiente firma:
+</p>
+
+<div class="org-src-container">
+
+<pre><code class=" jupyter-python" >def ford_fulkerson(graph, s, t, augmenting_path=shortest_path):
+    ...
+    return {'flow':{}, 'max_flow': max_flow}
+</code></pre>
+</div>
+
+<p>
+donde el valor del parámetro <code>augmenting_path</code> es el nombre de una
+función, por <b>default</b> será <b>BFS</b>.
+</p>
+
+</section>
+<section id="slide-org0a3d3ac">
+<h3 id="org0a3d3ac">Ejemplo</h3>
+
+<div class="figure">
+<p><img src="../images/ford_fulkerson_example.png" alt="ford_fulkerson_example.png" width="300px" height="250px">
+</p>
+<p><span class="figure-number">Figure 7: </span>Red para el ejemplo del algoritmo de Ford-Fulkerson</p>
+</div>
+
+
+</section>
+<section id="slide-orgba28079">
+<h3 id="orgba28079">Extensiones: Múltiples fuentes y sumideros</h3>
+<p>
+Supón que en el problema aparecen varias fuentes y/o varios sumideros,
+por ejemplo una compañía que tiene una fábrica (<b>fuente</b>) y varios
+centros de distribución (<b>sumidero</b>). Podemos resolverlo con los
+algoritmos de <b>max flow</b> si agregamos dos <b>super nodos</b>: <b>super-source</b>,
+\(S\) y <b>super-sink</b>, \(T\). Agregaremos varios arcos de \(S\) a todos las
+fuentes originales y de todas los sumideros a \(T\). Las capacidades de
+estos arcos es \(\infty\). Luego procedemos a resolverlo normalmente. 
+</p>
+
+</section>
+<section id="slide-orgc8142d3">
+<h3 id="orgc8142d3">Extensiones: Capacidades en los nodos</h3>
+<p>
+¿Qué sucede si hay un límite en las capacidades que un nodo puede
+contener? Por ejemplo, en el centro de distribución sólo caben \(k\)
+camiones. Para resolverlo, dividiremos los nodos en dos: \(in-vertex\) y
+\(out-vertex\), y agregaremos arcos que van del \(in-vertex\) al
+\(out-vertex\). La capacidad del nodo será la capacidad del arco. Ahora
+podemos aplicar el algoritmo de Ford-Fulkerson. 
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org1172247">
+<h2 id="org1172247">Minimum cost flow</h2>
+<p>
+El planteamiento del problema es como sigue:
+</p>
+
+<p>
+Sea \(G=(N,A, u, c, b)\) una red dirigida. Para cada arco \((i,j) \in A\) asociamos una <b>capacidad</b> \(u_{ij}\), 
+que especifica la cantidad máxima que puede fluir en el arco. Además cada arco \((i,j) \in A\), 
+tiene asociado un <b>costo</b> \(c_{ij}\) que denota el costo por unidad de flujo en ese arco.
+</p>
+
+<p>
+También asociaremos a cada nodo \(i \in N\) un número \(b_i\). Este valor representa la demanda/oferta
+de cada nodo. Si \(b_i > 0\) decimos que es un <b>supply node</b>, si \(b_i < 0\) el nodo es un <b>demand node</b>. 
+Si \(b_i = 0\) el nodo es un nodo de <b>transshipment</b>.
+</p>
+
+<p>
+A esta red se le llama red de transporte.
+</p>
+
+</section>
+<section>
+
+<p>
+El problema de optimización es como sigue:
+</p>
+
+<div>
+\begin{equation*}
+\begin{aligned}
+& \text{min}  
+& & z(x) = \sum_{(i,j) \in A} c_{ij}X_{ij}  \\
+& \text{s.t.}   \\
+& & & \sum_{j:(i,j) \in A} x_{ij} - \sum_{j:(j,i) \in A} x_{ji} = b_i & \ \text{para todo} \  i \in N, \\
+& & & 0 \leq x_{ij} \leq u_{ij}  & \ \text{para todo} \  (i, j) \in A
+\end{aligned}
+\end{equation*}
+
+</div>
+
+<p>
+La primera restricción es conocida como <b>restricción de balance de masa</b>, la segunda son los límites físicos del flujo. 
+</p>
+
+</section>
+<section id="slide-orgb7cadbb">
+<h3 id="orgb7cadbb">¿Cuándo tiene una solución <b>factible</b>?</h3>
+<form><ul>
+<li>Si \(\sum_i b_i \neq 0\), no hay solución ya que se violan la restricción de balance de masa.
+<form><ul>
+<li>Si este es el caso, se puede agregar un nodo \(r\) que sea tenga \(b_r =  -\delta\)</li>
+<li>Aún con \(\delta = 0\) no es seguro que tenga solución.</li>
+
+</ul></form></li>
+
+<li>Para ver si tiene solución, agreguemos dos nodos \(s, t\) a la
+red. Para cada nodo \(i \in N\) con \(b_i > 0\) agregamos un arco \((s,i)\)
+con capacidad \(b_i\) y costo \(0\). Para cada nodo \(i \in N\) con \(b_i < 0\)
+agregamos un arco \((i,t)\) con capacidad \(-b_i\) y costo \(0\). A esta
+red se le conocde como <b>red transformada</b></li>
+
+</ul></form>
+
+</section>
+<section id="slide-orgfc084ec">
+<h3 id="orgfc084ec">Suposiciones</h3>
+<form><ol>
+<li>Todos los datos \((u, c, b)\) son enteros</li>
+<li>La red es dirigida</li>
+<li>Todos los costos son no negativos</li>
+<li>Los nodos satisfacen \(\sum_{i} b_i = 0\) y el problema tiene una solución factible.</li>
+
+</ol></form>
+
+</section>
+<section>
+
+
+<div class="figure">
+<p><img src="../images/min_cost_flow_example.png" alt="min_cost_flow_example.png" width="500px" height="350px">
+</p>
+<p><span class="figure-number">Figure 8: </span>Red original para el ejemplo del min cost flow problem</p>
+</div>
+
+
+<p>
+<i>Ejercicio</i>
+</p>
+
+<form><ul>
+<li>Crea una función llamada <code>transformed_network(G)</code> que genere el grafo transformado</li>
+<li>Crear una función llamada <code>feasible_min_cost_solution(G)</code> que
+devuelva <code>True</code> si el grafo <code>G</code> tiene una solución <i>factible</i>.</li>
+
+</ul></form>
+
+</section>
+<section>
+
+<p>
+Como referencia, la <span class="underline">red transformada</span> es:
+</p>
+
+
+<div class="figure">
+<p><img src="file:///home/nanounanue/pCloudDrive/org/clases/operations-research/images/transformed_network_min_cost_flow_example.png" alt="transformed_network_min_cost_flow_example.png" width="500px" height="350px">
+</p>
+<p><span class="figure-number">Figure 9: </span>Red transformada para el ejemplo de min cost flow problem</p>
+</div>
+
+
+<p>
+La solución factible, tiene una <b>red residual</b> (después de remover los
+nodos \(s\) y \(t\) y todos sus arcos), a la que 
+denotaremos como \(G_x = (N, A_x)\), donde \(A_x\) son los arcos de la red
+residual de la solución factible con flujo \(x\). 
+</p>
+
+
+<p>
+Nota que en esta red la unidad que fluyan de \(i\) a \(j\) en el arco
+\((i,j)\) incrementan la función objetivo en \(c_{ij}\), y si fluye de \(j\) a
+\(i\) decrementa la función objetivo en \(c_{ij}\). 
+</p>
+
+
+<p>
+<i>Ejercicio</i>
+Modifica el método <code>residual_network</code> para tomar en cuenta los costos
+¿Cuál es la red residual de la solución factible de la red del
+ejercicio anterior?
+</p>
+
+</section>
+<section>
+
+<p>
+La red residual de la solución factible de la red del ejercicio es:
+</p>
+
+
+<div class="figure">
+<p><img src="file:///home/nanounanue/pCloudDrive/org/clases/operations-research/images/residual_network_min_cost_flow_example.png" alt="residual_network_min_cost_flow_example.png" width="500px" height="350px">
+</p>
+<p><span class="figure-number">Figure 10: </span>Red residual para el ejemplo de min cost flow problem</p>
+</div>
+
+</section>
+<section id="slide-org2ca3556">
+<h3 id="org2ca3556">¿Cómo lo solucionamos?</h3>
+<p>
+Existen tres algoritmos para solucionar este problema:
+</p>
+
+<form><ul>
+<li><i>Cycle cancelling algorithm</i></li>
+
+<li><i>Sucessive Shortest path algorithm</i></li>
+
+<li><i>Primal-dual algorithm</i></li>
+
+</ul></form>
+
+
+<p>
+En esta clase sólo veremos los primeros dos.
+</p>
+
+</section>
+<section id="slide-org72306a9">
+<h3 id="org72306a9">Algoritmo de cancelación de ciclos</h3>
+<form><dl>
+<dt>Teorema 1 (Existencia de la solución)</dt><dd>Sea \(G\) una red de
+transporte. Supongamos que \(G\) no contiene ciclos negativos sin
+capacidad (i.e. un ciclo consistente en arcos \((i,j)\) con \(u_{ij} = \infty\))
+y que existe una solución factible del problema de flujo de costo  mínimo. Entonces la solución óptima existe.</dd>
+
+</dl></form>
+
+<p>
+<i>Prueba</i> Dado que el problema del flujo de costo mínimo es un caso
+especial de programación lineal. Si el problema de programación lineal
+tiene una solución factible y su función objetivo está acotada,
+entonces tiene una solución óptima. Si \(G\) no tiene ciclos  negativos
+sin capacidad entonces la función objetivo está acotada por abajo,
+entonces la solución óptima existe. 
+</p>
+
+</section>
+<section>
+
+<form><dl>
+<dt>Teorema 2 (Condiciones de optimalidad)</dt><dd>Sea \(x^*\) una solución
+factible del problema de flujo de costo mínimo. Entonces \(x^*\) es una
+solución óptima si y sólo si, la red  residual \(G_x\) no contiene
+ciclos dirigidos de costos negativos.</dd>
+
+</dl></form>
+
+</section>
+<section>
+
+<p>
+Este último teorema nos da el algoritmo de cancelación de ciclos:
+</p>
+
+<pre class="example">
+algoritmo cycle_cancelling
+    G_x &lt;- encuentra un flujo factible x en la red
+    Mientas G_x contenga un ciclo negativo
+        N &lt;- identifica el ciclo negativo 
+        d &lt;- min{r_ij: (i,j) en N}
+        aumenta en d unidades el flujo alrededor de W
+        actualiza G_x
+    regresa G_x
+</pre>
+
+
+
+</section>
+<section id="slide-lectures/Networks/Bellman-Ford">
+<h3 id="lectures/Networks/Bellman-Ford">Algoritmo Bellman Ford</h3>
+<p>
+¿Cómo identifico los ciclos negativos?
+</p>
+
+<p>
+¿Recuerdas que mencionamos el algoritmo de <span class="underline">Bellman Ford</span> cuando vimos
+<i>shortest path problem</i>? Este algoritmo detecta los ciclos negativos. 
+</p>
+
+<p>
+En su forma original, el algoritmo es el siguiente:
+</p>
+
+<pre class="example">
+     algoritmo bellman_ford ( G, costs, source, target )
+           d[i] = infinity para todos los nodos i en N
+           d[source] &lt;- 0
+           pred[source] &lt;- None
+           n &lt;- número de nodos, i &lt;- 0
+           # Iteración de 1 a n-1
+           mientras i &lt; (n - 1)
+              para cada nodo en G
+                  para cada vecino de nodo
+                       relax(nodo, vecino)
+           d_prev &lt;- d
+           
+           # Iteración n
+           # Detección de ciclos negativos
+           para cada nodo en G
+              para cada vecino de nodo
+                   relax(nodo, vecino)
+
+            si d_prev &lt;&gt; d
+                # Ciclos negativos detectados
+                # No hay solución al SPP
+                pred &lt;- None
+                d &lt;- None
+</pre>
+
+<p>
+Donde la función <code>relax</code> es:
+</p>
+
+<pre class="example">
+    relax(nodo, vecino)
+        si d[vecino] &gt; d[nodo] + costo[nodo][vecino]
+            d[vecino] &gt; d[nodo] + costo[nodo][vecino]
+            pred[vecino] = nodo
+</pre>
+
+</section>
+<section id="slide-orgc315c39">
+<h3 id="orgc315c39">Algoritmo <i>Successive Shortest path</i></h3>
+<p>
+El algoritmo de cancelación de ciclos mantiene la factibilidad de la
+solución en cada paso mientras trata de buscar el la solución óptima. 
+</p>
+
+<p>
+El algoritmo de <i>successive shortest path</i> mantiene la optimalidad (ver
+<span class="underline">Teorema 3</span> más abajo) en cada paso, mientras trata de alcanzar la
+factibilidad, es decir en cada paso no cumple con las restricciones de
+balance de masa. 
+</p>
+
+</section>
+<section>
+
+<p>
+Recuerda la condición para que un camino más corto sea óptima (<b>condición de "optimalidad"</b> -la verdad no sé si esto sea una palabra en español) es:
+</p>
+
+<p>
+\[
+d(j) \leq d(i) + c_{ij}
+\]
+</p>
+
+<p>
+La cual puede escribirse, acomodando términos como sigue:
+</p>
+
+<p>
+\[
+c_{ij}^d = c_{ij} + d(i) - d(j) \geq 0
+\]
+</p>
+
+</section>
+<section>
+
+<p>
+Siguiendo esto, definimos las siguientes dos cantidades:
+</p>
+
+<form><dl>
+<dt>Node potential</dt><dd>Para cada nodo \(i \in N\) agreguemos un número \(\pi_i\),
+al que llamaremos <b>potencial del nodo</b> \(i\).</dd>
+
+</dl></form>
+
+</section>
+<section>
+
+<form><dl>
+<dt>Costo reducido del nodo</dt><dd>El costo reducido \(c_{ij}^\pi\) del nodo \(i
+  \in N\) quedará definido a partir del potencial del nodo como sigue:</dd>
+
+</dl></form>
+
+<p>
+\[
+c_{ij}^\pi = c_{ij} + \pi_i - \pi_j
+\]
+</p>
+
+<p>
+El costo reducido del nodo (<b>reduced cost</b>) también lo definiremos en la
+red residual, justo como le hicimos con el costo antes (i.e. si el
+arco es  <b>backwards</b> es costo reducido en  \(G_r\) es el negativo del costo en \(G\))
+</p>
+
+<p>
+El costo reducido cumple con las siguientes propiedades:
+</p>
+
+<form><ul>
+<li>Para cada camino dirigido \(P\) de \(k\) a \(l\) con \(k,l \in N\), se
+tiene que  \(\sum_{(i,j) \in P} C_{ij}^\pi = \sum_{(i,j) \in P} C_{ij} - \pi(k) +
+     \pi(l)\)</li>
+<li>Para cada siclo dirigido \(W\), se cumple que \(\sum_{(i,j) \in W} C_{ij}^\pi =
+     \sum_{(i,j) \in W} C_{ij}\)</li>
+
+</ul></form>
+
+<p>
+Esta propiedad implica que los <i>node potentials</i>  <span class="underline">no</span> cambian el camino
+más corto entre cualquier par de nodos \(k\) y \(l\) (ya que \(\pi(l) - \pi(k)\)
+es constante). También, estas propiedades implican que si \(W\) es un
+ciclo negativo con respecto a \(c_{ij}\) , también es un ciclo negativo
+respecto a \(c_{ij}^\pi\). 
+</p>
+
+</section>
+<section>
+
+<form><dl>
+<dt>Pseudoflujo</dt><dd>Un <b>pseudoflujo</b> \(x: A \to \mathbf{R}^+\) satisface
+únicamente las restricciones de capacidad y de no-negatividad.</dd>
+
+</dl></form>
+
+</section>
+<section>
+
+<form><dl>
+<dt>Desbalance del nodo \(i\)</dt><dd>Definimos como <b>desbalance del nodo</b> \(i\) la siguiente cantidad, \(e(i)\)</dd>
+
+</dl></form>
+
+<p>
+\[
+e(i) = b(i) + \sum_{j:(j,i) \in A} x_{ji} - \sum_{j:(i,j) \in A} x_{ij}
+\]
+</p>
+
+<p>
+Si esta cantidad es estrictamente positiva, diremos que \(i\) es un nodo
+con exceso, si es estrictamente negativa, \(-e(i)\) es el <b>déficit</b> del
+nodo, y si \(e(i) = 0\) diremos que el nodo está <b>balanceado</b>. 
+</p>
+
+<p>
+Usando \(e(i)\) definimos a los conjuntos \(E\) y \(D\) como los conjuntos
+conformados con nodos con exceso y nodos on déficit, respectivamente. 
+</p>
+
+<p>
+Como \(\sum_{i \in N} e(i) = \sum_{i \in N} b(i)\), se tiene que \(\sum_{i \in E}
+e(i) = - \sum_{i \in D} e(i)\) 
+</p>
+
+</section>
+<section>
+
+<p>
+<span class="underline">Teorema 3</span> Una solución factible \(x^*\) es una sólución <b>óptima</b> del
+problema de flujo de costo mínimo si y sólo si un conjunto de
+potenciales de nodo \(\pi\) satisface la siguiente condición reducida de
+optimalidad 
+</p>
+
+<p>
+\[
+c_{ij}^\pi \geq 0 \qquad \text{para todo arco} \quad (i,j) \in G(x^*)
+\]
+</p>
+
+<p>
+Esta es la condición de <b>optimalidad</b> que mantiene el algoritmo en cada paso.
+</p>
+
+</section>
+<section>
+
+<p>
+<i>Lema 1</i> Supón que el pseudoflujo \(x\) satisface la cóndición reducida
+de optimalidad con respecto a algunos potenciales \(\pi\). Sea \(d\) el
+vector que representa los caminos más cortos de algún nodo \(s\) a todos
+los demás nodos en la red residual de \(G(x)\) con \(c_{ij}^\pi\) como el
+costo del arco \((i,j)\), entonces: 
+</p>
+
+<form><ul>
+<li>El pseudoflujo \(x\) también satisface las condiciones de
+optimalidad reducidas con respecto a los potenciales de nodo \(\pi'
+     = \pi - d\).</li>
+<li>Los costos reducidos, \(c_{ij}^\pi\), son cero para todos los arcos
+\((i,j)\) en los caminos más cortos desde \(s\) a todos los otros
+nodos.</li>
+
+</ul></form>
+
+</section>
+<section>
+<p>
+<i>Lema 2</i> Supón que el pseudoflujo \(x\) satisface las condiciones de
+ optimalidad reducidas. Si definimos \(x'\) a partir de \(x\) mandando
+ flujo a lo largo del camino más corto de  \(s\) a algún nodo \(k\),
+ entonces \(x'\) también satisface las condiciones de optimalidad
+ reducidas. 
+</p>
+
+</section>
+<section>
+
+<p>
+Usando estos lemas y teoremas, podemos enunciar el algoritmo:
+</p>
+
+<pre class="example">
+    algoritmo ssp
+        x &lt;- 0; pi &lt;- 0
+        e(i) = b(i)
+        E = {i: e(i) &gt; 0}; D = {i: e(i) &lt; 0}
+        while E:
+           - Selecciona k en E, l en D
+           - Determina el camino más corto, d(j), desde k a todo los nodos en la red residual de G(x) con respecto al costo reducido c_ij^pi
+           - Sea P el camino más corto entre k y l
+           - pi &lt;- pi - d
+           - delta &lt;- min [ e(k),  -e(l), min[r_ij: (i,j) en P]]
+           - Aumenta delta unidades el flujo a lo largo del camino P
+           - Actualiza x, G(x), E, D y los costos reducidos
+        regresa G(x) 
+</pre>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgad122af">
+<h2 id="orgad122af">Repaso</h2>
+</section>
+</section>
+</div>
+</div>
+Adolfo De Unánue
+<script src="https://revealjs.com/js/reveal.js"></script>
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: true,
+center: true,
+slideNumber: 'c',
+rollingLinks: true,
+keyboard: true,
+mouseWheel: false,
+fragmentInURL: false,
+hashOneBasedIndex: false,
+pdfSeparateFragments: true,
+
+overview: true,
+width: 1400,
+height: 1000,
+margin: 0.10,
+minScale: 1.00,
+maxScale: 1.00,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'fade', // see README of reveal.js for options
+transitionSpeed: 'fast',
+controlsTutorial: false, controlsLayout: 'edges',
+
+// Optional libraries used to extend reveal.js
+dependencies: [
+{ src: 'https://revealjs.com/plugin/audio-slideshow/audio-slideshow.js', condition: function( ) { return !!document.body.classList && !Reveal.isSpeakerNotes(); } },
+{ src: 'https://revealjs.com/plugin/anything/anything.js' },
+{ src: 'https://revealjs.com/plugin/toc-progress/toc-progress.js', async: true, callback: function() { toc_progress.initialize('reduce', 'rgba(120,138,130,0.2)'); toc_progress.create(); } },
+{ src: 'https://revealjs.com/plugin/jump/jump.js', async: true },
+{ src: 'https://revealjs.com/plugin/quiz/js/quiz.js', async: true, callback: function() { prepareQuizzes({preventUnanswered: true, skipStartButton: true}); } },
+{ src: 'https://revealjs.com/plugin/coursemod/coursemod.js', async: true },
+ { src: 'https://revealjs.com/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+ { src: 'https://revealjs.com/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'https://revealjs.com/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }]
+
+,audioStartAtFragment: true,
+  audio: {
+    advance: -1, autoplay: false, defaultDuration: 0, defaultAudios: false, playerOpacity: 0.8, playerStyle: 'position: fixed; bottom: 9.5vh; left: 0%; width: 30%; height:30px; z-index: 33;' },
+anything: [
+        // Following initialization code for class animate from anything-demo.html.
+        // Copyright (c) 2016 Asvin Goel, under The MIT License (MIT).
+	{className: "animate",  initialize: (function(container, options){
+		Reveal.addEventListener( 'fragmentshown', function( event ) {
+			if (typeof event.fragment.beginElement === "function" ) {
+				event.fragment.beginElement();
+			}
+		});
+		Reveal.addEventListener( 'fragmenthidden', function( event ) {
+			if (event.fragment.hasAttribute('data-reverse') ) {
+				var reverse = event.fragment.parentElement.querySelector('[id=\"' + event.fragment.getAttribute('data-reverse') + '\"]');
+				if ( reverse && typeof reverse.beginElement === "function" ) {
+					reverse.beginElement();
+				}
+			}
+		});
+		if ( container.getAttribute("data-svg-src") ) {
+			var xhr = new XMLHttpRequest();
+			xhr.onload = function() {
+				if (xhr.readyState === 4) {
+					var svg = container.querySelector('svg');
+					container.removeChild( svg );
+					container.innerHTML = xhr.responseText + container.innerHTML;
+					if ( svg ) {
+						container.querySelector('svg').innerHTML = container.querySelector('svg').innerHTML + svg.innerHTML;
+					}
+				}
+				else {
+					console.warn( "Failed to get file. ReadyState: " + xhr.readyState + ", Status: " + xhr.status);
+				}
+			};
+			xhr.open( 'GET', container.getAttribute("data-svg-src"), true );
+			xhr.send();
+		}
+	}) },
+	{className: "randomPic",
+	 defaults: {imgalt: "Dummy alt text",
+		    imgcaption: "Image by {name}",
+		    choices: [ {name: "dummyname", path: "dummypath"} ]},
+	 initialize: (function(container, options){
+	     var choice = Math.trunc( Math.random()*(options.choices.length) );
+	     var img = "<img src='" + options.choices[choice].path + "' alt='" + options.choices[choice].imgalt + "' />";
+	     var caption = options.imgcaption.replace(new RegExp('\{name\}', 'gm'), options.choices[choice].name);
+	     container.innerHTML = img + caption;
+	 }) },
+	{className: "notes",
+	 initialize: (function(container, options){
+	     container.addEventListener('click', function(e) { RevealNotes.open(); });
+	 }) }
+],
+coursemod: { enabled: true, shown: false },
+});
+</script>
+<script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
+<script>
+/* Recompute layout upon changes by klipse.  Code fragment from
+   asciidoctor-revealjs-klipse by Timothy Pratley under GPLv3:
+   https://github.com/timothypratley/asciidoctor-revealjs-klipse/blob/master/docs/docinfo-footer.html */
+Reveal.addEventListener( 'slidechanged', function( event ) {
+    window.dispatchEvent( new Event('resize') );
+} );
+</script>
+</body>
+</html>

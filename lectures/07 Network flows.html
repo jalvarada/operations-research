@@ -82,32 +82,32 @@ School specific teaching materials"/>
 <h1 class="title">Network flows</h1><h2 class="author">Adolfo De Unánue Adolfo De Unánue Adolfo De Unánue</h2>
 </section>
 <section>
-<section id="slide-org45126df">
-<h2 id="org45126df">Introduction and Recap of Last Class</h2>
+<section id="slide-orgecbfea0">
+<h2 id="orgecbfea0">Introduction and Recap of Last Class</h2>
 </section>
-<section id="slide-orgeed53a8">
-<h3 id="orgeed53a8">Anuncios</h3>
+<section id="slide-org2852647">
+<h3 id="org2852647">Anuncios</h3>
 <form><ul>
 <li>&#x2026;</li>
 
 </ul></form>
 </section>
-<section id="slide-org40b5fa9">
-<h3 id="org40b5fa9">Repaso de la última clase</h3>
+<section id="slide-orgb65b66d">
+<h3 id="orgb65b66d">Repaso de la última clase</h3>
 </section>
 <section id="slide-lectures/Introduction and Recap of Last Class/Outline">
 <h3 id="lectures/Introduction and Recap of Last Class/Outline">Lecture Outline</h3>
 </section>
 </section>
 <section>
-<section id="slide-orga71a8dc">
-<h2 id="orga71a8dc">Grafos</h2>
+<section id="slide-org6023aa5">
+<h2 id="org6023aa5">Grafos</h2>
 
 </section>
 </section>
 <section>
-<section id="slide-orga7866c2">
-<h2 id="orga7866c2">Conceptos</h2>
+<section id="slide-org0259f5b">
+<h2 id="org0259f5b">Conceptos</h2>
 <form><ul>
 <li>Otros nombres para el nodo son <span class="underline">vértices</span>, para los arcos, <span class="underline">aristas</span></li>
 <li><b>Grafo dirigido</b> o <i>digrafo</i> Es un conjunto \(N\) de <span class="underline">nodos</span> y un conjunto \(A\) de
@@ -163,13 +163,13 @@ cualquier número de nodos, en lugar de solamente dos.</li>
 </section>
 </section>
 <section>
-<section id="slide-org6292a5f">
-<h2 id="org6292a5f">Representación</h2>
-<div class="outline-text-2" id="text-org6292a5f">
+<section id="slide-orgc8bd1e9">
+<h2 id="orgc8bd1e9">Representación</h2>
+<div class="outline-text-2" id="text-orgc8bd1e9">
 </div>
 </section>
-<section id="slide-orga1a4d34">
-<h3 id="orga1a4d34">Matriz de Adyacencia</h3>
+<section id="slide-orga8dc83b">
+<h3 id="orga8dc83b">Matriz de Adyacencia</h3>
 <form><ul>
 <li>Una  matriz \(A\) 
 
@@ -182,8 +182,8 @@ cualquier número de nodos, en lugar de solamente dos.</li>
 </ul></form>
 
 </section>
-<section id="slide-orgf450b2b">
-<h3 id="orgf450b2b">Lista de Adyacencia</h3>
+<section id="slide-org2343329">
+<h3 id="org2343329">Lista de Adyacencia</h3>
 <form><ul>
 <li>Cada nodo tiene una lista de los nodos que están conectados mediante
 aristas salientes (i.e. de \(i \to j\))</li>
@@ -192,8 +192,8 @@ aristas salientes (i.e. de \(i \to j\))</li>
 
 
 </section>
-<section id="slide-orgb5257a7">
-<h3 id="orgb5257a7">Ejemplo</h3>
+<section id="slide-orgcf593db">
+<h3 id="orgcf593db">Ejemplo</h3>
 
 <div class="figure">
 <p><img src="../images/graph-1.png" alt="graph-1.png" width="400px" height="400px">
@@ -220,8 +220,8 @@ graph["G"] = set()
 </section>
 </section>
 <section>
-<section id="slide-orgf1a0496">
-<h2 id="orgf1a0496">Ejemplos de Redes</h2>
+<section id="slide-org1027e93">
+<h2 id="org1027e93">Ejemplos de Redes</h2>
 <table>
 <caption class="t-above"><span class="table-number">Table 1:</span> Algunos ejemplos de mapeos de sistemas reales a una red. Tomado de <a class="org-ref-reference" href="#slide-bibliography">[hillierINVESTIGACIONOPERACIONES2015]</a></caption>
 
@@ -275,8 +275,8 @@ graph["G"] = set()
 </section>
 </section>
 <section>
-<section id="slide-org0fcfe39">
-<h2 id="org0fcfe39">Orden Topológico</h2>
+<section id="slide-org0cc1439">
+<h2 id="org0cc1439">Orden Topológico</h2>
 <p>
 <i>Entrada</i>: <b><b>DAG</b></b> \(G = (N, A)\)
 </p>
@@ -294,8 +294,8 @@ Uno de los algoritmos más fáciles de implementar (y bastante rápido \(\mathca
 </p>
 
 </section>
-<section id="slide-org29cd2f5">
-<h3 id="org29cd2f5">Algoritmo de Kahn</h3>
+<section id="slide-org63f885a">
+<h3 id="org63f885a">Algoritmo de Kahn</h3>
 <p>
 La idea básica es remover repetidamente los nodos \(v\) que tienen \(indeg(v) = 0\).
 </p>
@@ -323,8 +323,8 @@ La idea básica es remover repetidamente los nodos \(v\) que tienen \(indeg(v) =
 
 
 </section>
-<section id="slide-org198e2bf">
-<h3 id="org198e2bf">Ejemplo</h3>
+<section id="slide-orge1d9557">
+<h3 id="orge1d9557">Ejemplo</h3>
 <p>
 (<i>Tomado del libro</i> <b>A Gentle Introduction to Optimization</b>) 
 </p>
@@ -451,8 +451,8 @@ tasks['D'] = set()
 </section>
 </section>
 <section>
-<section id="slide-org4fddbb8">
-<h2 id="org4fddbb8">Rutas más cortas</h2>
+<section id="slide-org8e0c6ff">
+<h2 id="org8e0c6ff">Rutas más cortas</h2>
 <p>
 El algoritmo <b>BFS</b> nos da la ruta más corta entre dos nodos, si todos
 los vértices tienen un costo \(1\). 
@@ -529,8 +529,8 @@ n -1 & \text{para} \ &  i = s \\
 </div>
 
 </section>
-<section id="slide-orgc06dfa9">
-<h4 id="orgc06dfa9">Suposiciones</h4>
+<section id="slide-org07c05b7">
+<h4 id="org07c05b7">Suposiciones</h4>
 <p>
 Las suposiciones que hace este problema son:
 </p>
@@ -550,8 +550,8 @@ de Bellman-Ford.
 </p>
 
 </section>
-<section id="slide-orgea3e5b7">
-<h3 id="orgea3e5b7">Algoritmo de Dijkstra</h3>
+<section id="slide-orge4eca46">
+<h3 id="orge4eca46">Algoritmo de Dijkstra</h3>
 <p>
 El algoritmo de Dijkstra no es complicado en sí:
 </p>
@@ -622,8 +622,8 @@ Escrito como <b>pseudocódigo</b> es lo siguiente:
 </div>
 
 </section>
-<section id="slide-org57fe57a">
-<h3 id="org57fe57a">Ejemplo</h3>
+<section id="slide-org0048f2e">
+<h3 id="org0048f2e">Ejemplo</h3>
 
 <div class="figure">
 <p><img src="../images/shortest_path_example.png" alt="shortest_path_example.png" width="500px" height="250px">
@@ -632,8 +632,8 @@ Escrito como <b>pseudocódigo</b> es lo siguiente:
 </div>
 
 </section>
-<section id="slide-org6a512b0">
-<h4 id="org6a512b0">Implementación en <code>Python</code></h4>
+<section id="slide-orgaf688bc">
+<h4 id="orgaf688bc">Implementación en <code>Python</code></h4>
 <p>
 Nota que nuestra <span class="underline">red</span> ahora tiene más riqueza que los grafos
 anteriores. Ahora tenemos información en el arco. Esta información,
@@ -675,8 +675,8 @@ Tenemos un diccionario dentro de un diccionario.
 
 
 </section>
-<section id="slide-org208f1bf">
-<h3 id="org208f1bf">Ejemplo</h3>
+<section id="slide-org8506948">
+<h3 id="org8506948">Ejemplo</h3>
 
 <div class="figure">
 <p><img src="../images/shortest_path_example_2.png" alt="shortest_path_example_2.png" width="500px" height="350px">
@@ -717,8 +717,8 @@ example_2["F"] = {}
 </pre>
 
 </section>
-<section id="slide-org9d900e4">
-<h3 id="org9d900e4">Ejemplo</h3>
+<section id="slide-orgc7f96e9">
+<h3 id="orgc7f96e9">Ejemplo</h3>
 
 <div class="figure">
 <p><img src="file:///home/nanounanue/pCloudDrive/org/clases/operations-research/images/shortest_path_example_3.png" alt="shortest_path_example_3.png" width="500px" height="350px">
@@ -763,8 +763,8 @@ example_3["F"] = {}
 
 
 </section>
-<section id="slide-orgc3b5a6d">
-<h3 id="orgc3b5a6d">Ejemplo</h3>
+<section id="slide-orgd4e1ea3">
+<h3 id="orgd4e1ea3">Ejemplo</h3>
 <p>
 <i>¿Cuál es la programación más efectiva en costo para remplazar equipo en un periodo de tiempo?</i>
 (Tomado de:  <b>Operations Research A practical Introduction</b>)
@@ -895,8 +895,8 @@ Enero y Febrero?</li>
 </section>
 </section>
 <section>
-<section id="slide-orgc831700">
-<h2 id="orgc831700">Árboles de expansión mínima</h2>
+<section id="slide-orgb720d39">
+<h2 id="orgb720d39">Árboles de expansión mínima</h2>
 <form><ul>
 <li>Este problema es muy parecido al de <i>ruta más corta</i>.</li>
 <li>Queremos seleccionar <i>arcos</i> que minimicen el costo entre <span class="underline">cada</span> par de
@@ -908,8 +908,8 @@ algoritmo <i>greedy</i>.</li>
 
 
 </section>
-<section id="slide-org420d01b">
-<h3 id="org420d01b">Pseudo algoritmo</h3>
+<section id="slide-org024fb2a">
+<h3 id="org024fb2a">Pseudo algoritmo</h3>
 <form><ol>
 <li>Sea \(N\) el conjunto de nodos de la red</li>
 <li>\(S={\emptyset}\) y \(S'={N}\) son conjuntos con los nodos conectados y no,
@@ -928,8 +928,8 @@ un nodo de \(S\)</li>
 
 
 </section>
-<section id="slide-orgc884a18">
-<h3 id="orgc884a18">Ejemplo</h3>
+<section id="slide-orgcb8e84c">
+<h3 id="orgcb8e84c">Ejemplo</h3>
 
 <div class="figure">
 <p><img src="../images/arbol_expansion_minima_1.png" alt="arbol_expansion_minima_1.png" width="500px" height="350px">
@@ -938,8 +938,8 @@ un nodo de \(S\)</li>
 </div>
 
 </section>
-<section id="slide-org9a586cd">
-<h3 id="org9a586cd">Implementación en <code>python</code></h3>
+<section id="slide-org5bbe6d0">
+<h3 id="org5bbe6d0">Implementación en <code>python</code></h3>
 <div class="org-src-container">
 
 <pre><code class=" jupyter-python" >mst = {}
@@ -998,8 +998,8 @@ mst['6']['3'] = 10
 </section>
 </section>
 <section>
-<section id="slide-orgf929edc">
-<h2 id="orgf929edc">Ejemplo</h2>
+<section id="slide-orgeec6dd6">
+<h2 id="orgeec6dd6">Ejemplo</h2>
 <form><ul>
 <li>El parque Seervada <a class="org-ref-reference" href="#slide-bibliography">[hillierINVESTIGACIONOPERACIONES2015]</a> es
 utilizado para <i>camping</i> y paseos.  Posee el siguiente sistema de
@@ -1020,8 +1020,8 @@ parque justo a esta atracción.
 </p>
 
 </section>
-<section id="slide-orge846664">
-<h3 id="orge846664">Implementación en <code>python</code></h3>
+<section id="slide-orga34446a">
+<h3 id="orga34446a">Implementación en <code>python</code></h3>
 <div class="org-src-container">
 
 <pre><code class=" jupyter-python" >seervada = {}
@@ -1068,8 +1068,8 @@ seervada['T']['E'] = 7
 
 
 </section>
-<section id="slide-org1f0ba7e">
-<h3 id="org1f0ba7e">Problemas del Parque Seerveda</h3>
+<section id="slide-orgfaaadeb">
+<h3 id="orgfaaadeb">Problemas del Parque Seerveda</h3>
 <p>
 El parque enfrenta tres problemas principalmente
 </p>
@@ -1142,8 +1142,8 @@ viajes que se pueden hacer al día?</li>
 </section>
 </section>
 <section>
-<section id="slide-org6f7a209">
-<h2 id="org6f7a209">Maximum Flow</h2>
+<section id="slide-orgfaeae77">
+<h2 id="orgfaeae77">Maximum Flow</h2>
 <p>
 El problema de flujo máximo (<b>maximum flow problem</b>) está muy
 relacionado con el de <b>shortest path</b>, pero en lugar de hacer uso de los
@@ -1192,8 +1192,8 @@ conservación de flujo</b> hacen redundante la segunda restricción.
 </p>
 
 </section>
-<section id="slide-org91e722f">
-<h4 id="org91e722f">Restricciones</h4>
+<section id="slide-org40f5bda">
+<h4 id="org40f5bda">Restricciones</h4>
 <p>
 Las restricciones se pueden resumir en 
 </p>
@@ -1208,8 +1208,8 @@ de él;</li>
 </ol></form>
 
 </section>
-<section id="slide-org9a9bdfc">
-<h4 id="org9a9bdfc">Suposiciones</h4>
+<section id="slide-org85d9e51">
+<h4 id="org85d9e51">Suposiciones</h4>
 <p>
 Las suposiciones son:
 </p>
@@ -1234,8 +1234,8 @@ señalan hacia adentro.</li>
 </ol></form>
 
 </section>
-<section id="slide-orge0f6205">
-<h3 id="orge0f6205">Algoritmo Ford Fulkerson</h3>
+<section id="slide-org0d2f045">
+<h3 id="org0d2f045">Algoritmo Ford Fulkerson</h3>
 <p>
 El algoritmo para resolver el problema de flujo máximo, es el algoritmo de <span class="underline">Ford-Fulkerson</span>, en <b>pseudocódigo</b> es:
 </p>
@@ -1265,8 +1265,8 @@ puede leer una explicación similar en <a class="org-ref-reference" href="#slide
 </p>
 
 </section>
-<section id="slide-org4be42a5">
-<h3 id="org4be42a5">Red residual</h3>
+<section id="slide-org957e580">
+<h3 id="org957e580">Red residual</h3>
 <p>
 Dado un flujo \(x\), la capacidad residual \(r_{ij}\) de \((i,j) \in A\) es el
 <span class="underline">máximo flujo adicional</span> que puede ser mandado de \(i\) a \(j\) usando los
@@ -1357,8 +1357,8 @@ La red residual se ve así:
 </pre>
 
 </section>
-<section id="slide-orgc215323">
-<h3 id="orgc215323">Forward y Backward edges</h3>
+<section id="slide-org793c431">
+<h3 id="org793c431">Forward y Backward edges</h3>
 <p>
 Sea \(x\) un flujo en la red. Si el flujo, \(x_{ij}\) que cruza el arco
 \((i,j)\) es menor que \(u_{ij}\), decimos que la red residual tiene un
@@ -1377,8 +1377,8 @@ removidos.
 </p>
 
 </section>
-<section id="slide-org74186b1">
-<h3 id="org74186b1">Augmenting path</h3>
+<section id="slide-orgaf15654">
+<h3 id="orgaf15654">Augmenting path</h3>
 <p>
 Un camino aumentado (<b>augmenting path</b>) es simplemente un camino que va
 de \(s\) a \(t\) en la red residual \(G(x)\).  El mínimo de las capacidades
@@ -1395,8 +1395,8 @@ hay un camino (no necesariamente dirigido) de la fuente al destino con
 </p>
 
 </section>
-<section id="slide-org1c435a5">
-<h3 id="org1c435a5">Algoritmo de Ford-Fulkerson (de nuevo)</h3>
+<section id="slide-org7a5ada3">
+<h3 id="org7a5ada3">Algoritmo de Ford-Fulkerson (de nuevo)</h3>
 <p>
 Empieza sin flujo en la red, luego incrementa el flujo de la red
 mientras haya un <b>augmenting path</b> de \(s\) a \(t\) que no contenga <b>forward
@@ -1454,8 +1454,8 @@ función, por <b>default</b> será <b>BFS</b>.
 
 
 </section>
-<section id="slide-org4a5b0d5">
-<h3 id="org4a5b0d5">Ejemplo: Paso a paso</h3>
+<section id="slide-org247e2c9">
+<h3 id="org247e2c9">Ejemplo: Paso a paso</h3>
 <p>
 Volvamos a la red del primer ejemplo, pero haciendo todos los flujos
 \(x_{ij} = 0\)
@@ -1469,8 +1469,8 @@ Volvamos a la red del primer ejemplo, pero haciendo todos los flujos
 </div>
 
 </section>
-<section id="slide-org7b98a36">
-<h4 id="org7b98a36">Primera iteración</h4>
+<section id="slide-orga962cc2">
+<h4 id="orga962cc2">Primera iteración</h4>
 <p>
 La red residual, se obtiene haciendo, en el arco \((i,j)\), que su
 capacidad sea  \(u_{ij} - x_{ij}\) y en el arco \((j,i)\), \(x_{ij}\). 
@@ -1522,8 +1522,8 @@ D\). Todos los arcos de este camino son <i>forward arcs</i>.
 
 
 </section>
-<section id="slide-org96b1ebd">
-<h4 id="org96b1ebd">Segunda iteración</h4>
+<section id="slide-orga1d8df3">
+<h4 id="orga1d8df3">Segunda iteración</h4>
 <p>
 Actualizamos la red residual
 </p>
@@ -1566,8 +1566,8 @@ C \to D\). Todos los arcos de este camino son <i>forward arcs</i>.
 </div>
 
 </section>
-<section id="slide-orga2da0e1">
-<h4 id="orga2da0e1">Tercera iteración</h4>
+<section id="slide-org248952f">
+<h4 id="org248952f">Tercera iteración</h4>
 <p>
 Actualizamos la red residual
 </p>
@@ -1650,8 +1650,8 @@ G['D'] = {}
 </div>
 
 </section>
-<section id="slide-org7b9923e">
-<h3 id="org7b9923e">Ejemplo</h3>
+<section id="slide-orgffa9f2a">
+<h3 id="orgffa9f2a">Ejemplo</h3>
 <p>
 Tomado de <a class="org-ref-reference" href="#slide-bibliography">[tahaInvestigacionOperaciones10a2017]</a>
 </p>
@@ -1664,8 +1664,8 @@ Tomado de <a class="org-ref-reference" href="#slide-bibliography">[tahaInvestiga
 </div>
 
 </section>
-<section id="slide-org39fe7e2">
-<h4 id="org39fe7e2">Implementación en python</h4>
+<section id="slide-org6f0ff7a">
+<h4 id="org6f0ff7a">Implementación en python</h4>
 <div class="org-src-container">
 
 <pre><code class=" jupyter-python" >max_flow_0 = {}
@@ -1694,8 +1694,8 @@ max_flow_0["5"] = {}
 
 
 </section>
-<section id="slide-orgfc0ec84">
-<h3 id="orgfc0ec84">Ejemplo</h3>
+<section id="slide-org394cd23">
+<h3 id="org394cd23">Ejemplo</h3>
 
 <div class="figure">
 <p><img src="file:///home/nanounanue/pCloudDrive/org/clases/operations-research/images/ford_fulkerson_example_b.png" alt="ford_fulkerson_example_b.png" width="300px" height="250px">
@@ -1729,8 +1729,8 @@ max_flow_1["F"] = {}
 </div>
 
 </section>
-<section id="slide-org918eb8b">
-<h3 id="org918eb8b">Ejemplo: Parque Seervada</h3>
+<section id="slide-org92e63c2">
+<h3 id="org92e63c2">Ejemplo: Parque Seervada</h3>
 <p>
 Regresemos a la pregunta que no pudimos responder antes:
 </p>
@@ -1795,8 +1795,8 @@ seervada_flow['T'] = {}
 </div>
 
 </section>
-<section id="slide-org999300a">
-<h3 id="org999300a">Extensiones: Múltiples fuentes y sumideros</h3>
+<section id="slide-orgf6fee17">
+<h3 id="orgf6fee17">Extensiones: Múltiples fuentes y sumideros</h3>
 <p>
 Supón que en el problema aparecen varias fuentes y/o varios sumideros,
 por ejemplo una compañía que tiene una fábrica (<b>fuente</b>) y varios
@@ -1825,8 +1825,8 @@ estos arcos es \(\infty\). Luego procedemos a resolverlo normalmente.
 </div>
 
 </section>
-<section id="slide-org02ebef9">
-<h4 id="org02ebef9">Implementación en <code>python</code></h4>
+<section id="slide-org21e2d2b">
+<h4 id="org21e2d2b">Implementación en <code>python</code></h4>
 <div class="org-src-container">
 
 <pre><code class=" jupyter-python" >max_flow_2 = {}
@@ -1864,8 +1864,8 @@ max_flow_2["t"] = {}
 </div>
 
 </section>
-<section id="slide-org8d9e18e">
-<h3 id="org8d9e18e">Extensiones: Capacidades en los nodos</h3>
+<section id="slide-orgba787f5">
+<h3 id="orgba787f5">Extensiones: Capacidades en los nodos</h3>
 <p>
 ¿Qué sucede si hay un límite en las capacidades que un nodo puede
 contener? Por ejemplo, en el centro de distribución sólo caben \(k\)
@@ -1878,14 +1878,14 @@ podemos aplicar el algoritmo de Ford-Fulkerson.
 </section>
 </section>
 <section>
-<section id="slide-org62cc0cc">
-<h2 id="org62cc0cc">Minimum cost flow</h2>
+<section id="slide-org7a44ccd">
+<h2 id="org7a44ccd">Minimum cost flow</h2>
 <form><ul>
 <li>El problema del <span class="underline">flujo de costo mínimo</span>  ocupa una posición muy
 importante en los algoritmos de optimización de redes, ya que abarca
 una gran clase de aplicaciones.</li>
-<li>Tiene similitudes con el problema del <a href="#slide-org6f7a209" class="backwardlink">flujo máximo</a>, la red tiene
-<i>capacidades</i> en sus arcos y  con el problema de la <a href="#slide-org4fddbb8" class="backwardlink backwardlink">ruta más corta</a>
+<li>Tiene similitudes con el problema del <a href="#slide-orgfaeae77" class="backwardlink">flujo máximo</a>, la red tiene
+<i>capacidades</i> en sus arcos y  con el problema de la <a href="#slide-org8e0c6ff" class="backwardlink backwardlink">ruta más corta</a>
 considera el costo/distancia del flujo a través del arco <a class="org-ref-reference" href="#slide-bibliography">[hillierINVESTIGACIONOPERACIONES2015]</a></li>
 <li>Las similitudes existen ya que esos problemas son casos especiales
 del problema de <span class="underline">flujo de costo mínimo</span>.</li>
@@ -1964,8 +1964,8 @@ i.e. <i>El objetivo es minimizar el costo total de enviar el suministro</i>
 
 
 </section>
-<section id="slide-org43c629b">
-<h3 id="org43c629b">Suposiciones</h3>
+<section id="slide-orgc27826f">
+<h3 id="orgc27826f">Suposiciones</h3>
 <form><ol>
 <li>La red es dirigida y conexa</li>
 <li>Todos los datos \((u, c, b)\) son enteros</li>
@@ -1985,10 +1985,10 @@ Tomados de: <a class="org-ref-reference" href="#slide-bibliography">[ahujaNetwor
 </p>
 
 </section>
-<section id="slide-org06220f8">
-<h3 id="org06220f8">Casos especiales</h3>
+<section id="slide-orgd12a158">
+<h3 id="orgd12a158">Casos especiales</h3>
 <form><dl>
-<dt>Problema de transporte</dt><dd>\(u_{ij} = \infin\), No hay nodos de transbordo</dd>
+<dt>Problema de transporte</dt><dd>\(u_{ij} = \infty\), No hay nodos de transbordo</dd>
 
 </dl></form>
 
@@ -2002,16 +2002,17 @@ Tomados de: <a class="org-ref-reference" href="#slide-bibliography">[ahujaNetwor
 <dt>Problema de asignación</dt><dd>\(|S| = |T|\), \(b_i = 1\) si \(i \in S\), \(b_i =
   -1\) si \(i \in T\).</dd>
 
-<dt>Problema de transbordo</dt><dd>\(u_{ij} = \infin\)</dd>
-<dt>Problema de la ruta más corta</dt><dd></dd>
-
-<dt>Problema de flujo máximo</dt><dd></dd>
+<dt>Problema de transbordo</dt><dd>\(u_{ij} = \infty\)</dd>
+<dt>Problema de la ruta más corta</dt><dd>El nodo \(b_s = 1\), \(b_t=-1\), \(b_i =
+  0\). \(u_{ij} = \infty\)</dd>
+<dt>Problema de flujo máximo</dt><dd>\(c_{ij} = 0\), un arco \((s,t)\) con \(c_{st} = M\)
+y \(u_{ij} = \infty\). Asignar \(F\) muy grande a \(s\) y \(-F\) a \(t\).</dd>
 
 </dl></form>
 
 </section>
-<section id="slide-org9b43f56">
-<h3 id="org9b43f56">¿Cuándo tiene una solución <b>factible</b>?</h3>
+<section id="slide-org0d0afd7">
+<h3 id="org0d0afd7">¿Cuándo tiene una solución <b>factible</b>?</h3>
 <form><ul>
 <li>La condición necesaria para que un problema de flujo de coste mínimo
 tenga soluciones factibles es que el flujo total generado por los
@@ -2043,8 +2044,8 @@ red se le conocde como <b>red transformada</b></li>
 
 
 </section>
-<section id="slide-org9967ab5">
-<h3 id="org9967ab5">Ejemplo</h3>
+<section id="slide-org51187fe">
+<h3 id="org51187fe">Ejemplo</h3>
 
 <div class="figure">
 <p><img src="../images/min_cost_flow_example.png" alt="min_cost_flow_example.png" width="500px" height="350px">
@@ -2118,8 +2119,8 @@ La <span class="underline">red residual de la solución factible</span> de la re
 </div>
 
 </section>
-<section id="slide-org81a4b02">
-<h3 id="org81a4b02">¿Cómo lo solucionamos?</h3>
+<section id="slide-orgb241ebe">
+<h3 id="orgb241ebe">¿Cómo lo solucionamos?</h3>
 <p>
 Existen varios algoritmos para solucionar este problema, pero los más
 importantes son:
@@ -2133,8 +2134,8 @@ importantes son:
 </ul></form>
 
 </section>
-<section id="slide-orgeb55f39">
-<h3 id="orgeb55f39">Algoritmo de cancelación de ciclos</h3>
+<section id="slide-org0da90f5">
+<h3 id="org0da90f5">Algoritmo de cancelación de ciclos</h3>
 <form><dl>
 <dt>Teorema 1 (Existencia de la solución)</dt><dd>Sea \(G\) una red de
 transporte. Supongamos que \(G\) no contiene ciclos negativos sin
@@ -2199,7 +2200,7 @@ resuelve el problema de ruta más corta).
 </section>
 <section>
 <ul class="org-ul">
-<li><a id="org7a159a4"></a>Comparación con Dijkstra<br>
+<li><a id="org97d535f"></a>Comparación con Dijkstra<br>
 <form><ul>
 <li>Ambos calculan el camino más corto de <span class="underline">un</span> nodo a <span class="underline">todos</span> los demás nodos</li>
 <li>Trabaja con pesos negativos en los arcos</li>
@@ -2215,7 +2216,7 @@ resuelve el problema de ruta más corta).
 </section>
 <section>
 </li>
-<li><a id="org2d9f250"></a>Observación clave de Bellman-Ford<br>
+<li><a id="org5637846"></a>Observación clave de Bellman-Ford<br>
 <form><ul>
 <li>Hay un máximo de \(|N| - 1\) arcos en cada uno de los <i>paths</i></li>
 
@@ -2229,7 +2230,7 @@ camino \(\implies\) hay un <span class="underline">ciclo</span></li>
 </section>
 <section>
 </li>
-<li><a id="org3cd45a1"></a>Pseudoalgoritmo<br>
+<li><a id="org775ba3a"></a>Pseudoalgoritmo<br>
 <p>
 En su forma original, el algoritmo es el siguiente:
 </p>
@@ -2275,7 +2276,7 @@ Donde la función <code>relax</code> es:
 </section>
 <section>
 </li>
-<li><a id="orgdb7c152"></a>Ejemplo<br>
+<li><a id="org275793e"></a>Ejemplo<br>
 <div class="figure">
 <p><img src="../images/bellman_ford_1.png" alt="bellman_ford_1.png">
 </p>
@@ -2315,7 +2316,7 @@ network['D'] = {}
 </section>
 <section>
 </li>
-<li><a id="orgbdc5f1b"></a>Ejemplo<br>
+<li><a id="org83f18b3"></a>Ejemplo<br>
 <div class="figure">
 <p><img src="../images/bellman_ford_2.png" alt="bellman_ford_2.png">
 </p>
@@ -2357,7 +2358,7 @@ network['E']['D'] = {'costo' : 1}
 </section>
 <section>
 </li>
-<li><a id="org593c87a"></a>Ejemplo (con ciclos negativos)<br>
+<li><a id="org0ca29e3"></a>Ejemplo (con ciclos negativos)<br>
 <div class="org-src-container">
 
 <pre><code class=" jupyter-python" >network = {}
@@ -2395,8 +2396,8 @@ network['E']['D'] = {'costo' : 1}
 
 
 </section>
-<section id="slide-org13a3d62">
-<h4 id="org13a3d62">Ejemplo</h4>
+<section id="slide-orgb469eef">
+<h4 id="orgb469eef">Ejemplo</h4>
 
 <div class="figure">
 <p><img src="../images/cycle_cancelling_1.png" alt="cycle_cancelling_1.png">
@@ -2406,8 +2407,8 @@ network['E']['D'] = {'costo' : 1}
 
 
 </section>
-<section id="slide-org9c65fd7">
-<h3 id="org9c65fd7">Algoritmo <i>Successive Shortest path</i></h3>
+<section id="slide-org5530a7a">
+<h3 id="org5530a7a">Algoritmo <i>Successive Shortest path</i></h3>
 <p>
 El algoritmo de cancelación de ciclos mantiene la factibilidad de la
 solución en cada paso mientras trata de buscar el la solución óptima. 
@@ -2617,8 +2618,8 @@ Usando estos lemas y teoremas, podemos enunciar el algoritmo:
 </section>
 </section>
 <section>
-<section id="slide-org6cc7fcc">
-<h2 id="org6cc7fcc">Repaso</h2>
+<section id="slide-orge7b843d">
+<h2 id="orge7b843d">Repaso</h2>
 </section>
 </section>
 </div>
